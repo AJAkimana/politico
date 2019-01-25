@@ -26,3 +26,26 @@ for(let i=0; i<menuArray.length; i++){
 	//append <li> to <lu>
 	mainNav.appendChild(liNode);
 }
+// Get the modal
+// var modal = document.getElementById('myModal');
+
+function openModal(modalToOpen,action){
+	var modal = document.getElementById(modalToOpen);
+	modal.style.display = "block";
+	if(action=='addParty'){
+		let modalTitle = document.getElementById('modalTitle');
+		modalTitle.textContent="Add new party"
+	}
+}
+// When the user clicks on <span> (x), close the modal
+function closeModal(modalToClose) {
+  	var modal = document.getElementById(modalToClose);
+	modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// }
