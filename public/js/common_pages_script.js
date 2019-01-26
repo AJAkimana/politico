@@ -7,10 +7,12 @@ navBarToggle.addEventListener('click', function () {
 // Menu will appear according to the user logged in
 
 let menuArray = [
-	{name:'Dashboard',href:'#',css_class:'nav-links'},//for users to view political offices and candidates he has voted
-	{name:'Parties',href:'parties.html',css_class:'nav-links'}, // for both admin and users
-	{name:'Ofices',href:'offices.html',css_class:'nav-links'}, //for admin and politian
-	{name:'User Names',href:'#',css_class:'nav-links'},
+	{name:'Parties and offices',href:'parties.html',css_class:'nav-links'},//for users to view political offices and candidates he has voted
+	{name:'Politician',href:'politician.html',css_class:'nav-links'}, // for both admin and users
+	{name:'Profile',href:'profile.html',css_class:'nav-links'}, //for admin and politian
+	{name:'Login',href:'signin.html',css_class:'nav-links'},
+	{name:'Sign up',href:'signup.html',css_class:'nav-links'},
+	{name:'Reset password',href:'recoverpwd.html',css_class:'nav-links'},
 	{name:'Log Out',href:'#',css_class:'nav-links'},
 ];
 
