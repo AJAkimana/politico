@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Politico</title>
+	<link rel="stylesheet" type="text/css" href="../public/css/style.css">
+</head>
+<body>
+	<nav class="navbar">
+		<span class="navbar-toggle" id="js-navbar-toggle">
+			<i class="fas fa-bars">Menu</i>
+		</span>
+		<a href="#" class="logo">Politico</a>
+		<ul class="main-nav" id="js-menu">
+		</ul>
+	</nav>
+	<section class="row">
+		<h1 class="text-center">Offices and parties DASHBOARD</h1>
+		<div class="col-smt-12">
+			<button class="pull-right" onclick="openModal('partyModal','addParty')">Add party</button>
+			<button class="pull-right" onclick="openModal('officeModal','addOffice')">Add office</button>
+		</div>
+		<div class="row">
+			<div class="col-smt-12 col-tab-8">
+				<h2 class="text-center">Parties</h2>
+				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
+					<div class="panel">
+						<div class="panel-heading">Name</div>
+						<div class="panel-body">Url</div>
+						<div class="panel-footer">
+							<button onclick="openModal('partyModal','editParty')">Edit</button><button onclick="openModal('deleteModal')">Delete</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
+					<div class="panel">
+						<div class="panel-heading">Name</div>
+						<div class="panel-body">Url</div>
+						<div class="panel-footer">
+							<button onclick="openModal('partyModal','editParty')">Edit</button><button onclick="openModal('deleteModal')">Delete</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
+					<div class="panel">
+						<div class="panel-heading">Name</div>
+						<div class="panel-body">Url</div>
+						<div class="panel-footer">
+							<button onclick="openModal('partyModal','editParty')">Edit</button><button onclick="openModal('deleteModal')">Delete</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
+					<div class="panel">
+						<div class="panel-heading">Name</div>
+						<div class="panel-body">Url</div>
+						<div class="panel-footer">
+							<button onclick="openModal('partyModal','editParty')">Edit</button><button onclick="openModal('deleteModal')">Delete</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
+					<div class="panel">
+						<div class="panel-heading">Name</div>
+						<div class="panel-body">Url</div>
+						<div class="panel-footer">
+							<button onclick="openModal('partyModal','editParty')">Edit</button><button onclick="openModal('deleteModal')">Delete</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
+					<div class="panel">
+						<div class="panel-heading">Name</div>
+						<div class="panel-body">Url</div>
+						<div class="panel-footer">
+							<button onclick="openModal('partyModal','editParty')">Edit</button><button onclick="openModal('deleteModal')">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-smt-12 col-tab-4">
+				<h2 class="text-center">Offices</h2>
+				<div class="col-smt-12">
+					<div class="panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">Name 1</h3>
+						</div>
+						<div class="panel-body">
+							<h4 class="panel-title">Type: Type 1</h4>
+						</div>
+						<div class="panel-footer">
+							<button>Edit</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-smt-12">
+					<div class="panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">Name 1</h3>
+						</div>
+						<div class="panel-body">
+							<h4 class="panel-title">Type: Type 1</h4>
+						</div>
+						<div class="panel-footer">
+							<button>Edit</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div id="partyModal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="close" onclick="closeModal('partyModal')">&times;</span>
+				<h2 id="partyModalTitle">Add new party</h2>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-smt-12 col-tab-6 col-lap-4 col-dsk-4">
+						<label for="partyName">Name</label>
+						<input type="text" name="partyName" id="partyName" placeholder="Enter party name">
+					</div>
+					<div class="col-smt-12 col-tab-6 col-lap-4 col-dsk-4">
+						<label for="partyAddress">Headquoter address</label>
+						<input type="text" name="partyAddress" id="partyAddress" placeholder="Enter Headquoter address">
+					</div>
+					<div class="col-smt-12 col-tab-6 col-lap-4 col-dsk-4">
+						<label for="partyLogo">Link of logo</label>
+						<input type="text" name="partyLogo" id="partyLogo" placeholder="Enter party logo">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-save">Save</button>
+			</div>
+		</div>
+	</div>
+	<div id="officeModal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="close" onclick="closeModal('officeModal')">&times;</span>
+				<h2 id="modalTitle">Add new office</h2>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+						<label for="officeName">Name</label>
+						<input type="text" name="officeName" id="officeName" placeholder="Enter office name">
+					</div>
+					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+						<label for="officeType">Office type</label>
+						<select name="officeType" id="officeType">
+							<option value="">--Select--</option>
+							<option value="federal">Federal</option>
+							<option value="legistrative">Legistrative</option>
+							<option value="local">Local</option>
+							<option value="state">State</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-save">Save</button>
+			</div>
+		</div>
+	</div>
+	<div id="deleteModal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="close" onclick="closeModal('deleteModal')">&times;</span>
+				<h2 id="deletePartyModalTitle">Delete party</h2>
+			</div>
+			<div class="modal-body">
+				<h4>Are you sure you want to delete this party</h4>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-delete">Yes delete</button>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../public/js/common_pages_script.js"></script>
+</body>
+</html>
