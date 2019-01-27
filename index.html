@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Politico</title>
-	<link rel="stylesheet" type="text/css" href="public/css/style.css">
-</head>
-<body>
-	<nav class="navbar">
-		<span class="navbar-toggle" id="js-navbar-toggle">
-			<i class="fas fa-bars">Menu</i>
-		</span>
-		<a href="#" class="logo">logo</a>
-		<ul class="main-nav" id="js-menu">
-		</ul>
-	</nav>
-	<section class="row">
-		<h2 class="text-center">List of people</h2>
-	</section>
-	<script type="text/javascript" src="public/navselect.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Sign in @ Politico</title>
+		<link rel="stylesheet" type="text/css" href="public/css/style.css">
+	</head>
+	<body>
+		<div class="navbar">
+			<h2 class="text-center">Politico</h2>
+		</div>
+		<div class="row">
+			<h3 class="text-center">Sign in to <strong>Politico</strong></h3>
+		</div>
+		<div class="row">
+			<div class="col-smt-12 col-tab-2 col-lap-3 col-dsk-3"></div>
+			<div class="col-smt-12 col-tab-8 col-lap-6 col-dsk-6">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" placeholder="Enter you email">
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" placeholder="Enter you password">
+				<a href="UI/parties.html" class="btn btn-save" onclick="login()">Log in</a>
+				<div class="col-12 gray-area">
+					<h4>If you do not have account do not hesitate to <a href="UI/signup.html">Sign up here</a> or <a href="UI/recoverpwd.html">forget your password</a></h4>
+				</div>
+			</div>
+			<div class="col-smt-12 col-tab-2 col-lap-3 col-dsk-3"></div>
+		</div>
+		<script type="text/javascript" src="public/js/http_request_services.js"></script>
+		<script type="text/javascript" src="public/js/notifier.js"></script>
+		<script type="text/javascript" src="public/js/js_auth.js"></script>
+	</body>
 </html>
