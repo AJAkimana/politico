@@ -16,50 +16,51 @@
 		<div class="row">
 			<div class="col-smt-12 col-tab-2 col-lap-3 col-dsk-3"></div>
 			<div class="col-smt-12 col-tab-8 col-lap-6 col-dsk-6">
-				<form>
-					<div class="col-smt-12 col-tab-6 col-lap-4 col-dsk-4">
-						<label for="firstname">First name</label>
-						<input type="text" name="firstname" id="firstname" placeholder="Enter you first name">
-					</div>
-					<div class="col-smt-12 col-tab-6 col-lap-4 col-dsk-4">
-						<label for="lastname">Last name</label>
-						<input type="text" name="lastname" id="lastname" placeholder="Enter you last name">
-					</div>
-					<div class="col-smt-12 col-tab-12 col-lap-4 col-dsk-4">
-						<label for="middlename">Middle name</label>
-						<input type="text" name="middlename" id="middlename" placeholder="Enter you middle name">
-					</div>
-					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
-						<label for="email">Email</label>
-						<input type="email" name="email" id="email" placeholder="Enter you email">
-					</div>
-					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
-						<label>Account type</label>
-						<select name="isadmin" id="isadmin">
-							<option value="">---Select---</option>
-							<option value="1">Admin</option>
-							<option value="2">User</option>
-						</select>
-					</div>
-					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
-						<label for="password">Password</label>
-						<input type="password" name="password" id="password" placeholder="Enter you password">
-					</div>
-					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
-						<label for="pswconfirm">Confirm password</label>
-						<input type="password" name="pswconfirm" id="pswconfirm" placeholder="Re-enter you password">
-					</div>
-					<label for="phonenumber">Phone number</label>
-					<input type="text" name="phonenumber" id="phonenumber" placeholder="Enter you phone number">
-					<label for="passporturl">Passport link</label>
-					<input type="text" name="passporturl" id="passporturl" placeholder="Enter you passport link">
-					<input type="submit" name="btnSave" value="Save">
-				</form>
+				<div class="col-smt-12 col-tab-6 col-lap-4 col-dsk-4">
+					<label for="firstname">First name</label>
+					<input type="text" name="firstname" id="firstname" placeholder="Enter you first name">
+				</div>
+				<div class="col-smt-12 col-tab-6 col-lap-4 col-dsk-4">
+					<label for="lastname">Last name</label>
+					<input type="text" name="lastname" id="lastname" placeholder="Enter you last name">
+				</div>
+				<div class="col-smt-12 col-tab-12 col-lap-4 col-dsk-4">
+					<label for="middlename">Middle name</label>
+					<input type="text" name="middlename" id="middlename" placeholder="Enter you middle name">
+				</div>
+				<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email" placeholder="Enter you email">
+				</div>
+				<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+					<label>Account type</label>
+					<select name="isadmin" id="isadmin">
+						<option value="">---Select---</option>
+						<option value="1">Admin</option>
+						<option value="2">User</option>
+					</select>
+				</div>
+				<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" placeholder="Enter you password">
+				</div>
+				<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+					<label for="pswconfirm">Confirm password</label>
+					<input type="password" name="pswconfirm" id="pswconfirm" placeholder="Re-enter you password">
+				</div>
+				<label for="phonenumber">Phone number</label>
+				<input type="text" name="phonenumber" id="phonenumber" placeholder="Enter you phone number">
+				<label for="passporturl">Passport link</label>
+				<input type="text" name="passporturl" id="passporturl" placeholder="Enter you passport link">
+				<button class="btn btn-save" onclick="getAuth()">Register</button>
 				<div class="col-smt-12 gray-area">
 					<h4>Or <a href="signin.html">sign in</a></h4>
 				</div>
 			</div>
 			<div class="col-smt-12 col-tab-2 col-lap-3 col-dsk-3"></div>
 		</div>
+		<script type="text/javascript" src="../public/js/http_request_services.js"></script>
+		<script type="text/javascript" src="../public/js/notifier.js"></script>
+		<script type="text/javascript" src="../public/js/js_auth.js"></script>
 	</body>
 </html>

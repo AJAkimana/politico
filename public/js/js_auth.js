@@ -1,11 +1,11 @@
-function login(){
-    let email = document.querySelector('#email').value;
-    let password = document.querySelector('#password').value;
-    const params = {
-        email: email,
-        password: password
-    }
+function getAuth(){
     window.location='../UI/parties.html';
+    // let email = document.querySelector('#email').value;
+    // let password = document.querySelector('#password').value;
+    // const params = {
+    //     email: email,
+    //     password: password
+    // }
     // let request = new HttpRequest();
     // request.method = "POST";
     // request.data = JSON.stringify(params);
