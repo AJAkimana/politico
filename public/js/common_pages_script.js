@@ -10,9 +10,11 @@ let menuArray = [
 	{name:'Parties and offices',href:'parties.html',css_class:'nav-links'},//for users to view political offices and candidates he has voted
 	{name:'Politician',href:'politician.html',css_class:'nav-links'}, // for both admin and users
 	{name:'Profile',href:'profile.html',css_class:'nav-links'}, //for admin and politian
-	{name:'Login',href:'signin.html',css_class:'nav-links'},
-	{name:'Sign up',href:'signup.html',css_class:'nav-links'},
-	{name:'Reset password',href:'recoverpwd.html',css_class:'nav-links'},
+	/* LInks that will be available when not logged in 
+		{name:'Login',href:'signin.html',css_class:'nav-links'},
+		{name:'Sign up',href:'signup.html',css_class:'nav-links'},
+		{name:'Reset password',href:'recoverpwd.html',css_class:'nav-links'},
+	*/
 	{name:'Log Out',href:'#',css_class:'nav-links'},
 ];
 
@@ -44,10 +46,6 @@ function closeModal(modalToClose) {
   	var modal = document.getElementById(modalToClose);
 	modal.style.display = "none";
 }
-
-// When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
+/*
+	App functions and methods
+*/
