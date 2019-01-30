@@ -31,7 +31,7 @@ describe("Politico", () => {
              });
         });
         describe('/POST create party',  () => {
-            const body = {name:'',hqAddress:'',logoUrl:''};
+            const body = {name:'Umuhuza',hqAddress:'Gakamba',logoUrl:'muhuzaUrl'};
             it("Status code should be 201 and must be an object", (done) => {
                 chai.request(server)
                     .post('/v1/parties')
@@ -43,15 +43,25 @@ describe("Politico", () => {
                     });
              });
         });
-        describe('/POST modify party',  () => {
+        describe('/PATCH modify party',  () => {
             const body = {name:'Akimana',hqAddress:'Gitega',logoUrl:'akimanaUl'};
             it("Status code should be 201 and must be an object", (done) => {
                 chai.request(server)
-                    .patch('/v1/parties/4/fdc')
+                    .patch('/v1/parties/2/fdc')
                     .send(body)
                     .end((err, res) => {
                         res.should.have.status(201);
                         res.body.should.be.a('object');
+                        done();
+                    });
+             });
+        });
+        describe('/DELETE One party',  () => {
+            it("Status code should be 204", (done) => {
+                chai.request(server)
+                    .delete('/v1/parties/7')
+                    .end((err, res) => {
+                        res.should.have.status(204);
                         done();
                     });
              });

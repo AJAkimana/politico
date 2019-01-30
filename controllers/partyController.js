@@ -37,7 +37,7 @@ exports.getAllPartiesList = (req, res) => {
 }
 exports.getSpecificParty = (req, res) => {
 	// Check valid party id
-	req.assert('partyId','Invalid party spaecification').isInt();
+	req.assert('partyId','Invalid party spacification').isInt();
 	const errors = req.validationErrors();
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 	const partyId = Number(req.params.partyId);
@@ -67,7 +67,7 @@ exports.modifyParty = (req, res) => {
 
 	const id = Number(req.params.partyId);
 	Party.findOneAndUpdate(id, req.body)
-    .then(party => res.json({
+    .then(party => res.status(201).json({
     	status: 201,
         data: party
     }))
@@ -80,4 +80,24 @@ exports.modifyParty = (req, res) => {
         res.status(codeStatus).json(response)
     })
 }
-exports.deleteParty = (req, res) => {}
+exports.deleteParty = (req, res) => {
+	// Check valid party id
+	req.assert('partyId','Invalid party spaecification').isInt();
+	const errors = req.validationErrors();
+	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
+	const partyId = Number(req.params.partyId);
+    
+    Party.removeOne(partyId)
+    .then(party => res.status(204).json({
+    	status: 204,
+        message: `The party #${partyId} has been deleted`
+    }))
+    .catch(err => {
+        let codeStatus = err.status?err.status:500;
+		let response = {
+			status:codeStatus,
+			error:err.message
+		}
+        res.status(codeStatus).json(response)
+    })
+}

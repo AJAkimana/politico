@@ -9,7 +9,7 @@ const officeController = require('../controllers/officeController');
 */
 apiVersion1.post('/parties', partyController.createNewParty);
 apiVersion1.get('/parties', partyController.getAllPartiesList);
-apiVersion1.get('/parties/:partId', partyController.getSpecificParty);
+apiVersion1.get('/parties/:partyId', partyController.getSpecificParty);
 apiVersion1.patch('/parties/:partyId/:partyName', partyController.modifyParty)
 apiVersion1.delete('/parties/:partyId', partyController.deleteParty)
 
