@@ -1,0 +1,39 @@
+{
+  "name": "politico",
+  "version": "1.0.0",
+  "description": "Politico enables citizens give their mandate to politicians running for different government offices",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AJAkimana/politico.git"
+  },
+  "keywords": [
+    "politico"
+  ],
+  "author": "Akimana Jean dAmour",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AJAkimana/politico/issues"
+  },
+  "homepage": "https://github.com/AJAkimana/politico#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "eslint": "^5.12.1",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "consolidate": "^0.15.1",
+    "cookie-parser": "^1.4.3",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "path": "^0.12.7",
+    "swig": "^1.4.2"
+  }
+}
