@@ -12,7 +12,6 @@ exports.createNewParty = (req, res) => {
 		.then(party => {
 			res.status(201).json({
 				status: 201,
-				// message: `The party #${party.id} has been created`,
 				data: party
 			})
 		})
@@ -57,5 +56,28 @@ exports.getSpecificParty = (req, res) => {
 		return res.status(codeStatus).json(response)
     })
 }
-exports.modifyParty = (req, res) => {}
+exports.modifyParty = (req, res) => {
+	// Check validity of body and params
+	req.assert('name', 'Type party name').notEmpty()
+	req.assert('hqAddress', 'Provide party address').notEmpty()
+	req.assert('logoUrl', 'Provide party logo url').notEmpty()
+	req.assert('partId','Invalid party spaecification').isInt();
+	const errors = req.validationErrors();
+	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
+
+	const id = Number(req.params.partId);
+	Party.findOneAndUpdate(id, req.body)
+    .then(party => res.json({
+    	status: 201,
+        data: party
+    }))
+    .catch(err => {
+    	let codeStatus = err.status?err.status:500;
+		let response = {
+			status:codeStatus,
+			error:err.message
+		}
+        res.status(codeStatus).json(response)
+    })
+}
 exports.deleteParty = (req, res) => {}
