@@ -42,7 +42,7 @@ exports.findOneAndUpdate = (id, newParty) => {
                 createdAt: party.createdAt,
                 updatedAt: helper.newDate()
             } 
-            parties[index] = { ...id, ...date, ...newParty }
+            parties[index] = { ...id, ...newParty, ...date }
             helper.writeJSONFile(partyFileJson, parties)
             resolve(parties[index])
         })

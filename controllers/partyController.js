@@ -37,10 +37,10 @@ exports.getAllPartiesList = (req, res) => {
 }
 exports.getSpecificParty = (req, res) => {
 	// Check valid party id
-	req.assert('partId','Invalid party spaecification').isInt();
+	req.assert('partyId','Invalid party spaecification').isInt();
 	const errors = req.validationErrors();
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
-	const partyId = Number(req.params.partId);
+	const partyId = Number(req.params.partyId);
 
 	Party.findOneById(partyId)
 	.then(party => res.status(200).json({
@@ -61,11 +61,11 @@ exports.modifyParty = (req, res) => {
 	req.assert('name', 'Type party name').notEmpty()
 	req.assert('hqAddress', 'Provide party address').notEmpty()
 	req.assert('logoUrl', 'Provide party logo url').notEmpty()
-	req.assert('partId','Invalid party spaecification').isInt();
+	req.assert('partyId','Invalid party spacification').isInt();
 	const errors = req.validationErrors();
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 
-	const id = Number(req.params.partId);
+	const id = Number(req.params.partyId);
 	Party.findOneAndUpdate(id, req.body)
     .then(party => res.json({
     	status: 201,
