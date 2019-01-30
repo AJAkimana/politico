@@ -1,0 +1,30 @@
+// Import the dependencies for testing
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../app');
+// Configure chai
+chai.use(chaiHttp);
+chai.should();
+describe("Politico", () => {
+    describe("Parties api", () => {
+        // Test to get all parties
+        describe('/GET parties',  () => {
+            it("Status code should be 200", (done) => {
+                chai.request(server)
+                    .get('/v1/parties')
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        done();
+                    });
+             });
+            it("should get an object", (done) => {
+                 chai.request(server)
+                     .get('/v1/parties')
+                     .end((err, res) => {
+                         res.should.have.status(200);
+                         done();
+                      });
+             });
+        });
+    });
+});
