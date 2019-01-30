@@ -17,8 +17,17 @@ exports.getAllPartiesList = (req, res) => {
 		});
 }
 exports.getSpecificParty = (req, res) => {
-	Party.findOneById(req.params.partId)
-	.then(party => res.json(party))
+	// Check valid party id
+	req.assert('partId','Invalid party spaecification').isInt();
+	const errors = req.validationErrors();
+	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
+	const partyId = Number(req.params.partId);
+
+	Party.findOneById(partyId)
+	.then(party => res.status(200).json({
+		status: 200,
+		data: party
+	}))
 	.catch(err => {
         let codeStatus = err.status?err.status:500;
 		let response = {

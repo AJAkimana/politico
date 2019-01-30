@@ -21,7 +21,25 @@ describe("Politico", () => {
                  chai.request(server)
                      .get('/v1/parties')
                      .end((err, res) => {
-                         res.should.have.status(200);
+                         res.body.should.be.a('object');
+                         done();
+                      });
+             });
+        });
+        describe('/GET One party',  () => {
+            it("Status code should be 200", (done) => {
+                chai.request(server)
+                    .get('/v1/parties/1')
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        done();
+                    });
+             });
+            it("should get an object", (done) => {
+                 chai.request(server)
+                     .get('/v1/parties/1')
+                     .end((err, res) => {
+                         res.body.should.be.a('object');
                          done();
                       });
              });

@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const errorHandler = require('errorhandler');
 const path = require('path');
 const consolidate = require('consolidate');
+const expressValidator = require('express-validator');
 /**
  * Create Express server.
  */
@@ -53,6 +54,20 @@ app.all('*', (req, res) => {
     	error: 'Hello world' 
     })
 })
+
+app.use(expressValidator({
+	customValidators: {
+		isArray:(value)=>{
+			return Array.isArray(value);
+		},
+		gte:(param, num)=>{
+			return param >= num;
+		},
+		hasNoWhiteSpace:(value)=>{
+			return value.indexOf(' ') ==-1;
+		},
+	}
+}));
 /*
  * Error Handler.
  */
