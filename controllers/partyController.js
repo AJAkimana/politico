@@ -1,6 +1,26 @@
 const Party = require('../models/Party');
 
-exports.createNewParty = (req, res) => {};
+exports.createNewParty = (req, res) => {
+	// Check validity of body
+	req.assert('name', 'Type party name').notEmpty()
+	req.assert('hqAddress', 'Provide party address').notEmpty()
+	req.assert('logoUrl', 'Provide party logo url').notEmpty()
+	const errors = req.validationErrors();
+	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
+
+	Party.saveNew(req.body)
+		.then(party => {
+			res.status(201).json({
+				status: 201,
+				// message: `The party #${party.id} has been created`,
+				data: party
+			})
+		})
+		.catch(err => res.status(500).json({ 
+			status: 500,
+			error: err.message 
+		}));
+};
 exports.getAllPartiesList = (req, res) => {
 	Party.findAll()
 		.then(parties => res.status(200).json({

@@ -44,5 +44,26 @@ describe("Politico", () => {
                       });
              });
         });
+        describe('/POST create party',  () => {
+            const body = {name:'PDS',hqAddress:'Kimironko',logoUrl:'logopdc'};
+            it("Status code should be 201", (done) => {
+                chai.request(server)
+                    .post('/v1/parties')
+                    .send(body)
+                    .end((err, res) => {
+                        res.should.have.status(201);
+                        done();
+                    });
+             });
+            it("Response body should be object", (done) => {
+                chai.request(server)
+                    .post('/v1/parties')
+                    .send(body)
+                    .end((err, res) => {
+                        res.body.should.be.a('object');
+                        done();
+                    });
+             });
+        });
     });
 });

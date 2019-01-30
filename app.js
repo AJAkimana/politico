@@ -45,16 +45,6 @@ app.use(session({
 * Set public directory as our static folder resources
 */
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 2*hours }));
-
-let apiVersion1 = require('./routes/apiVersion1');
-app.use('/v1', apiVersion1);
-app.all('*', (req, res) => {
-    return res.status(404).json({ 
-    	status: 404,
-    	error: 'Hello world' 
-    })
-})
-
 app.use(expressValidator({
 	customValidators: {
 		isArray:(value)=>{
@@ -68,6 +58,15 @@ app.use(expressValidator({
 		},
 	}
 }));
+let apiVersion1 = require('./routes/apiVersion1');
+app.use('/v1', apiVersion1);
+app.all('*', (req, res) => {
+    return res.status(404).json({ 
+    	status: 404,
+    	error: 'Hello world' 
+    })
+})
+
 /*
  * Error Handler.
  */
