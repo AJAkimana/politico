@@ -10,7 +10,7 @@ function HttpRequest() {
 
     this.send = function() {
         httpRequest.open(this.method, this.url, this.asnyc);
-        httpRequest.setRequestHeader("Content-Type", "application/json");
+        // httpRequest.setRequestHeader("Content-Type", "application/json");
         httpRequest.send(this.data);
     };
 

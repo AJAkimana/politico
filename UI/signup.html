@@ -52,12 +52,15 @@
 				<input type="text" name="phonenumber" id="phonenumber" placeholder="Enter you phone number">
 				<label for="passporturl">Passport link</label>
 				<input type="text" name="passporturl" id="passporturl" placeholder="Enter you passport link">
-				<input type="submit" name="btnSave" value="Save">
+				<button class="btn btn-save" onclick="getAuth()">Register</button>
 				<div class="col-smt-12 gray-area">
 					<h4>Or <a href="signin.html">sign in</a></h4>
 				</div>
 			</div>
 			<div class="col-smt-12 col-tab-2 col-lap-3 col-dsk-3"></div>
 		</div>
+		<script type="text/javascript" src="../public/js/http_request_services.js"></script>
+		<script type="text/javascript" src="../public/js/notifier.js"></script>
+		<script type="text/javascript" src="../public/js/js_auth.js"></script>
 	</body>
 </html>

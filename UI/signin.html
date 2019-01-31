@@ -20,14 +20,16 @@
 				<input type="email" name="email" id="email" placeholder="Enter you email">
 				<label for="password">Password</label>
 				<input type="password" name="password" id="password" placeholder="Enter you password">
-				<button class="btn btn-save" onclick="login()">Log in</button>
+				<button class="btn btn-save" onclick="getAuth()">Log in</button>
 				<div class="col-12 gray-area">
 					<h4>If you do not have account do not hesitate to <a href="signup.html">Sign up here</a> or <a href="recoverpwd.html">forget your password</a></h4>
 				</div>
 			</div>
+			<p id="toast"></p>
 			<div class="col-smt-12 col-tab-2 col-lap-3 col-dsk-3"></div>
 		</div>
 		<script type="text/javascript" src="../public/js/http_request_services.js"></script>
+		<script type="text/javascript" src="../public/js/notifier.js"></script>
 		<script type="text/javascript" src="../public/js/js_auth.js"></script>
 	</body>
 </html>
