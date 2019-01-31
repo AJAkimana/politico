@@ -4,6 +4,7 @@
   "description": "Politico enables citizens give their mandate to politicians running for different government offices",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "mocha || true"
   },
   "repository": {
@@ -11,7 +12,8 @@
     "url": "git+https://github.com/AJAkimana/politico.git"
   },
   "keywords": [
-    "politico"
+    "politico",
+    "heroku"
   ],
   "author": "Akimana Jean dAmour",
   "license": "ISC",
@@ -36,5 +38,8 @@
     "express-validator": "^5.3.1",
     "path": "^0.12.7",
     "swig": "^1.4.2"
+  },
+  "engines": {
+    "node": "11.x"
   }
 }
