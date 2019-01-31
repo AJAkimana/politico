@@ -88,9 +88,9 @@ exports.deleteParty = (req, res) => {
 	const partyId = Number(req.params.partyId);
     
     Party.removeOne(partyId)
-    .then(party => res.status(204).json({
-    	status: 204,
-        message: `The party #${partyId} has been deleted`
+    .then(party => res.status(200).json({
+    	status: 200,
+        message: `The party has been deleted`
     }))
     .catch(err => {
         let codeStatus = err.status?err.status:500;
