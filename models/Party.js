@@ -1,6 +1,7 @@
 const helper = require('../dataHelper/helper.js')
 const partyFileJson = '../dataHelper/data/parties.json'
 let parties = require(partyFileJson)
+let theParty = [];
 exports.findAll = () => {
 	return new Promise((resolve, reject) => {
         if (parties.length === 0) {
@@ -15,7 +16,10 @@ exports.findAll = () => {
 exports.findOneById = (id) => {
     return new Promise((resolve, reject) => {
         helper.mustBeInArray(parties, id)
-        .then(party => resolve(party))
+        .then(party => {
+            theParty[0] = party
+            resolve(theParty)
+        })
         .catch(err => reject(err))
     })
 }
@@ -29,7 +33,8 @@ exports.saveNew = (newParty) => {
         newParty = { ...id, ...newParty, ...date }
         parties.push(newParty)
         helper.writeJSONFile(partyFileJson, parties)
-        resolve(newParty); 
+        theParty[0] = newParty
+        resolve(theParty); 
     })
 }
 exports.findOneAndUpdate = (id, newParty) => {
@@ -44,7 +49,8 @@ exports.findOneAndUpdate = (id, newParty) => {
             } 
             parties[index] = { ...id, ...newParty, ...date }
             helper.writeJSONFile(partyFileJson, parties)
-            resolve(parties[index])
+            theParty[0] = parties[index]
+            resolve(theParty)
         })
         .catch(err => reject(err))
     })
