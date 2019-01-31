@@ -17,7 +17,7 @@ const app = express();
 /**
  * Express configuration.
  */
-app.set('port', 8080);
+app.set('port', process.env.PORT || 8080);
 
 /**
  * Set views for the app 
