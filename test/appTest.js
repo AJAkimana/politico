@@ -63,11 +63,11 @@ describe("Politico", () => {
              });
         });
         describe('/DELETE One party',  () => {
-            it("Status code should be 204", (done) => {
+            it("Status code should be 200", (done) => {
                 chai.request(server)
                     .delete('/v1/parties/7')
                     .end((err, res) => {
-                        res.should.have.status(204);
+                        res.should.have.status(200);
                         done();
                     });
              });
