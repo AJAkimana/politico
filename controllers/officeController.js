@@ -20,5 +20,19 @@ exports.createNewOffice = (req, res) => {
 			error: err.message 
 		}));
 };
-exports.getAllOfficesList = (req, res) => {}
+exports.getAllOfficesList = (req, res) => {
+	Office.findAll()
+		.then(offices => res.status(200).json({
+			status: 200,
+			data: offices
+		}))
+		.catch(err => {
+			let codeStatus = err.status?err.status:500;
+			let response = {
+				status:codeStatus,
+				error:err.message
+			}
+			return res.status(codeStatus).json(response)
+		});
+}
 exports.getSpecificOffice = (req, res) => {}

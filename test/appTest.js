@@ -97,17 +97,17 @@ describe("Politico", () => {
         //             });
         //      });
         // });
-        // describe('/POST create office',  () => {
-        //     it("Status code should be 201 and must be an object", (done) => {
-        //         chai.request(server)
-        //             .post('/v1/parties')
-        //             .send(officeBody)
-        //             .end((err, res) => {
-        //                 res.should.have.status(201);
-        //                 res.body.should.be.a('object');
-        //                 done();
-        //             });
-        //      });
-        // });
+        describe('/POST create office',  () => {
+            it("Status code should be 201 and must be an object", (done) => {
+                chai.request(server)
+                    .post('/v1/parties')
+                    .send(officeBody)
+                    .end((err, res) => {
+                        res.should.have.status(201);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+             });
+        });
     });
 });
