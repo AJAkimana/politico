@@ -17,7 +17,7 @@ const app = express();
 /**
  * Express configuration.
  */
-app.set('port', 8080);
+app.set('port', process.env.PORT || 8080);
 
 /**
  * Set views for the app 
@@ -61,11 +61,11 @@ app.use(expressValidator({
 let apiVersion1 = require('./routes/apiVersion1');
 app.use('/v1', apiVersion1);
 app.all('*', (req, res) => {
-    return res.status(404).json({ 
-    	status: 404,
-    	error: 'Hello world' 
-    })
-})
+	return res.status(404).json({ 
+		status: 404,
+		error: 'Invalid route' 
+	});
+});
 
 /*
  * Error Handler.

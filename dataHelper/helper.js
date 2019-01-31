@@ -17,9 +17,9 @@ exports.mustBeInArray = (array, id) => {
 	});
 };
 exports.writeJSONFile = (filename, content) => {
-	let fileName = __dirname+'/'+filename
+	let fileName = __dirname+'/'+filename;
 	fs.writeFileSync(fileName, JSON.stringify(content), 'utf8', (err,ok) => {
 		if (err)  console.log('Err:'+JSON.stringify(err));
-		console.log('Ok:'+JSON.stringify(ok))
+		console.log('Ok:'+JSON.stringify(ok));
 	});
 };
