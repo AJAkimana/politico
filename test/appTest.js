@@ -86,21 +86,21 @@ describe("Politico", () => {
                     });
              });
         });
-        // describe('/GET One office',  () => {
-        //     it("Status code should be 200 and must be an object", (done) => {
-        //         chai.request(server)
-        //             .get('/v1/offices/1')
-        //             .end((err, res) => {
-        //                 res.should.have.status(200);
-        //                 res.body.should.be.a('object');
-        //                 done();
-        //             });
-        //      });
-        // });
+        describe('/GET One office',  () => {
+            it("Status code should be 200 and must be an object", (done) => {
+                chai.request(server)
+                    .get('/v1/offices/1')
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.be.a('object');
+                        done();
+                    });
+             });
+        });
         describe('/POST create office',  () => {
             it("Status code should be 201 and must be an object", (done) => {
                 chai.request(server)
-                    .post('/v1/parties')
+                    .post('/v1/offices')
                     .send(officeBody)
                     .end((err, res) => {
                         res.should.have.status(201);
