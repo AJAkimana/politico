@@ -59,7 +59,10 @@ app.use(expressValidator({
 	}
 }));
 let apiVersion1 = require('./routes/apiVersion1');
+let pageRoute = require('./routes/pagesRoute');
+
 app.use('/v1', apiVersion1);
+app.use(pageRoute);
 app.all('*', (req, res) => {
 	return res.status(404).json({ 
 		status: 404,
@@ -75,7 +78,7 @@ app.use(errorHandler());
  * Start Express server.
  */
 app.listen(app.get('port'), ()=>{
-	console.log('Sneaker app is listening on port %d. Visit http://localhost:%d', 
+	console.log('Politico app is listening on port %d. Visit http://localhost:%d', 
 		app.get('port'),app.get('port'));
 });
 module.exports = app;
