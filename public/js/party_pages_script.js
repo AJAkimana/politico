@@ -9,7 +9,7 @@ function partyDesign(designData, hideAction){
 				'<div class="panel">' +
 					'<div class="panel-heading">'+ designData.name +'</div>' +
 					'<div class="panel-body">'+
-						'<img src="/img/1.png" width="50%" height="50%"/>'+
+						'<img src="/img/default.png" width="50%" height="50%"/>'+
 					'</div>'+
 					'<div class="panel-footer '+ panelDivCss +'">' +
 						'<button class="btn btn-edit" onclick="openModal(\'partyModal\',\'editParty('+ designData +')\')">Edit</button>' +
