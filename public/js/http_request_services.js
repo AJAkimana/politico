@@ -9,8 +9,10 @@ function HttpRequest() {
     this.data = null;
 
     this.send = function() {
-        httpRequest.open(this.method, this.url, this.asnyc);
+        httpRequest.open(this.method, this.url, true);
+        // httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         // httpRequest.setRequestHeader("Content-Type", "application/json");
+        httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
         httpRequest.send(this.data);
     };
 
@@ -35,7 +37,7 @@ function HttpRequest() {
 
     httpRequest.onreadystatechange = function() {
         if(this.readyState == 4) {
-            if(this.status == 200) self.success(this.responseText);
+            if(this.status >= 200 && this.status < 300) self.success(this.responseText);
             else self.fail(this.responseText);
         }
     };
