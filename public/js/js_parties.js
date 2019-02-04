@@ -152,7 +152,7 @@ let app = new function() {
 	this.partyDesign = (designData, hideAction)=>{
 		let panelDivCss = hideAction?'hide':'show';
 		let party = '';
-		party += '<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-3" id="id_'+ designData.id +'">';
+		party += '<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-3 img-bg" id="id_'+ designData.id +'">';
 		party += '<div class="panel">';
 		party += '<div class="panel-heading">'+ designData.name +'</div>';
 		party += '<div class="panel-body">';
