@@ -248,6 +248,9 @@ let app = new function() {
 			var office = this.itemDetail(this.officesList, modalData);
 			this.currentOffice = office;
 			this.delItemModalTitle.innerHTML='Edit office <strong>'+office.name+'</strong>';
+			this.deleteBtn.onclick = () => {
+				this.deleteItem('/v1/offices/'+office.id, office.id,'offices-list')
+			}
 		}
 	}
 	// When the user clicks on <span> (x), close the modal
