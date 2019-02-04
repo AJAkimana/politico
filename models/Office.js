@@ -37,3 +37,32 @@ exports.saveNew = (newOffice) => {
 		resolve(theOffice); 
 	});
 };
+exports.findOneAndUpdate = (id, newOffice) => {
+	return new Promise((resolve, reject) => {
+		helper.mustBeInArray(offices, id)
+			.then(office => {
+				const index = offices.findIndex(p => p.id == office.id);
+				id = { id: office.id };
+				const date = {
+					createdAt: party.createdAt,
+					updatedAt: helper.newDate()
+				}; 
+				offices[index] = { ...id, ...newOffice, ...date };
+				helper.writeJSONFile(officeFileJson, offices);
+				theOffice[0] = offices[index];
+				resolve(theOffice);
+			})
+			.catch(err => reject(err));
+	});
+};
+exports.removeOne = (id) => {
+	return new Promise((resolve, reject) => {
+		helper.mustBeInArray(offices, id)
+			.then(() => {
+				offices = offices.filter(p => p.id != id);
+				helper.writeJSONFile(officeFileJson, offices);
+				resolve();
+			})
+			.catch(err => reject(err));
+	});
+};
