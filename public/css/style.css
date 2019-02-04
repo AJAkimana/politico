@@ -524,3 +524,6 @@ input[type=text], input[type=password], input[type=email], select {
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
+.img-bg{
+    background: color url('/img/default.png') others;
+}
