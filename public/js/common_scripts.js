@@ -6,6 +6,7 @@ let hideAction = false;
 navBarToggle.addEventListener('click', function () {
 	mainNav.classList.toggle('active');
 });
+var itemData = {};
 // Menu will appear according to the user logged in
 
 let menuArray = [
@@ -35,12 +36,22 @@ for(let i=0; i<menuArray.length; i++){
 // Get the modal
 // var modal = document.getElementById('myModal');
 
-function openModal(modalToOpen,action){
+function openModal(modalToOpen,action,modalData){
 	var modal = document.getElementById(modalToOpen);
+	let modalTitle = document.getElementById('modalTitle');
 	modal.style.display = 'block';
+	console.log('Data:'+(modalData))
 	if(action=='addParty'){
-		let modalTitle = document.getElementById('modalTitle');
 		modalTitle.textContent='Add new party';
+	}
+	if(action=='addOffice'){
+		modalTitle.textContent='Add new office';
+	}
+	if(action=='editParty'){
+		modalTitle.innerHTML='Edit party <strong>'+'AJA'+'</strong>';
+	}
+	if(action=='editOffice'){
+		modalTitle.innerHTML='Edit office <strong>'+'AJA'+'</strong>';
 	}
 }
 // When the user clicks on <span> (x), close the modal
@@ -62,7 +73,9 @@ function httpGet(url, displayDiv, divDesign){
 		let response = JSON.parse(res);
 		let partiesList = response.data;
 		for(let i = 0; i < partiesList.length; i++){
+			var partyInfo = JSON.stringify(partiesList[i]);
 			displayDiv.innerHTML += divDesign(partiesList[i],hideAction);
+			console.log('HTML CODE::::'+divDesign(partyInfo,hideAction)+'::::')
 		}
 	};
 
