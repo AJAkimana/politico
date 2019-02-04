@@ -19,5 +19,7 @@ apiVersion1.delete('/parties/:partyId', partyController.deleteParty);
 apiVersion1.get('/offices', officeController.getAllOfficesList);
 apiVersion1.post('/offices', officeController.createNewOffice);
 apiVersion1.get('/offices/:officeId', officeController.getSpecificOffice);
+apiVersion1.patch('/offices/:officeId/:officeName', officeController.modifyOffice);
+apiVersion1.delete('/offices/:officeId', officeController.deleteOffice);
 
 module.exports = apiVersion1;
