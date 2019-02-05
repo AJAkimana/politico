@@ -22,8 +22,8 @@ app.set('port', process.env.PORT || 8080);
 /**
  * Set views for the app 
  */
-app.engine('html', consolidate.swig);
 app.set('views', path.join(__dirname, 'UI'));
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.use(compression());
