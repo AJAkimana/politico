@@ -78,7 +78,6 @@ app.use(errorHandler());
  * Start Express server.
  */
 app.listen(app.get('port'), ()=>{
-	console.log('Politico app is listening on port %d. Visit http://localhost:%d', 
-		app.get('port'),app.get('port'));
+	// console.log('Politico app is listening on port %d. Visit http://localhost:%d', app.get('port'),app.get('port'));
 });
 module.exports = app;
