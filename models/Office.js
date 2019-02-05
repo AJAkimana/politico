@@ -13,6 +13,9 @@ exports.findAll = () => {
 		resolve(offices);
 	});
 };
+exports.firstOne = () => {
+	return offices[0];
+};
 exports.findOneById = (id) => {
 	return new Promise((resolve, reject) => {
 		helper.mustBeInArray(offices, id)
@@ -44,7 +47,7 @@ exports.findOneAndUpdate = (id, newOffice) => {
 				const index = offices.findIndex(p => p.id == office.id);
 				id = { id: office.id };
 				const date = {
-					createdAt: party.createdAt,
+					createdAt: office.createdAt,
 					updatedAt: helper.newDate()
 				}; 
 				offices[index] = { ...id, ...newOffice, ...date };
