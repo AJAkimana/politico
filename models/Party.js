@@ -13,6 +13,9 @@ exports.findAll = () => {
 		resolve(parties);
 	});
 };
+exports.firstOne = () => {
+	return parties[0];
+};
 exports.findOneById = (id) => {
 	return new Promise((resolve, reject) => {
 		helper.mustBeInArray(parties, id)

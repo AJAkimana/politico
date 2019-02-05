@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const errorHandler = require('errorhandler');
 const path = require('path');
-const consolidate = require('consolidate');
+const ejs = require('ejs');
 const expressValidator = require('express-validator');
 /**
  * Create Express server.
@@ -22,8 +22,8 @@ app.set('port', process.env.PORT || 8080);
 /**
  * Set views for the app 
  */
-app.engine('html', consolidate.swig);
 app.set('views', path.join(__dirname, 'UI'));
+app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
 
 app.use(compression());

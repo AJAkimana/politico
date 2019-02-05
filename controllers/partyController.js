@@ -2,7 +2,6 @@ const Party = require('../models/Party');
 
 exports.createNewParty = (req, res) => {
 	// Check validity of body
-	console.log('Body:'+JSON.stringify(req.body))
 	req.assert('name', 'Type party name').notEmpty();
 	req.assert('hqAddress', 'Provide party address').notEmpty();
 	req.assert('logoUrl', 'Provide party logo url').notEmpty();

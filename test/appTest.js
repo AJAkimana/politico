@@ -2,6 +2,8 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
+const Office = require('../models/Office');
+const Party = require('../models/Party');
 
 // Configure chai
 chai.use(chaiHttp);
@@ -16,21 +18,19 @@ let officeBody = {name:'Umuhuza',type:officeByRandom};
 describe('Politico', () => {
 	describe('Parties api', () => {
 		// Test to get all parties
+		beforeEach((done) => {
+			chai.request(server)
+				.post('/v1/parties')
+				.send(partyBody)
+				.end((err, res) => {
+					done();
+				});
+		});
+		let firstParty = Party.firstOne();
 		describe('/GET parties',  () => {
 			it('Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
 					.get('/v1/parties')
-					.end((err, res) => {
-						res.should.have.status(200);
-						res.body.should.be.a('object');
-						done();
-					});
-			});
-		});
-		describe('/GET One party',  () => {
-			it('Status code should be 200 and must be an object', (done) => {
-				chai.request(server)
-					.get('/v1/parties/1')
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.be.a('object');
@@ -50,10 +50,20 @@ describe('Politico', () => {
 					});
 			});
 		});
-		describe('/PATCH modify party',  () => {
-			it('Status code should be 201 and must be an object', (done) => {
+		describe('/GET One party',  () => {
+			it('Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
-					.patch('/v1/parties/2/fdc')
+					.get('/v1/parties/'+firstParty.id)
+					.end((err, res) => {
+						res.should.have.status(200);
+						res.body.should.be.a('object');
+						done();
+					});
+			});
+		});
+		describe('/PATCH modify party',  () => {
+			it('Status code should be 201 and must be an object', (done) => {				chai.request(server)
+					.patch('/v1/parties/'+firstParty.id+'/'+firstParty.name)
 					.send(partyBody)
 					.end((err, res) => {
 						res.should.have.status(201);
@@ -65,7 +75,7 @@ describe('Politico', () => {
 		describe('/DELETE One party',  () => {
 			it('Status code should be 200', (done) => {
 				chai.request(server)
-					.delete('/v1/parties/7')
+					.delete('/v1/parties/'+firstParty.id)
 					.end((err, res) => {
 						res.should.have.status(200);
 						done();
@@ -74,7 +84,15 @@ describe('Politico', () => {
 		});
 	});
 	describe('Political office apis', () => {
-		// Test to get all parties
+		beforeEach((done) => {
+			chai.request(server)
+				.post('/v1/offices')
+				.send(officeBody)
+				.end((err, res) => {
+					done();
+				});
+		});
+		let firstOffice = Office.firstOne();
 		describe('/GET offices',  () => {
 			it('Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
@@ -89,7 +107,7 @@ describe('Politico', () => {
 		describe('/GET One office',  () => {
 			it('Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
-					.get('/v1/offices/1')
+					.get('/v1/offices/'+firstOffice.id)
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.be.a('object');
@@ -105,6 +123,28 @@ describe('Politico', () => {
 					.end((err, res) => {
 						res.should.have.status(201);
 						res.body.should.be.a('object');
+						done();
+					});
+			});
+		});
+		describe('/PATCH modify office',  () => {
+			it('Status code should be 201 and must be an object', (done) => {
+				chai.request(server)
+					.patch('/v1/offices/'+firstOffice.id+'/'+firstOffice.name)
+					.send(officeBody)
+					.end((err, res) => {
+						res.should.have.status(201);
+						res.body.should.be.a('object');
+						done();
+					});
+			});
+		});
+		describe('/DELETE One office',  () => {
+			it('Status code should be 200', (done) => {
+				chai.request(server)
+					.delete('/v1/offices/'+firstOffice.id)
+					.end((err, res) => {
+						res.should.have.status(200);
 						done();
 					});
 			});

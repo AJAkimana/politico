@@ -60,10 +60,12 @@ exports.modifyOffice = (req, res) => {
 	// Check validity of body and params
 	req.assert('name', 'Type office name').notEmpty();
 	req.assert('type', 'Invalid office type').isIn(officeTypes);
+	req.assert('officeId','Invalid office spacification').isInt();
+	
 	const errors = req.validationErrors();
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 
-	const id = Number(req.params.partyId);
+	const id = Number(req.params.officeId);
 	Office.findOneAndUpdate(id, req.body)
 		.then(office => res.status(201).json({
 			status: 201,
