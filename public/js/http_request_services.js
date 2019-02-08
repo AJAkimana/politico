@@ -10,8 +10,6 @@ function HttpRequest() {
 
     this.send = function() {
         httpRequest.open(this.method, this.url, true);
-        // httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        // httpRequest.setRequestHeader("Content-Type", "application/json");
         httpRequest.setRequestHeader('Content-type','application/json; charset=utf-8');
         httpRequest.send(this.data);
     };

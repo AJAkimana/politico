@@ -7,7 +7,7 @@ exports.findAll = () => {
 		if (parties.length === 0) {
 			reject({
 				message: 'No party available',
-				status: 204
+				status: 404
 			});
 		}
 		resolve(parties);

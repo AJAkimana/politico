@@ -22,7 +22,6 @@ let app = new function() {
 	this.editPartyBtn = document.getElementById('edit-party');
 	this.officeFormBtn = document.getElementById('office-form-btn');
 	this.editOfficeBtn = document.getElementById('edit-office');
-	this.params = {};
 
 	this.officesUrl = '/v1/offices';
 	this.partiesUrl = '/v1/parties';
@@ -41,9 +40,9 @@ let app = new function() {
 			}
 		};
 		request.fail = (error) => {
-			var error = JSON.parse(error);
-			Notifier('',error.error);
-			displayDiv.innerHTML = '<h3 class="text-center">Nothing to display</h3>';
+			var _error = JSON.parse(error);
+			Notifier('',_error.error);
+			this.partiesEl.innerHTML = '<h3 class="text-center">Nothing to display</h3>';
 		};
 		request.send();
 	};
@@ -59,9 +58,9 @@ let app = new function() {
 			}
 		};
 		request.fail = (error) => {
-			var error = JSON.parse(error);
-			Notifier('',error.error);
-			displayDiv.innerHTML = '<h3 class="text-center">Nothing to display</h3>';
+			var _error = JSON.parse(error);
+			Notifier('',_error.error);
+			this.officesEl.innerHTML = '<h3 class="text-center">Nothing to display</h3>';
 		};
 		request.send();
 	};
@@ -74,8 +73,8 @@ let app = new function() {
 			this.itemInfo = response.data[0];
 		};
 		request.fail = (error) => {
-			var error = JSON.parse(error);
-			Notifier('',error.error);
+			var _error = JSON.parse(error);
+			Notifier('',_error.error);
 		};
 		request.send();
 	};
@@ -118,7 +117,7 @@ let app = new function() {
 		}
 		this.params = {name: this.partyName.value, hqAddress: this.partyAddress.value, logoUrl: this.partyLogo.value};
 		this.params = JSON.stringify(this.params);
-		this.editItem(+this.partiesUrl+'/'+partyId+'/'+partyName, this.params, this.partiesEl, this.partyDesign);
+		this.editItem(this.partiesUrl+'/'+partyId+'/'+partyName, this.params, this.partiesEl);
 	};
 	this.saveNewOffice = () => {
 		if(!this.officeName.value){
@@ -148,17 +147,17 @@ let app = new function() {
 		}
 		this.params = {name: this.officeName.value, type: this.officeType.value};
 		this.params = JSON.stringify(this.params);
-		this.editItem(this.officesUrl+'/'+officeId+'/'+officeName, this.params, this.officesEl, this.officeDesign);
+		this.editItem(this.officesUrl+'/'+officeId+'/'+officeName, this.params, this.officesEl);
 	};
 	this.setPartyFormData = (party) => {
 		this.partyName.value = party.name;
 		this.partyAddress.value = party.hqAddress;
 		this.partyLogo.value = party.logoUrl;
-	}
+	};
 	this.setOfficeFormData = (office) => {
 		this.officeName.value = office.name;
 		this.officeType.value = office.type;
-	}
+	};
 	// Html design
 	this.partyDesign = (designData, hideAction)=>{
 		let panelDivCss = hideAction?'hide':'show';
@@ -183,22 +182,37 @@ let app = new function() {
 	this.officeDesign = (designData, hideAction) => {
 		let panelDivCss = hideAction?'hide':'show';
 		let office ='';
-		office += '<div class="col-smt-12" id="id_'+ designData.id +'">';
-		office += '<div class="panel">';
-		office += '<div class="panel-heading">';
-		office += '<h3 class="panel-title">' + designData.name + '</h3>';
-		office += '</div>';
-		office += '<div class="panel-body">';
-		office += '<h4 class="panel-title">' + designData.type + '</h4>';
-		office += '</div>';
-		office += '<div class="panel-footer '+ panelDivCss +'">';
+
+
+		office += '<tr id="id_'+ designData.id +'">';
+		office += '<td>' + designData.name + '</td>';
+		office += '<td>' + designData.type + '</td>';
+		office += '<td>';
 		office += '<button class="btn btn-edit" onclick="app.openModal(\'officeModal\',\'editOffice\','+ designData.id +')">Edit</button>';
-		office += '<button class="btn btn-delete" onclick="app.openModal(\'deleteModal\',\'deleteOffice\','+ designData.id +')">Delete</button>';
-		office += '</div>';
-		office += '</div>';
-		office += '</div>';
+		office += '<button class="btn btn-delete" onclick="app.openModal(\'deleteModal\',\'deleteOffice\','+ designData.id +')">&times;</button>';
+		office += '</td>';
+		office += '</tr>';
 		return office;
 	};
+	// this.officeDesign = (designData, hideAction) => {
+	// 	let panelDivCss = hideAction?'hide':'show';
+	// 	let office ='';
+	// 	office += '<div class="col-smt-12" id="id_'+ designData.id +'">';
+	// 	office += '<div class="panel">';
+	// 	office += '<div class="panel-heading">';
+	// 	office += '<h3 class="panel-title">' + designData.name + '</h3>';
+	// 	office += '</div>';
+	// 	office += '<div class="panel-body">';
+	// 	office += '<h4 class="panel-title">' + designData.type + '</h4>';
+	// 	office += '</div>';
+	// 	office += '<div class="panel-footer '+ panelDivCss +'">';
+	// 	office += '<button class="btn btn-edit" onclick="app.openModal(\'officeModal\',\'editOffice\','+ designData.id +')">Edit</button>';
+	// 	office += '<button class="btn btn-delete" onclick="app.openModal(\'deleteModal\',\'deleteOffice\','+ designData.id +')">Delete</button>';
+	// 	office += '</div>';
+	// 	office += '</div>';
+	// 	office += '</div>';
+	// 	return office;
+	// };
 	this.openModal = (modalToOpen,action,modalData) => {
 		var modal = document.getElementById(modalToOpen);
 		let officeModTitle = document.getElementById('office-modal-title');
@@ -239,31 +253,31 @@ let app = new function() {
 		if(action=='editOffice'){
 			var office = this.itemDetail(this.officesList, modalData);
 			this.currentOffice = office;
-			officeModTitle.innerHTML='Delete office <strong>'+office.name+'</strong>';
+			officeModTitle.innerHTML='Edit office <strong>'+office.name+'</strong>';
 			this.setOfficeFormData(office);
 			this.editOfficeBtn.style.visibility = 'visible';
 			this.officeFormBtn.style.visibility = 'hidden';
 			this.officeName.value = office.name;
 			this.officeType.value = office.type;
 			this.editOfficeBtn.textContent = 'Edit '+office.name;
-			this.officeFormBtn.onclick = () => {
+			this.editOfficeBtn.onclick = () => {
 				this.editOffice(office.id,office.name);
 			};
 		}
 		if(action=='deleteParty'){
-			var party = this.itemDetail(this.partiesList, modalData);
-			this.currentParty = party;
-			this.delItemModalTitle.innerHTML='Delete party <strong>'+party.name+'</strong>';
+			var _party = this.itemDetail(this.partiesList, modalData);
+			this.currentParty = _party;
+			this.delItemModalTitle.innerHTML='Delete party <strong>'+_party.name+'</strong>';
 			this.deleteBtn.onclick = () => {
-				this.deleteItem(this.partiesUrl+'/'+party.id, party.id,'parties-list');
+				this.deleteItem(this.partiesUrl+'/'+_party.id, _party.id,'parties-list');
 			};
 		}
 		if(action=='deleteOffice'){
-			var office = this.itemDetail(this.officesList, modalData);
-			this.currentOffice = office;
-			this.delItemModalTitle.innerHTML='Edit office <strong>'+office.name+'</strong>';
+			var _office = this.itemDetail(this.officesList, modalData);
+			this.currentOffice = _office;
+			this.delItemModalTitle.innerHTML='Delete office <strong>'+_office.name+'</strong>';
 			this.deleteBtn.onclick = () => {
-				this.deleteItem(this.officesUrl+'/'+office.id, office.id,'offices-list');
+				this.deleteItem(this.officesUrl+'/'+_office.id, _office.id,'offices-list');
 			};
 		}
 	};
@@ -277,16 +291,15 @@ let app = new function() {
 		request.method = 'POST';url;
 		request.data = dataToSend;
 		request.url = url;
-		request.success = function(res) {
+		request.success = (res)=> {
 			let response = JSON.parse(res);
 			displayEl.innerHTML += designEl(response.data[0],this.hideAction);
-			closeModal('partyModal');
-			closeModal('officeModal');
+			this.closeModal('partyModal');
+			this.closeModal('officeModal');
 		};
-		request.fail = function(error) {
-			var error = JSON.parse(error);
-			console.log('Error:'+JSON.stringify(error));
-			Notifier('',error.error);
+		request.fail = (error)=> {
+			var _error = JSON.parse(error);
+			Notifier('',_error.error);
 		};
 		request.send();
 	};
@@ -298,34 +311,34 @@ let app = new function() {
 			let response = JSON.parse(res);
 			Notifier('',response.message);
 			this.removeElement(contentEl, 'id_'+id);
-			closeModal('deleteModal');
+			this.closeModal('deleteModal');
 		};
 		request.fail = (error) => {
-			var error = JSON.parse(error);
-			Notifier('',error.error);
+			var _error = JSON.parse(error);
+			Notifier('',_error.error);
 		};
 		request.send();
 	};
-	this.editItem = (url, dataToSend, displayEl, designEl) => {
+	this.editItem = (url, dataToSend, displayEl) => {
 		let request = new HttpRequest();
 		request.method = 'PATCH';
 		request.data = dataToSend;
 		request.url = url;
-		request.success = function(res) {
-			let response = JSON.parse(res);
-
+		request.success = () => {
+			// let response = JSON.parse(res);
 			if(displayEl == this.officesEl){
+				this.officesEl.innerHTML = '';
 				this.fetchOffices();
+				this.closeModal('officeModal');
 			}else{
-				this.fetchParties()
+				this.partiesEl.innerHTML = '';
+				this.fetchParties();
+				this.closeModal('partyModal');
 			}
-			closeModal('partyModal');
-			closeModal('officeModal');
 		};
-		request.fail = function(error) {
-			var error = JSON.parse(error);
-			console.log('Error:'+JSON.stringify(error));
-			Notifier('',error.error);
+		request.fail = (error) => {
+			var _error = JSON.parse(error);
+			Notifier('',_error.error);
 		};
 		request.send();
 	};
@@ -340,7 +353,7 @@ let app = new function() {
 		return detail;
 	};
 	this.removeElement = (parentDiv, childDiv) => {
-		console.log('P:'+parentDiv, 'C:'+childDiv)
+		console.log('P:'+parentDiv, 'C:'+childDiv);
 		if (childDiv == parentDiv) {
 			Notifier('','Item cannot be removed.');
 		}
