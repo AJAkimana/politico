@@ -1,4 +1,6 @@
-const Office = require('../models/Office');
+const DataModel = require('../models/DataModel');
+const officeFileJson = '../dataHelper/data/offices.json';
+const offices = require(officeFileJson);
 const officeTypes = ['federal','legistrative','state','local'];
 
 exports.createNewOffice = (req, res) => {
@@ -8,7 +10,7 @@ exports.createNewOffice = (req, res) => {
 	const errors = req.validationErrors();
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 
-	Office.saveNew(req.body)
+	DataModel.saveNew(officeFileJson, offices, req.body)
 		.then(office => {
 			res.status(201).json({
 				status: 201,
@@ -21,7 +23,7 @@ exports.createNewOffice = (req, res) => {
 		}));
 };
 exports.getAllOfficesList = (req, res) => {
-	Office.findAll()
+	DataModel.findAll(offices)
 		.then(offices => res.status(200).json({
 			status: 200,
 			data: offices
@@ -42,7 +44,7 @@ exports.getSpecificOffice = (req, res) => {
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 	const officeId = Number(req.params.officeId);
 
-	Office.findOneById(officeId)
+	DataModel.findOneById(offices, officeId)
 		.then(office => res.status(200).json({
 			status: 200,
 			data: office
@@ -66,7 +68,7 @@ exports.modifyOffice = (req, res) => {
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 
 	const id = Number(req.params.officeId);
-	Office.findOneAndUpdate(id, req.body)
+	DataModel.findOneAndUpdate(officeFileJson, offices, id, req.body)
 		.then(office => res.status(201).json({
 			status: 201,
 			data: office
@@ -87,7 +89,7 @@ exports.deleteOffice = (req, res) => {
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 	const officeId = Number(req.params.officeId);
 
-	Office.removeOne(officeId)
+	DataModel.removeOne(officeFileJson, offices, officeId)
 		.then(() => res.status(200).json({
 			status: 200,
 			message: 'The office has been deleted'
