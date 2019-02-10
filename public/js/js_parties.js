@@ -353,7 +353,6 @@ let app = new function() {
 		return detail;
 	};
 	this.removeElement = (parentDiv, childDiv) => {
-		console.log('P:'+parentDiv, 'C:'+childDiv);
 		if (childDiv == parentDiv) {
 			Notifier('','Item cannot be removed.');
 		}
