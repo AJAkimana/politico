@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Sign in @ Politico</title>
+		<link rel="stylesheet" type="text/css" href="../public/css/style.css">
+	</head>
+	<body class="bg-color">
+		<nav class="navbar">
+			<a href="" class="logo">Politico</a>
+			<span class="navbar-toggle" id="js-navbar-toggle">
+				<i class="fas fa-bars">Log in</i>
+			</span>
+			<div class="main-nav" id="js-menu">
+				<input type="email" name="email" id="email" placeholder="Email" class="sm-padding">
+				<input type="password" name="password" id="password" placeholder="Password" class="sm-padding">
+				<button class="btn-login btn-save sm-padding" onclick="getAuth()">Log in</button>
+			</div>
+		</nav>
+		<section>
+			<div class="row">
+				<h3 class="text-center">Sign in to <strong>Politico</strong> or <a href="#" onclick="openModal('forgetPswModal','')">Forget password</a></h4></h3>
+			</div>
+			<div class="row">
+				<div class="col-smt-12 col-tab-2 col-lap-8 col-dsk-8"></div>
+				<div class="col-smt-12 col-tab-8 col-lap-4 col-dsk-4 box-login">
+					<h2 class="text-center">Register</h2>
+					<div class="col-smt-12 col-tab-6 col-lap-4 col-dsk-4">
+						<label for="firstname">First name</label>
+						<input type="text" name="firstname" id="firstname" placeholder="First name">
+					</div>
+					<div class="col-smt-12 col-tab-6 col-lap-4 col-dsk-4">
+						<label for="lastname">Last name</label>
+						<input type="text" name="lastname" id="lastname" placeholder="Enter you last name">
+					</div>
+					<div class="col-smt-12 col-tab-12 col-lap-4 col-dsk-4">
+						<label for="middlename">Middle name</label>
+						<input type="text" name="middlename" id="middlename" placeholder="Middle name">
+					</div>
+					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+						<label for="email">Email</label>
+						<input type="email" name="email" id="email" placeholder="Email">
+					</div>
+					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+						<label>Account type</label>
+						<select name="isadmin" id="isadmin">
+							<option value="">---Select---</option>
+							<option value="1">Admin</option>
+							<option value="2">User</option>
+						</select>
+					</div>
+					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+						<label for="password">Password</label>
+						<input type="password" name="password" id="password" placeholder="Password">
+					</div>
+					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+						<label for="pswconfirm">Confirm password</label>
+						<input type="password" name="pswconfirm" id="pswconfirm" placeholder="Password confirm">
+					</div>
+					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+						<label for="phonenumber">Phone number</label>
+						<input type="text" name="phonenumber" id="phonenumber" placeholder="Phone number">
+					</div>
+					<div class="col-smt-12 col-tab-6 col-lap-6 col-dsk-6">
+						<label for="passporturl">Passport link</label>
+						<input type="text" name="passporturl" id="passporturl" placeholder="Passport link">
+					</div>
+					<!-- <div class="col-smt-12">
+						<button class="btn-login btn-save" onclick="getAuth()">Register</button>
+					</div> -->
+					<div class="col-smt-12 gray-area">
+						<button class="btn-login btn-save" onclick="getAuth()">Register</button>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div id="forgetPswModal" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close" onclick="closeModal('forgetPswModal')">&times;</span>
+					<h2>Forget password</h2>
+				</div>
+				<div class="modal-body">
+					<input type="email" name="email" id="email" placeholder="Provide your email address">
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-save">Reset</button>
+				</div>
+			</div>
+		</div>
+		<footer class="footer">
+			<h4>&copy; <span id="year"></span></h4>
+		</footer>
+		<script type="text/javascript" src="../public/js/common_pages_script.js"></script>
+		<script type="text/javascript" src="../public/js/http_request_services.js"></script>
+		<script type="text/javascript" src="../public/js/notifier.js"></script>
+		<script type="text/javascript" src="../public/js/js_auth.js"></script>
+	</body>
+</html>
