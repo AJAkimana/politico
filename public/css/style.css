@@ -1,3 +1,6 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
 * {
   box-sizing: border-box;
   padding: 0;
@@ -9,21 +12,21 @@
   clear: both;
   display: block;
 }
-
+.box-login{
+  border: 3px solid #70c9c7;
+}
 [class*="col-"] {
   float: left;
   padding: 15px;
 }
-
-html {
-  font-family: "Lucida Sans", sans-serif;
+.sm-padding{
+  padding-left: 40px;
 }
-input[type=text], input[type=password], input[type=email], select {
+input[type=text], input[type=password], input[type=email], select, .btn-login{
   width: 100%;
-  padding: 12px;
+  padding: 8px;
   border: 1px solid #ccc;
-  /*padding: 15px;*/
-  margin: 5px 0 22px 0;
+  margin: 5px 0 15px 0;
   display: inline-block;
   border-radius: 4px;
   resize: vertical;
@@ -31,6 +34,14 @@ input[type=text], input[type=password], input[type=email], select {
 .text-center{
   text-align: center;
 }
+.bg-color {
+  background-repeat:no-repeat;
+  background: -webkit-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
+  background: -o-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
+  background: -moz-linear-gradient(70deg, #ff6464 40%, #5ac8fa 40%);
+  background: linear-gradient(70deg, #ff6464 40%, #edf9f8 40%);
+}
+
 .center{
   transform: translateX(-50%) translateY(-50%);
   position: absolute;
@@ -38,7 +49,7 @@ input[type=text], input[type=password], input[type=email], select {
   left: 50%;
 }
 .gray-area{
-  background-color: #f1f1f1;
+  background-color: #70c9c7;
   text-align: center;
   padding: 16px;
 }
@@ -52,11 +63,13 @@ input[type=text], input[type=password], input[type=email], select {
 }
 
 .footer {
-  background-color: #0099cc;
-  color: #ffffff;
+  /*position: fixed;*/
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #edf9f8;
   text-align: center;
-  font-size: 12px;
-  padding: 15px;
 }
 
 .col-smt-1, .col-tab-1, .col-lap-1, .col-dsk-1, .col-smt-2, .col-tab-2, .col-lap-2, .col-dsk-2, .col-smt-3, .col-tab-3, .col-lap-3, .col-dsk-3, .col-smt-4, .col-tab-4, .col-lap-4, .col-dsk-4, .col-smt-5, .col-tab-5, .col-lap-5, .col-dsk-5, .col-smt-6, .col-tab-6, .col-lap-6, .col-dsk-6, .col-smt-7, .col-tab-7, .col-lap-7, .col-dsk-7, .col-smt-8, .col-tab-8, .col-lap-8, .col-dsk-8, .col-smt-9, .col-tab-9, .col-lap-9, .col-dsk-9, .col-smt-10, .col-tab-10, .col-lap-10, .col-dsk-10, .col-smt-11, .col-tab-11, .col-lap-11, .col-dsk-11, .col-smt-12, .col-tab-12, .col-lap-12, .col-dsk-12 {
@@ -249,8 +262,7 @@ input[type=text], input[type=password], input[type=email], select {
 .main-nav {
     list-style-type: none;
 }
-.nav-links,
-.logo {
+.nav-links,.logo {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.7);
 }
@@ -260,9 +272,9 @@ input[type=text], input[type=password], input[type=email], select {
 }
 .logo {
     display: inline-block;
-    font-size: 22px;
+    font-size: 32px;
     margin-top: 10px;
-    margin-left: 20px;
+    margin-left: 40px;
 }
 .navbar-toggle {
     position: absolute;
@@ -458,7 +470,7 @@ input[type=text], input[type=password], input[type=email], select {
 }
 .btn-save {
   color: #fff;
-  background-color: #337ab7;
+  background-color: #56b759;
   border-color: #2e6da4;
 }
 .btn-edit {
