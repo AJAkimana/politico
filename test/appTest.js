@@ -2,8 +2,12 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
-const Office = require('../models/Office');
-const Party = require('../models/Party');
+
+const DataModel = require('../models/DataModel');
+const officeFileJson = '../dataHelper/data/offices.json';
+const partyFileJson = '../dataHelper/data/parties.json';
+const parties = require(partyFileJson);
+const offices = require(officeFileJson);
 
 // Configure chai
 chai.use(chaiHttp);
@@ -42,7 +46,7 @@ describe('Politico', () => {
 			});
 		});
 		describe('/GET One party',  () => {
-			let firstParty = Party.firstOne();
+			let firstParty = DataModel.firstOne(parties);
 			it('Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
 					.get('/v1/parties/'+firstParty.id)
@@ -54,7 +58,7 @@ describe('Politico', () => {
 			});
 		});
 		describe('/PATCH modify party',  () => {
-			let firstParty = Party.firstOne();
+			let firstParty = DataModel.firstOne(parties);
 			it('Status code should be 201 and must be an object', (done) => {				chai.request(server)
 					.patch('/v1/parties/'+firstParty.id+'/'+firstParty.name)
 					.send(partyBody)
@@ -66,7 +70,7 @@ describe('Politico', () => {
 			});
 		});
 		describe('/DELETE One party',  () => {
-			let firstParty = Party.firstOne();
+			let firstParty = DataModel.firstOne(parties);
 			it('Status code should be 200', (done) => {
 				chai.request(server)
 					.delete('/v1/parties/'+firstParty.id)
@@ -102,7 +106,7 @@ describe('Politico', () => {
 			});
 		});
 		describe('/GET One office',  () => {
-			let firstOffice = Office.firstOne();
+			let firstOffice = DataModel.firstOne(offices);
 			it('Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
 					.get('/v1/offices/'+firstOffice.id)
@@ -114,7 +118,7 @@ describe('Politico', () => {
 			});
 		});
 		describe('/PATCH modify office',  () => {
-			let firstOffice = Office.firstOne();
+			let firstOffice = DataModel.firstOne(offices);
 			it('Status code should be 201 and must be an object', (done) => {
 				chai.request(server)
 					.patch('/v1/offices/'+firstOffice.id+'/'+firstOffice.name)
@@ -127,7 +131,7 @@ describe('Politico', () => {
 			});
 		});
 		describe('/DELETE One office',  () => {
-			let firstOffice = Office.firstOne();
+			let firstOffice = DataModel.firstOne(offices);
 			it('Status code should be 200', (done) => {
 				chai.request(server)
 					.delete('/v1/offices/'+firstOffice.id)
