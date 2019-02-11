@@ -45,19 +45,7 @@ app.use(session({
 * Set public directory as our static folder resources
 */
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 2*hours }));
-app.use(expressValidator({
-	customValidators: {
-		isArray:(value)=>{
-			return Array.isArray(value);
-		},
-		gte:(param, num)=>{
-			return param >= num;
-		},
-		hasNoWhiteSpace:(value)=>{
-			return value.indexOf(' ') ==-1;
-		},
-	}
-}));
+app.use(expressValidator());
 let apiVersion1 = require('./routes/apiVersion1');
 let pageRoute = require('./routes/pagesRoute');
 

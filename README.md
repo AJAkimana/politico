@@ -3,9 +3,7 @@ Politico enables citizens give their mandate to politicians running for differen
 
 Embedded JavaScript templates
 
-[![Build Status](https://travis-ci.org/AJAkimana/politico.svg?branch=master)](https://travis-ci.org/AJAkimana/politico)
-
-[![Coverage Status](https://coveralls.io/repos/github/AJAkimana/politico/badge.svg?branch=master)](https://coveralls.io/github/AJAkimana/politico?branch=master)
+[![Build Status](https://travis-ci.org/AJAkimana/politico.svg?branch=master)](https://travis-ci.org/AJAkimana/politico) [![Coverage Status](https://coveralls.io/repos/github/AJAkimana/politico/badge.svg?branch=master)](https://coveralls.io/github/AJAkimana/politico?branch=master)  [![Maintainability](https://api.codeclimate.com/v1/badges/03a8b99c0e216d5f4ed9/maintainability)](https://codeclimate.com/github/AJAkimana/politico/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/03a8b99c0e216d5f4ed9/test_coverage)](https://codeclimate.com/github/AJAkimana/politico/test_coverage)
 
 ## Technologies
 

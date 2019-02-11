@@ -1,4 +1,6 @@
-const Party = require('../models/Party');
+const DataModel = require('../models/DataModel');
+const partyFileJson = '../dataHelper/data/parties.json';
+const parties = require(partyFileJson);
 
 exports.createNewParty = (req, res) => {
 	// Check validity of body
@@ -8,20 +10,23 @@ exports.createNewParty = (req, res) => {
 	const errors = req.validationErrors();
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 
-	Party.saveNew(req.body)
+	DataModel.saveNew(partyFileJson, parties, req.body)
 		.then(party => {
 			res.status(201).json({
 				status: 201,
 				data: party
 			});
 		})
-		.catch(err => res.status(500).json({ 
-			status: 500,
-			error: err.message 
-		}));
+		.catch(err => {
+			console.log('Err:'+err)
+			res.status(500).json({ 
+				status: 500,
+				error: err.message 
+			})
+		});
 };
 exports.getAllPartiesList = (req, res) => {
-	Party.findAll()
+	DataModel.findAll(parties)
 		.then(parties => res.status(200).json({
 			status: 200,
 			data: parties
@@ -42,7 +47,7 @@ exports.getSpecificParty = (req, res) => {
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 	const partyId = Number(req.params.partyId);
 
-	Party.findOneById(partyId)
+	DataModel.findOneById(parties, partyId)
 		.then(party => res.status(200).json({
 			status: 200,
 			data: party
@@ -66,7 +71,7 @@ exports.modifyParty = (req, res) => {
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 
 	const id = Number(req.params.partyId);
-	Party.findOneAndUpdate(id, req.body)
+	DataModel.findOneAndUpdate(partyFileJson, parties, id, req.body)
 		.then(party => res.status(201).json({
 			status: 201,
 			data: party
@@ -87,7 +92,7 @@ exports.deleteParty = (req, res) => {
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 	const partyId = Number(req.params.partyId);
 
-	Party.removeOne(partyId)
+	DataModel.removeOne(partyFileJson, parties, partyId)
 		.then(() => res.status(200).json({
 			status: 200,
 			message: 'The party has been deleted'
