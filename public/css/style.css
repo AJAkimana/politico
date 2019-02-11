@@ -28,6 +28,18 @@ input[type=text], input[type=password], input[type=email], select {
   border-radius: 4px;
   resize: vertical;
 }
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 .text-center{
   text-align: center;
 }
