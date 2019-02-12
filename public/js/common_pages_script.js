@@ -1,6 +1,5 @@
 let mainNav = document.getElementById('js-menu');
 let navBarToggle = document.getElementById('js-navbar-toggle');
-
 navBarToggle.addEventListener('click', function () {
     mainNav.classList.toggle('active');
 });
@@ -35,7 +34,6 @@ switch (userType) {
 	default:
 		break;
 }
-
 for(let i=0; i<menuArray.length; i++){
 	//Create <li> and <a> element
 	let liNode = document.createElement('li');
@@ -44,11 +42,7 @@ for(let i=0; i<menuArray.length; i++){
 	aNode.setAttribute('class', menuArray[i].css_class);
 	aNode.textContent = menuArray[i].name;
 	liNode.appendChild(aNode);
-
-	//append <li> to <lu>
-	mainNav.appendChild(liNode);
 }
-
 // Get the modal
 // var modal = document.getElementById('myModal');
 
