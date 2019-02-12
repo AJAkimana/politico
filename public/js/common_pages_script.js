@@ -8,20 +8,34 @@ let theDate = new Date();
 document.getElementById('year').textContent = theDate.getFullYear() + '. All right reserved';
 
 // Menu will appear according to the user logged in
+let menuArray = [];
+switch (userType) {
+	case 'admin':
+		menuArray = [
+			{name:'Parties and offices',href:'parties.html',css_class:'nav-links'},//for users to view political offices and candidates he has voted
+			{name:'Politician',href:'politician.html',css_class:'nav-links'}, // for both admin and users
+			{name:'Profile',href:'profile.html',css_class:'nav-links'}, //for admin and politian
+			{name:'Users',href:'user_list.html',css_class:'nav-links'}, //for admin only
+			{name:'Log Out',href:'index.html',css_class:'nav-links'},
+		];
+		break;
+	case 'politician':
+		menuArray = [
+			{name:'Offices',href:'politician.html',css_class:'nav-links'},//for users to view political offices and candidates he has voted
+			{name:'Log Out',href:'index.html',css_class:'nav-links'},
+		];
+		break;
+	case 'user':
+		menuArray = [
+			{name:'Parties and offices',href:'user-parties.html',css_class:'nav-links'},//for users to view political offices and candidates he has voted
+			{name:'Profile',href:'profile.html',css_class:'nav-links'}, 
+			{name:'Log Out',href:'index.html',css_class:'nav-links'},
+		];
+		break;
+	default:
+		break;
+}
 
-let menuArray = [
-	{name:'Parties and offices',href:'parties.html',css_class:'nav-links'},//for users to view political offices and candidates he has voted
-	{name:'Politician',href:'politician.html',css_class:'nav-links'}, // for both admin and users
-	{name:'Profile',href:'profile.html',css_class:'nav-links'}, //for admin and politian
-	/* LInks that will be available when not logged in 
-		{name:'Login',href:'signin.html',css_class:'nav-links'},
-		{name:'Sign up',href:'signup.html',css_class:'nav-links'},
-		{name:'Reset password',href:'recoverpwd.html',css_class:'nav-links'},
-	*/
-	{name:'Log Out',href:'#',css_class:'nav-links'},
-];
-
-/**
 for(let i=0; i<menuArray.length; i++){
 	//Create <li> and <a> element
 	let liNode = document.createElement('li');
@@ -34,7 +48,7 @@ for(let i=0; i<menuArray.length; i++){
 	//append <li> to <lu>
 	mainNav.appendChild(liNode);
 }
-*/
+
 // Get the modal
 // var modal = document.getElementById('myModal');
 
