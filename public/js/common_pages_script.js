@@ -7,6 +7,9 @@ document.getElementById('year').textContent = theDate.getFullYear() + '. All rig
 navBarToggle.addEventListener('click', function () {
     mainNav.classList.toggle('active');
 });
+let theDate = new Date();
+document.getElementById('year').textContent = theDate.getFullYear() + '. All right reserved';
+
 // Menu will appear according to the user logged in
 
 let menuArray = [
@@ -20,19 +23,14 @@ let menuArray = [
 	*/
 	{name:'Log Out',href:'#',css_class:'nav-links'},
 ];
-if(auth){
-	for(let i=0; i<menuArray.length; i++){
-		//Create <li> and <a> element
-		let liNode = document.createElement('li');
-		let aNode = document.createElement('a');
-		aNode.setAttribute('href', menuArray[i].href);
-		aNode.setAttribute('class', menuArray[i].css_class);
-		aNode.textContent = menuArray[i].name;
-		liNode.appendChild(aNode);
-
-		//append <li> to <lu>
-		mainNav.appendChild(liNode);
-	}
+for(let i=0; i<menuArray.length; i++){
+  //Create <li> and <a> element
+  let liNode = document.createElement('li');
+  let aNode = document.createElement('a');
+  aNode.setAttribute('href', menuArray[i].href);
+  aNode.setAttribute('class', menuArray[i].css_class);
+  aNode.textContent = menuArray[i].name;
+  liNode.appendChild(aNode);
 }
 // Get the modal
 // var modal = document.getElementById('myModal');

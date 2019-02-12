@@ -7,11 +7,12 @@
 	<link rel="stylesheet" type="text/css" href="../public/css/style.css">
 </head>
 <body>
+	<script type="text/javascript">var userType='admin'</script>
 	<nav class="navbar">
 		<span class="navbar-toggle" id="js-navbar-toggle">
 			<i class="fas fa-bars">Menu</i>
 		</span>
-		<a href="#" class="logo">Politico</a>
+		<a href="index.html" class="logo">Politico</a>
 		<ul class="main-nav" id="js-menu">
 		</ul>
 	</nav>
@@ -22,90 +23,89 @@
 			<button class="btn btn-save pull-right" onclick="openModal('officeModal','addOffice')">Add office</button>
 		</div>
 		<div class="row">
-			<div class="col-smt-12 col-tab-8">
+			<div class="col-smt-12 col-tab-9">
 				<h2 class="text-center">Parties</h2>
-				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
-					<div class="panel">
-						<div class="panel-heading">Name</div>
-						<div class="panel-body">Url</div>
-						<div class="panel-footer">
-							<button class="btn btn-edit" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete" onclick="openModal('deleteModal')">Delete</button>
+				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-3">
+					<div class="card">
+						<!-- <h4 class="text-center">Party name</h4> -->
+						<div class="card-header">Party name</div>
+						<div class="card-body">
+							<img class="img-full" src="../public/default.png">
+						</div>
+						<div class="card-footer">
+							<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button>
+							<button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
 						</div>
 					</div>
 				</div>
-				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
-					<div class="panel">
-						<div class="panel-heading">Name</div>
-						<div class="panel-body">Url</div>
-						<div class="panel-footer">
-							<button class="btn btn-edit" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete" onclick="openModal('deleteModal')">Delete</button>
+				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-3">
+					<div class="card">
+						<!-- <h4 class="text-center">Party name</h4> -->
+						<div class="card-header">Party name</div>
+						<div class="card-body">
+							<img class="img-full" src="../public/default.png">
+						</div>
+						<div class="card-footer">
+							<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button>
+							<button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
 						</div>
 					</div>
 				</div>
-				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
-					<div class="panel">
-						<div class="panel-heading">Name</div>
-						<div class="panel-body">Url</div>
-						<div class="panel-footer">
-							<button class="btn btn-edit" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete" onclick="openModal('deleteModal')">Delete</button>
+				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-3">
+					<div class="card">
+						<!-- <h4 class="text-center">Party name</h4> -->
+						<div class="card-header">Party name</div>
+						<div class="card-body">
+							<img class="img-full" src="../public/default.png">
+						</div>
+						<div class="card-footer">
+							<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button>
+							<button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
 						</div>
 					</div>
 				</div>
-				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
-					<div class="panel">
-						<div class="panel-heading">Name</div>
-						<div class="panel-body">Url</div>
-						<div class="panel-footer">
-							<button class="btn btn-edit" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete" onclick="openModal('deleteModal')">Delete</button>
+				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-3">
+					<div class="card">
+						<!-- <h4 class="text-center">Party name</h4> -->
+						<div class="card-header">Party name</div>
+						<div class="card-body">
+							<img class="img-full" src="../public/default.png">
 						</div>
-					</div>
-				</div>
-				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
-					<div class="panel">
-						<div class="panel-heading">Name</div>
-						<div class="panel-body">Url</div>
-						<div class="panel-footer">
-							<button class="btn btn-edit" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete" onclick="openModal('deleteModal')">Delete</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-smt-12 col-tab-4 col-lap-3 col-dsk-2">
-					<div class="panel">
-						<div class="panel-heading">Name</div>
-						<div class="panel-body">Url</div>
-						<div class="panel-footer">
-							<button class="btn btn-edit" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete" onclick="openModal('deleteModal')">Delete</button>
+						<div class="card-footer">
+							<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button>
+							<button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-smt-12 col-tab-4">
+			<div class="col-smt-12 col-tab-3">
 				<h2 class="text-center">Offices</h2>
-				<div class="col-smt-12">
-					<div class="panel">
-						<div class="panel-heading">
-							<h3 class="panel-title">Name 1</h3>
-						</div>
-						<div class="panel-body">
-							<h4 class="panel-title">Type: Type 1</h4>
-						</div>
-						<div class="panel-footer">
-							<button class="btn btn-edit">Edit</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-smt-12">
-					<div class="panel">
-						<div class="panel-heading">
-							<h3 class="panel-title">Name 1</h3>
-						</div>
-						<div class="panel-body">
-							<h4 class="panel-title">Type: Type 1</h4>
-						</div>
-						<div class="panel-footer">
-							<button class="btn btn-edit">Edit</button>
-						</div>
-					</div>
+				<div class="responsive">
+					<table class="table">
+						<tr><th>Name</th><th>Type</th><th>Actions</th></tr>
+						<tbody id="offices-list">
+							<tr>
+								<td>Name 1</td><td>Type 1</td><td>
+									<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
+								</td>
+							</tr>
+							<tr>
+								<td>Name 2</td><td>Type 2</td><td>
+									<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
+								</td>
+							</tr>
+							<tr>
+								<td>Name 3</td><td>Type 3</td><td>
+									<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
+								</td>
+							</tr>
+							<tr>
+								<td>Name 4</td><td>Type 4</td><td>
+									<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -127,8 +127,8 @@
 						<input type="text" name="partyAddress" id="partyAddress" placeholder="Enter Headquoter address">
 					</div>
 					<div class="col-smt-12 col-tab-6 col-lap-4 col-dsk-4">
-						<label for="partyLogo">Link of logo</label>
-						<input type="text" name="partyLogo" id="partyLogo" placeholder="Enter party logo">
+						<label for="partyLogo">Select logo</label>
+						<input type="file" name="partyLogo" id="partyLogo">
 					</div>
 				</div>
 			</div>
@@ -141,7 +141,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<span class="close" onclick="closeModal('officeModal')">&times;</span>
-				<h2 id="modalTitle">Add new office</h2>
+				<h2 id="">Add new office</h2>
 			</div>
 			<div class="modal-body">
 				<div class="row">
@@ -180,6 +180,9 @@
 			</div>
 		</div>
 	</div>
+	<footer class="footer">
+		<h4>&copy; <span id="year"></span></h4>
+	</footer>
 	<script type="text/javascript" src="../public/js/common_pages_script.js"></script>
 </body>
 </html>
