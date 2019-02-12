@@ -1,3 +1,28 @@
+let mainNav = document.getElementById('js-menu');
+let navBarToggle = document.getElementById('js-navbar-toggle');
+
+navBarToggle.addEventListener('click', function () {
+    mainNav.classList.toggle('active');
+});
+let theDate = new Date();
+document.getElementById('year').textContent = theDate.getFullYear() + '. All right reserved';
+
+function openModal(modalToOpen,action){
+    var modal = document.getElementById(modalToOpen);
+    modal.style.display = "block";
+    if(action=='addParty'){
+        let modalTitle = document.getElementById('modalTitle');
+        modalTitle.textContent="Add new party"
+    }
+}
+// When the user clicks on <span> (x), close the modal
+function closeModal(modalToClose) {
+    var modal = document.getElementById(modalToClose);
+    modal.style.display = "none";
+}
+/*
+    App functions and methods
+*/
 function getAuth(){
     window.location='../UI/parties.html';
     // let email = document.querySelector('#email').value;
