@@ -1,3 +1,6 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
 * {
   box-sizing: border-box;
   padding: 0;
@@ -9,14 +12,15 @@
   clear: both;
   display: block;
 }
-
+.box-login{
+  border: 3px solid #70c9c7;
+}
 [class*="col-"] {
   float: left;
   padding: 15px;
 }
-
-html {
-  font-family: "Lucida Sans", sans-serif;
+.sm-padding{
+  padding-left: 40px;
 }
 .landing-text{
   font-size: 36px;
@@ -285,8 +289,7 @@ tr:nth-child(even) {
 .main-nav {
     list-style-type: none;
 }
-.nav-links,
-.logo {
+.nav-links,.logo {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.7);
 }
@@ -296,9 +299,9 @@ tr:nth-child(even) {
 }
 .logo {
     display: inline-block;
-    font-size: 22px;
+    font-size: 32px;
     margin-top: 10px;
-    margin-left: 20px;
+    margin-left: 40px;
 }
 .navbar-toggle {
     position: absolute;
