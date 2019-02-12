@@ -18,7 +18,7 @@
 html {
   font-family: "Lucida Sans", sans-serif;
 }
-input[type=text], input[type=password], input[type=email], select .btn-login{
+input[type=text], input[type=password], input[type=email], select, .btn-login{
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -72,6 +72,9 @@ tr:nth-child(even) {
 }
 .box-login{
   border: 3px solid #70c9c7;
+}
+.sm-padding{
+  padding-left: 40px;
 }
 .footer {
   /*position: fixed;*/
