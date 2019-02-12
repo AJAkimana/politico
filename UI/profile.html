@@ -11,21 +11,22 @@
 		<span class="navbar-toggle" id="js-navbar-toggle">
 			<i class="fas fa-bars">Menu</i>
 		</span>
-		<a href="#" class="logo">Politico</a>
+		<a href="index.html" class="logo">Politico</a>
 		<ul class="main-nav" id="js-menu">
 		</ul>
 	</nav>
 	<section class="row">
+		<script type="text/javascript">var userType='user'</script>
 		<h2 class="text-center">My Dashbord</h2>
-		<div class="col-smt-6">
+		<div class="col-smt-3">
 			<h3 class="text-center">List of my political offices</h3>
 			<div class="col-smt-6">
 				<div class="panel">
 					<div class="panel-heading">
-						<h3 class="panel-title">Name 3</h3>
+						<h3 class="panel-title">Name 1</h3>
 					</div>
 					<div class="panel-body">
-						<h4 class="panel-title">Type: Type 3</h4>
+						<h4 class="panel-title">Local</h4>
 					</div>
 					<div class="panel-footer">
 						<label>3 candidates</label>
@@ -35,18 +36,73 @@
 			<div class="col-smt-6">
 				<div class="panel">
 					<div class="panel-heading">
-						<h3 class="panel-title">Name 1</h3>
+						<h3 class="panel-title">Name 2</h3>
 					</div>
 					<div class="panel-body">
-						<h4 class="panel-title">Type: Type 1</h4>
+						<h4 class="panel-title">State</h4>
 					</div>
 					<div class="panel-footer">
 						<label>1 candidates</label>
 					</div>
 				</div>
 			</div>
+			<div class="col-smt-6">
+				<div class="panel">
+					<div class="panel-heading">
+						<h3 class="panel-title">Name 3</h3>
+					</div>
+					<div class="panel-body">
+						<h4 class="panel-title">Government</h4>
+					</div>
+					<div class="panel-footer">
+						<label>0 candidates</label>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="col-smt-6">
+			<h2 class="text-center">List of candidates</h2>
+			<div class="responsive">
+				<table class="table">
+					<tr><th>Candidate names</th><th>Office</th><th>Office type</th><th>Actions</th></tr>
+					<tbody id="candidates-list">
+						<tr>
+							<td>Candidates name 1</td>
+							<td>Office name</td>
+							<td>Local</td>
+							<td>
+								<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Vote</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Candidates name 2</td>
+							<td>Office name</td>
+							<td>State</td>
+							<td>
+								<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Vote</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Candidates name 3</td>
+							<td>Office 2</td>
+							<td>Local</td>
+							<td>
+								<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Vote</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Candidates name 4</td>
+							<td>Office 4</td>
+							<td>Government</td>
+							<td>
+								<button class="btn btn-save btn-small" onclick="openModal('partyModal','editParty')">Voted</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-smt-3">
 			<h3 class="text-center">All my candidates</h3>
 			<ul>
 				<li><strong>Perso name 1</strong> from <strong>Office 3</strong></li>
@@ -57,6 +113,9 @@
 			</ul>
 		</div>
 	</section>
+	<footer class="footer">
+		<h4>&copy; <span id="year"></span></h4>
+	</footer>
 	<script type="text/javascript" src="../public/js/common_pages_script.js"></script>
 </body>
 </html>
