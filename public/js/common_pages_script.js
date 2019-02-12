@@ -4,6 +4,9 @@ let navBarToggle = document.getElementById('js-navbar-toggle');
 navBarToggle.addEventListener('click', function () {
     mainNav.classList.toggle('active');
 });
+let theDate = new Date();
+document.getElementById('year').textContent = theDate.getFullYear() + '. All right reserved';
+
 // Menu will appear according to the user logged in
 
 let menuArray = [
