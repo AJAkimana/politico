@@ -18,6 +18,7 @@ let menuArray = [
 	{name:'Log Out',href:'#',css_class:'nav-links'},
 ];
 
+/**
 for(let i=0; i<menuArray.length; i++){
 	//Create <li> and <a> element
 	let liNode = document.createElement('li');
@@ -30,6 +31,7 @@ for(let i=0; i<menuArray.length; i++){
 	//append <li> to <lu>
 	mainNav.appendChild(liNode);
 }
+*/
 // Get the modal
 // var modal = document.getElementById('myModal');
 
