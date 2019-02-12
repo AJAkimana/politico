@@ -42,6 +42,8 @@ for(let i=0; i<menuArray.length; i++){
 	aNode.setAttribute('class', menuArray[i].css_class);
 	aNode.textContent = menuArray[i].name;
 	liNode.appendChild(aNode);
+	//
+	mainNav.appendChild(liNode);
 }
 // Get the modal
 // var modal = document.getElementById('myModal');
