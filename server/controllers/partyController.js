@@ -1,32 +1,35 @@
 const DataModel = require('../models/DataModel');
-const officeFileJson = '../dataHelper/data/offices.json';
-const offices = require(officeFileJson);
-const officeTypes = ['federal','legistrative','state','local'];
+const partyFileJson = '../helper/data/parties.json';
+const parties = require(partyFileJson);
 
-exports.createNewOffice = (req, res) => {
+exports.createNewParty = (req, res) => {
 	// Check validity of body
 	req.assert('name', 'Type party name').notEmpty();
-	req.assert('type', 'Invalid office type').isIn(officeTypes);
+	req.assert('hqAddress', 'Provide party address').notEmpty();
+	req.assert('logoUrl', 'Provide party logo url').notEmpty();
 	const errors = req.validationErrors();
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 
-	DataModel.saveNew(officeFileJson, offices, req.body)
-		.then(office => {
+	DataModel.saveNew(partyFileJson, parties, req.body)
+		.then(party => {
 			res.status(201).json({
 				status: 201,
-				data: office
+				data: party
 			});
 		})
-		.catch(err => res.status(500).json({ 
-			status: 500,
-			error: err.message 
-		}));
+		.catch(err => {
+			console.log('Err:'+err)
+			res.status(500).json({ 
+				status: 500,
+				error: err.message 
+			})
+		});
 };
-exports.getAllOfficesList = (req, res) => {
-	DataModel.findAll(offices)
-		.then(offices => res.status(200).json({
+exports.getAllPartiesList = (req, res) => {
+	DataModel.findAll(parties)
+		.then(parties => res.status(200).json({
 			status: 200,
-			data: offices
+			data: parties
 		}))
 		.catch(err => {
 			let codeStatus = err.status?err.status:500;
@@ -37,17 +40,17 @@ exports.getAllOfficesList = (req, res) => {
 			return res.status(codeStatus).json(response);
 		});
 };
-exports.getSpecificOffice = (req, res) => {
-	// Check valid office id
-	req.assert('officeId','Invalid office spacification').isInt();
+exports.getSpecificParty = (req, res) => {
+	// Check valid party id
+	req.assert('partyId','Invalid party spacification').isInt();
 	const errors = req.validationErrors();
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
-	const officeId = Number(req.params.officeId);
+	const partyId = Number(req.params.partyId);
 
-	DataModel.findOneById(offices, officeId)
-		.then(office => res.status(200).json({
+	DataModel.findOneById(parties, partyId)
+		.then(party => res.status(200).json({
 			status: 200,
-			data: office
+			data: party
 		}))
 		.catch(err => {
 			let codeStatus = err.status?err.status:500;
@@ -58,20 +61,20 @@ exports.getSpecificOffice = (req, res) => {
 			return res.status(codeStatus).json(response);
 		});
 };
-exports.modifyOffice = (req, res) => {
+exports.modifyParty = (req, res) => {
 	// Check validity of body and params
-	req.assert('name', 'Type office name').notEmpty();
-	req.assert('type', 'Invalid office type').isIn(officeTypes);
-	req.assert('officeId','Invalid office spacification').isInt();
-	
+	req.assert('name', 'Type party name').notEmpty();
+	req.assert('hqAddress', 'Provide party address').notEmpty();
+	req.assert('logoUrl', 'Provide party logo url').notEmpty();
+	req.assert('partyId','Invalid party spacification').isInt();
 	const errors = req.validationErrors();
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 
-	const id = Number(req.params.officeId);
-	DataModel.findOneAndUpdate(officeFileJson, offices, id, req.body)
-		.then(office => res.status(201).json({
+	const id = Number(req.params.partyId);
+	DataModel.findOneAndUpdate(partyFileJson, parties, id, req.body)
+		.then(party => res.status(201).json({
 			status: 201,
-			data: office
+			data: party
 		}))
 		.catch(err => {
 			let codeStatus = err.status?err.status:500;
@@ -82,17 +85,17 @@ exports.modifyOffice = (req, res) => {
 			res.status(codeStatus).json(response);
 		});
 };
-exports.deleteOffice = (req, res) => {
+exports.deleteParty = (req, res) => {
 	// Check valid party id
-	req.assert('officeId','Invalid office spacification').isInt();
+	req.assert('partyId','Invalid party spaecification').isInt();
 	const errors = req.validationErrors();
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
-	const officeId = Number(req.params.officeId);
+	const partyId = Number(req.params.partyId);
 
-	DataModel.removeOne(officeFileJson, offices, officeId)
+	DataModel.removeOne(partyFileJson, parties, partyId)
 		.then(() => res.status(200).json({
 			status: 200,
-			message: 'The office has been deleted'
+			message: 'The party has been deleted'
 		}))
 		.catch(err => {
 			let codeStatus = err.status?err.status:500;

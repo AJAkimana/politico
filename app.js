@@ -2,13 +2,8 @@
  * Module dependencies.
  */
 const express = require('express');
-const compression = require('compression');
-const session = require('express-session');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const errorHandler = require('errorhandler');
-const path = require('path');
-const ejs = require('ejs');
 const expressValidator = require('express-validator');
 /**
  * Create Express server.
@@ -19,38 +14,13 @@ const app = express();
  */
 app.set('port', process.env.PORT || 8080);
 
-/**
- * Set views for the app 
- */
-app.set('views', path.join(__dirname, 'UI'));
-app.engine('html', ejs.renderFile);
-app.set('view engine', 'html');
-
-app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-var hours = 3600000;
-app.use(cookieParser());
 
-app.use(session({
-	resave: true,
-	saveUninitialized: true,
-	secret: 'MySecretSessionId',
-	name : 'NODESESSID', 
-	//When still not connected the cookie will live 2 hours
-	cookie:{ path: '/', httpOnly: true, secure: false, maxAge: 2*hours },
-}));
-
-/**
-* Set public directory as our static folder resources
-*/
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
-let apiVersion1 = require('./routes/apiVersion1');
-let pageRoute = require('./routes/pagesRoute');
+let apiVersion1 = require('./server/routes/apiVersion1');
 
-app.use('/v1', apiVersion1);
-app.use(pageRoute);
+app.use('/api', apiVersion1);
 app.all('*', (req, res) => {
 	return res.status(404).json({ 
 		status: 404,
