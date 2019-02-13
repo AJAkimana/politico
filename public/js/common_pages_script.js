@@ -12,22 +12,27 @@ switch (userType) {
 	case 'admin':
 		menuArray = [
 			{name:'Parties and offices',href:'parties.html',css_class:'nav-links'},//for users to view political offices and candidates he has voted
-			{name:'Politician',href:'politician.html',css_class:'nav-links'}, // for both admin and users
-			{name:'Profile',href:'profile.html',css_class:'nav-links'}, //for admin and politian
-			{name:'Users',href:'user_list.html',css_class:'nav-links'}, //for admin only
+			{name:'Politician Dashbord',href:'politician.html',css_class:'nav-links'}, // for both admin and users
+			{name:'User dashboard',href:'profile.html',css_class:'nav-links'}, //for admin and politian
+			{name:'Admin dashboard',href:'user_list.html',css_class:'nav-links'}, //for admin only
+			{name:'Politician panel',href:'politician.html',css_class:'nav-links'},
 			{name:'Log Out',href:'index.html',css_class:'nav-links'},
 		];
 		break;
 	case 'politician':
 		menuArray = [
-			{name:'Offices',href:'politician.html',css_class:'nav-links'},//for users to view political offices and candidates he has voted
+			{name:'Politician dashboard',href:'politician.html',css_class:'nav-links'},//for users to view political offices and candidates he has voted
+			{name:'User panel',href:'user-parties.html',css_class:'nav-links'},
+			{name:'Admin panel',href:'parties.html',css_class:'nav-links'},
 			{name:'Log Out',href:'index.html',css_class:'nav-links'},
 		];
 		break;
 	case 'user':
 		menuArray = [
 			{name:'Parties and offices',href:'user-parties.html',css_class:'nav-links'},//for users to view political offices and candidates he has voted
-			{name:'Profile',href:'profile.html',css_class:'nav-links'}, 
+			{name:'User dashboard',href:'profile.html',css_class:'nav-links'}, 
+			{name:'Politician panel',href:'politician.html',css_class:'nav-links'},
+			{name:'Admin panel',href:'parties.html',css_class:'nav-links'},
 			{name:'Log Out',href:'index.html',css_class:'nav-links'},
 		];
 		break;
@@ -52,8 +57,20 @@ function openModal(modalToOpen,action){
 	var modal = document.getElementById(modalToOpen);
 	modal.style.display = "block";
 	if(action=='addParty'){
-		let modalTitle = document.getElementById('modalTitle');
+		let modalTitle = document.getElementById('partyModalTitle');
 		modalTitle.textContent="Add new party"
+	}
+	if(action=='addOffice'){
+		let modalTitle = document.getElementById('officeModalTitle');
+		modalTitle.textContent="Add new office"
+	}
+	if(action=='editParty'){
+		let modalTitle = document.getElementById('partyModalTitle');
+		modalTitle.textContent="Edit party"
+	}
+	if(action=='editOffice'){
+		let modalTitle = document.getElementById('officeModalTitle');
+		modalTitle.textContent="Edit office"
 	}
 }
 // When the user clicks on <span> (x), close the modal

@@ -20,7 +20,7 @@
 		<h1 class="text-center">Offices and parties DASHBOARD</h1>
 		<div class="col-smt-12">
 			<button class="btn btn-save pull-right" onclick="openModal('partyModal','addParty')">Add party</button>
-			<button class="btn btn-save pull-right" onclick="openModal('officeModal','addOffice')">Add office</button>
+			<button class="btn btn-save pull-right sm-padding" onclick="openModal('officeModal','addOffice')">Add office</button>
 		</div>
 		<div class="row">
 			<div class="col-smt-12 col-tab-9">
@@ -86,22 +86,22 @@
 						<tbody id="offices-list">
 							<tr>
 								<td>Name 1</td><td>Type 1</td><td>
-									<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
+									<button class="btn btn-edit btn-small" onclick="openModal('officeModal','editOffice')">Edit</button><button class="btn btn-delete btn-small sm-padding" onclick="openModal('deleteModal')">Delete</button>
 								</td>
 							</tr>
 							<tr>
 								<td>Name 2</td><td>Type 2</td><td>
-									<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
+									<button class="btn btn-edit btn-small" onclick="openModal('officeModal','editOffice')">Edit</button><button class="btn btn-delete btn-small sm-padding" onclick="openModal('deleteModal')">Delete</button>
 								</td>
 							</tr>
 							<tr>
 								<td>Name 3</td><td>Type 3</td><td>
-									<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
+									<button class="btn btn-edit btn-small" onclick="openModal('officeModal','editOffice')">Edit</button><button class="btn btn-delete btn-small sm-padding" onclick="openModal('deleteModal')">Delete</button>
 								</td>
 							</tr>
 							<tr>
 								<td>Name 4</td><td>Type 4</td><td>
-									<button class="btn btn-edit btn-small" onclick="openModal('partyModal','editParty')">Edit</button><button class="btn btn-delete btn-small" onclick="openModal('deleteModal')">Delete</button>
+									<button class="btn btn-edit btn-small" onclick="openModal('officeModal','editOffice')">Edit</button><button class="btn btn-delete btn-small sm-padding" onclick="openModal('deleteModal')">Delete</button>
 								</td>
 							</tr>
 						</tbody>
@@ -141,7 +141,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<span class="close" onclick="closeModal('officeModal')">&times;</span>
-				<h2 id="">Add new office</h2>
+				<h2 id="officeModalTitle">Add new office</h2>
 			</div>
 			<div class="modal-body">
 				<div class="row">
@@ -170,10 +170,10 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<span class="close" onclick="closeModal('deleteModal')">&times;</span>
-				<h2 id="deletePartyModalTitle">Delete party</h2>
+				<h2 id="deletePartyModalTitle">Delete</h2>
 			</div>
 			<div class="modal-body">
-				<h4>Are you sure you want to delete this party</h4>
+				<h4>Are you sure you want to delete it? There no revert</h4>
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-delete">Yes delete</button>
