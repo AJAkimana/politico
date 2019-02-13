@@ -36,7 +36,7 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true,
 	secret: 'MySecretSessionId',
-	name : 'NODESESSID',     // simulate Php cookie
+	name : 'NODESESSID', 
 	//When still not connected the cookie will live 2 hours
 	cookie:{ path: '/', httpOnly: true, secure: false, maxAge: 2*hours },
 }));
@@ -44,7 +44,7 @@ app.use(session({
 /**
 * Set public directory as our static folder resources
 */
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: 2*hours }));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
 let apiVersion1 = require('./routes/apiVersion1');
 let pageRoute = require('./routes/pagesRoute');
