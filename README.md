@@ -9,8 +9,6 @@ Embedded JavaScript templates
 
   * Runtime environment: [Node](https://nodejs.org/)
   * Backend framework: [Express.js](https://expressjs.com/)
-  * Frontend Javascript framework: None
-  * View engine: Pure HTML with help of [EJS](https://ejs.co/)
   * Database: None. All data are saved to and retrieved from created JSON files
 
 ## Installation
