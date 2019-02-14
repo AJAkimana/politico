@@ -1,7 +1,7 @@
 // Import the dependencies for testing
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../../app');
+const server = require('../app');
 
 const DataModel = require('../models/DataModel');
 const officeFileJson = '../helper/data/offices.json';
