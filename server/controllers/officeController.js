@@ -1,15 +1,8 @@
 const DataModel = require('../models/DataModel');
 const officeFileJson = '../helper/data/offices.json';
 const offices = require(officeFileJson);
-const officeTypes = ['federal','legistrative','state','local'];
 
 exports.createNewOffice = (req, res) => {
-	// Check validity of body
-	req.assert('name', 'Type party name').notEmpty();
-	req.assert('type', 'Invalid office type').isIn(officeTypes);
-	const errors = req.validationErrors();
-	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
-
 	DataModel.saveNew(officeFileJson, offices, req.body)
 		.then(office => {
 			res.status(201).json({
@@ -29,8 +22,8 @@ exports.getAllOfficesList = (req, res) => {
 			data: offices
 		}))
 		.catch(err => {
-			let codeStatus = err.status?err.status:500;
-			let response = {
+			const codeStatus = err.status?err.status:500;
+			const response = {
 				status:codeStatus,
 				error:err.message
 			};
@@ -38,10 +31,6 @@ exports.getAllOfficesList = (req, res) => {
 		});
 };
 exports.getSpecificOffice = (req, res) => {
-	// Check valid office id
-	req.assert('officeId','Invalid office spacification').isInt();
-	const errors = req.validationErrors();
-	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 	const officeId = Number(req.params.officeId);
 
 	DataModel.findOneById(offices, officeId)
@@ -50,8 +39,8 @@ exports.getSpecificOffice = (req, res) => {
 			data: office
 		}))
 		.catch(err => {
-			let codeStatus = err.status?err.status:500;
-			let response = {
+			const codeStatus = err.status?err.status:500;
+			const response = {
 				status:codeStatus,
 				error:err.message
 			};
@@ -59,14 +48,6 @@ exports.getSpecificOffice = (req, res) => {
 		});
 };
 exports.modifyOffice = (req, res) => {
-	// Check validity of body and params
-	req.assert('name', 'Type office name').notEmpty();
-	req.assert('type', 'Invalid office type').isIn(officeTypes);
-	req.assert('officeId','Invalid office spacification').isInt();
-	
-	const errors = req.validationErrors();
-	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
-
 	const id = Number(req.params.officeId);
 	DataModel.findOneAndUpdate(officeFileJson, offices, id, req.body)
 		.then(office => res.status(201).json({
@@ -74,8 +55,8 @@ exports.modifyOffice = (req, res) => {
 			data: office
 		}))
 		.catch(err => {
-			let codeStatus = err.status?err.status:500;
-			let response = {
+			const codeStatus = err.status?err.status:500;
+			const response = {
 				status:codeStatus,
 				error:err.message
 			};
@@ -83,10 +64,6 @@ exports.modifyOffice = (req, res) => {
 		});
 };
 exports.deleteOffice = (req, res) => {
-	// Check valid party id
-	req.assert('officeId','Invalid office spacification').isInt();
-	const errors = req.validationErrors();
-	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 	const officeId = Number(req.params.officeId);
 
 	DataModel.removeOne(officeFileJson, offices, officeId)
@@ -95,8 +72,8 @@ exports.deleteOffice = (req, res) => {
 			message: 'The office has been deleted'
 		}))
 		.catch(err => {
-			let codeStatus = err.status?err.status:500;
-			let response = {
+			const codeStatus = err.status?err.status:500;
+			const response = {
 				status:codeStatus,
 				error:err.message
 			};

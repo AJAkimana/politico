@@ -3,13 +3,6 @@ const partyFileJson = '../helper/data/parties.json';
 const parties = require(partyFileJson);
 
 exports.createNewParty = (req, res) => {
-	// Check validity of body
-	req.assert('name', 'Type party name').notEmpty();
-	req.assert('hqAddress', 'Provide party address').notEmpty();
-	req.assert('logoUrl', 'Provide party logo url').notEmpty();
-	const errors = req.validationErrors();
-	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
-
 	DataModel.saveNew(partyFileJson, parties, req.body)
 		.then(party => {
 			res.status(201).json({
@@ -41,8 +34,6 @@ exports.getAllPartiesList = (req, res) => {
 		});
 };
 exports.getSpecificParty = (req, res) => {
-	// Check valid party id
-	req.assert('partyId','Invalid party spacification').isInt();
 	const errors = req.validationErrors();
 	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 	const partyId = Number(req.params.partyId);
@@ -62,14 +53,6 @@ exports.getSpecificParty = (req, res) => {
 		});
 };
 exports.modifyParty = (req, res) => {
-	// Check validity of body and params
-	req.assert('name', 'Type party name').notEmpty();
-	req.assert('hqAddress', 'Provide party address').notEmpty();
-	req.assert('logoUrl', 'Provide party logo url').notEmpty();
-	req.assert('partyId','Invalid party spacification').isInt();
-	const errors = req.validationErrors();
-	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
-
 	const id = Number(req.params.partyId);
 	DataModel.findOneAndUpdate(partyFileJson, parties, id, req.body)
 		.then(party => res.status(201).json({
@@ -86,10 +69,6 @@ exports.modifyParty = (req, res) => {
 		});
 };
 exports.deleteParty = (req, res) => {
-	// Check valid party id
-	req.assert('partyId','Invalid party spaecification').isInt();
-	const errors = req.validationErrors();
-	if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 	const partyId = Number(req.params.partyId);
 
 	DataModel.removeOne(partyFileJson, parties, partyId)
