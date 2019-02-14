@@ -4,8 +4,8 @@ const chaiHttp = require('chai-http');
 const server = require('../app');
 
 const DataModel = require('../models/DataModel');
-const officeFileJson = '../dataHelper/data/offices.json';
-const partyFileJson = '../dataHelper/data/parties.json';
+const officeFileJson = '../helper/data/offices.json';
+const partyFileJson = '../helper/data/parties.json';
 const parties = require(partyFileJson);
 const offices = require(officeFileJson);
 
@@ -35,7 +35,7 @@ describe('Politico', () => {
 		describe('/POST create party',  () => {
 			it('If no name. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.post('/v1/parties')
+					.post('/api/v1/parties')
 					.send(partyBodyWithNoName)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -45,7 +45,7 @@ describe('Politico', () => {
 			});
 			it('If no Address. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.post('/v1/parties')
+					.post('/api/v1/parties')
 					.send(partyBodyWithNoAddress)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -55,7 +55,7 @@ describe('Politico', () => {
 			});
 			it('If no Url. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.post('/v1/parties')
+					.post('/api/v1/parties')
 					.send(partyBodyWithNoUrl)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -65,7 +65,7 @@ describe('Politico', () => {
 			});
 			it('Everything is fine. Status code should be 201 and must be an object', (done) => {
 				chai.request(server)
-					.post('/v1/parties')
+					.post('/api/v1/parties')
 					.send(partyBody)
 					.end((err, res) => {
 						res.should.have.status(201);
@@ -77,7 +77,7 @@ describe('Politico', () => {
 		describe('/GET parties',  () => {
 			it('Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
-					.get('/v1/parties')
+					.get('/api/v1/parties')
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.be.a('object');
@@ -88,7 +88,7 @@ describe('Politico', () => {
 		describe('/GET One party',  () => {
 			it('id: '+wrongId+'. Status code should be 404 and must be an object', (done) => {
 				chai.request(server)
-					.get('/v1/parties/'+wrongId)
+					.get('/api/v1/parties/'+wrongId)
 					.end((err, res) => {
 						res.should.have.status(404);
 						res.body.should.be.a('object');
@@ -97,7 +97,7 @@ describe('Politico', () => {
 			});
 			it('Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
-					.get('/v1/parties/'+firstParty.id)
+					.get('/api/v1/parties/'+firstParty.id)
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.be.a('object');
@@ -107,7 +107,7 @@ describe('Politico', () => {
 		});
 		describe('/PATCH modify party',  () => {
 			it('If ID is string. Status code should be 400 and must be an object', (done) => {				chai.request(server)
-					.patch('/v1/parties/wrongId/noname')
+					.patch('/api/v1/parties/wrongId/noname')
 					.send(partyBody)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -116,7 +116,7 @@ describe('Politico', () => {
 					});
 			});
 			it('If no Name. Status code should be 400 and must be an object', (done) => {				chai.request(server)
-					.patch('/v1/parties/'+firstParty.id+'/'+firstParty.name)
+					.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
 					.send(partyBodyWithNoName)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -125,7 +125,7 @@ describe('Politico', () => {
 					});
 			});
 			it('If no Address. Status code should be 400 and must be an object', (done) => {				chai.request(server)
-					.patch('/v1/parties/'+firstParty.id+'/'+firstParty.name)
+					.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
 					.send(partyBodyWithNoAddress)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -134,7 +134,7 @@ describe('Politico', () => {
 					});
 			});
 			it('If no Url. Status code should be 400 and must be an object', (done) => {				chai.request(server)
-					.patch('/v1/parties/'+firstParty.id+'/'+firstParty.name)
+					.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
 					.send(partyBodyWithNoUrl)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -143,7 +143,7 @@ describe('Politico', () => {
 					});
 			});
 			it('If everything is fine. Status code should be 201 and should be an object', (done) => {				chai.request(server)
-					.patch('/v1/parties/'+firstParty.id+'/'+firstParty.name)
+					.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
 					.send(partyBody)
 					.end((err, res) => {
 						res.should.have.status(201);
@@ -155,7 +155,7 @@ describe('Politico', () => {
 		describe('/DELETE One party',  () => {
 			it('If ID is string. Status code should be 400 and should be an object', (done) => {
 				chai.request(server)
-					.delete('/v1/parties/String')
+					.delete('/api/v1/parties/String')
 					.end((err, res) => {
 						res.should.have.status(400);
 						res.body.should.be.a('object');
@@ -164,7 +164,7 @@ describe('Politico', () => {
 			});
 			it('If no data to delete. Status code should be 404 and should be an object', (done) => {
 				chai.request(server)
-					.delete('/v1/parties/'+wrongId)
+					.delete('/api/v1/parties/'+wrongId)
 					.end((err, res) => {
 						res.should.have.status(404);
 						res.body.should.be.a('object');
@@ -173,7 +173,7 @@ describe('Politico', () => {
 			});
 			it('Status code should be 200 and should be an object', (done) => {
 				chai.request(server)
-					.delete('/v1/parties/'+firstParty.id)
+					.delete('/api/v1/parties/'+firstParty.id)
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.be.a('object');
@@ -186,7 +186,7 @@ describe('Politico', () => {
 		describe('/POST create office',  () => {
 			it('If no Name. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.post('/v1/offices')
+					.post('/api/v1/offices')
 					.send(officeBodyWithNoName)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -196,7 +196,7 @@ describe('Politico', () => {
 			});
 			it('if no type. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.post('/v1/offices')
+					.post('/api/v1/offices')
 					.send(officeBodyWithNoType)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -206,7 +206,7 @@ describe('Politico', () => {
 			});
 			it('If type in not in [Legist,state,local,gover]. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.post('/v1/offices')
+					.post('/api/v1/offices')
 					.send(officeBodyWithWrongType)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -216,7 +216,7 @@ describe('Politico', () => {
 			});
 			it('If everything is fine. Status code should be 201 and must be an object', (done) => {
 				chai.request(server)
-					.post('/v1/offices')
+					.post('/api/v1/offices')
 					.send(officeBody)
 					.end((err, res) => {
 						res.should.have.status(201);
@@ -228,7 +228,7 @@ describe('Politico', () => {
 		describe('/GET offices',  () => {
 			it('Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
-					.get('/v1/offices')
+					.get('/api/v1/offices')
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.be.a('object');
@@ -239,7 +239,7 @@ describe('Politico', () => {
 		describe('/GET One office',  () => {
 			it('ID: '+wrongId+'.Status code should be 404 and must be an object', (done) => {
 				chai.request(server)
-					.get('/v1/offices/'+wrongId)
+					.get('/api/v1/offices/'+wrongId)
 					.end((err, res) => {
 						res.should.have.status(404);
 						res.body.should.be.a('object');
@@ -248,7 +248,7 @@ describe('Politico', () => {
 			});
 			it('Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
-					.get('/v1/offices/'+firstOffice.id)
+					.get('/api/v1/offices/'+firstOffice.id)
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.be.a('object');
@@ -259,7 +259,7 @@ describe('Politico', () => {
 		describe('/PATCH modify office',  () => {
 			it('If ID is string. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.patch('/v1/offices/string/name')
+					.patch('/api/v1/offices/string/name')
 					.send(officeBody)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -269,7 +269,7 @@ describe('Politico', () => {
 			});
 			it('If no Name. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.patch('/v1/offices/'+firstOffice.id+'/'+firstOffice.name)
+					.patch('/api/v1/offices/'+firstOffice.id+'/'+firstOffice.name)
 					.send(officeBodyWithNoName)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -279,7 +279,7 @@ describe('Politico', () => {
 			});
 			it('If no type. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.patch('/v1/offices/'+firstOffice.id+'/'+firstOffice.name)
+					.patch('/api/v1/offices/'+firstOffice.id+'/'+firstOffice.name)
 					.send(officeBodyWithWrongType)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -289,7 +289,7 @@ describe('Politico', () => {
 			});
 			it('Everything fine. Status code should be 201 and must be an object', (done) => {
 				chai.request(server)
-					.patch('/v1/offices/'+firstOffice.id+'/'+firstOffice.name)
+					.patch('/api/v1/offices/'+firstOffice.id+'/'+firstOffice.name)
 					.send(officeBody)
 					.end((err, res) => {
 						res.should.have.status(201);
@@ -301,7 +301,7 @@ describe('Politico', () => {
 		describe('/DELETE One office',  () => {
 			it('If no office matching id. Status code should be 404', (done) => {
 				chai.request(server)
-					.delete('/v1/offices/'+wrongId)
+					.delete('/api/v1/offices/'+wrongId)
 					.end((err, res) => {
 						res.should.have.status(404);
 						res.body.should.be.a('object');
@@ -310,7 +310,7 @@ describe('Politico', () => {
 			});
 			it('If deleted. Status code should be 200', (done) => {
 				chai.request(server)
-					.delete('/v1/offices/'+firstOffice.id)
+					.delete('/api/v1/offices/'+firstOffice.id)
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.be.a('object');

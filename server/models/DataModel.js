@@ -1,4 +1,4 @@
-const helper = require('../dataHelper/helper.js');
+const helper = require('../helper/helper.js');
 let oneDataInfo = [];
 
 exports.findAll = (dataArray) => {
