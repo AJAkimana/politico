@@ -1,9 +1,9 @@
 // Import the dependencies for testing
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const server = require('../app');
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import server from '../app';
 
-const DataModel = require('../models/DataModel');
+import DataModel from '../models/DataModel';
 const officeFileJson = '../helper/data/offices.json';
 const partyFileJson = '../helper/data/parties.json';
 const parties = require(partyFileJson);
@@ -13,22 +13,22 @@ const offices = require(officeFileJson);
 chai.use(chaiHttp);
 chai.should();
 
-let partyBody = {name:'Part Test',hqAddress:'Kigali',logoUrl:'testUrl'},
+const partyBody = {name:'Part Test',hqAddress:'Kigali',logoUrl:'testUrl'},
 	partyBodyWithNoName = {hqAddress:'Kigali',logoUrl:'testUrl'},
 	partyBodyWithNoAddress = {name:'Part Test', logoUrl:'testUrl'},
 	partyBodyWithNoUrl = {name:'Part Test',hqAddress:'Kigali'};
 
-let officeTypes = ['federal','legistrative','state','local'];
-let officeByRandom = officeTypes[Math.floor(Math.random()*officeTypes.length)];
+const officeTypes = ['federal','legistrative','state','local'];
+const officeByRandom = officeTypes[Math.floor(Math.random()*officeTypes.length)];
 
-let officeBody = {name:'Office Test',type:officeByRandom},
+const officeBody = {name:'Office Test',type:officeByRandom},
 	officeBodyWithNoName = {type:officeByRandom},
 	officeBodyWithNoType = {name:'Office Test'},
 	officeBodyWithWrongType = {name:'Office Test',type:'Wrong type'};
 
-let firstParty = DataModel.firstOne(parties);
-let firstOffice = DataModel.firstOne(offices);
-let wrongId = 2019;
+const firstParty = DataModel.firstOne(parties);
+const firstOffice = DataModel.firstOne(offices);
+const wrongId = 2019;
 
 describe('Politico', () => {
 	describe('Parties api', () => {
@@ -107,49 +107,49 @@ describe('Politico', () => {
 		});
 		describe('/PATCH modify party',  () => {
 			it('If ID is string. Status code should be 400 and must be an object', (done) => {				chai.request(server)
-					.patch('/api/v1/parties/wrongId/noname')
-					.send(partyBody)
-					.end((err, res) => {
-						res.should.have.status(400);
-						res.body.should.be.a('object');
-						done();
-					});
+				.patch('/api/v1/parties/wrongId/noname')
+				.send(partyBody)
+				.end((err, res) => {
+					res.should.have.status(400);
+					res.body.should.be.a('object');
+					done();
+				});
 			});
 			it('If no Name. Status code should be 400 and must be an object', (done) => {				chai.request(server)
-					.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
-					.send(partyBodyWithNoName)
-					.end((err, res) => {
-						res.should.have.status(400);
-						res.body.should.be.a('object');
-						done();
-					});
+				.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
+				.send(partyBodyWithNoName)
+				.end((err, res) => {
+					res.should.have.status(400);
+					res.body.should.be.a('object');
+					done();
+				});
 			});
 			it('If no Address. Status code should be 400 and must be an object', (done) => {				chai.request(server)
-					.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
-					.send(partyBodyWithNoAddress)
-					.end((err, res) => {
-						res.should.have.status(400);
-						res.body.should.be.a('object');
-						done();
-					});
+				.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
+				.send(partyBodyWithNoAddress)
+				.end((err, res) => {
+					res.should.have.status(400);
+					res.body.should.be.a('object');
+					done();
+				});
 			});
 			it('If no Url. Status code should be 400 and must be an object', (done) => {				chai.request(server)
-					.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
-					.send(partyBodyWithNoUrl)
-					.end((err, res) => {
-						res.should.have.status(400);
-						res.body.should.be.a('object');
-						done();
-					});
+				.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
+				.send(partyBodyWithNoUrl)
+				.end((err, res) => {
+					res.should.have.status(400);
+					res.body.should.be.a('object');
+					done();
+				});
 			});
 			it('If everything is fine. Status code should be 201 and should be an object', (done) => {				chai.request(server)
-					.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
-					.send(partyBody)
-					.end((err, res) => {
-						res.should.have.status(201);
-						res.body.should.be.a('object');
-						done();
-					});
+				.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
+				.send(partyBody)
+				.end((err, res) => {
+					res.should.have.status(201);
+					res.body.should.be.a('object');
+					done();
+				});
 			});
 		});
 		describe('/DELETE One party',  () => {
