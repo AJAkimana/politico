@@ -1,10 +1,12 @@
 /**
  * Module dependencies.
  */
-const express = require('express');
-const bodyParser = require('body-parser');
-const errorHandler = require('errorhandler');
-const expressValidator = require('express-validator');
+import express from 'express';
+import bodyParser from 'body-parser';
+import errorHandler from 'errorhandler';
+import expressValidator from 'express-validator';
+
+import apiVersion1 from './routes/apiVersion1';
 /**
  * Create Express server.
  */
@@ -18,7 +20,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(expressValidator());
-let apiVersion1 = require('./routes/apiVersion1');
 
 app.use('/api', apiVersion1);
 app.all('*', (req, res) => {
@@ -36,6 +37,7 @@ app.use(errorHandler());
  * Start Express server.
  */
 app.listen(app.get('port'), ()=>{
-	// console.log('Politico app is listening on port %d. Visit http://localhost:%d', app.get('port'),app.get('port'));
+	console.log('Politico app is listening on port %d. Visit http://localhost:%d', app.get('port'),app.get('port'));
 });
-module.exports = app;
+
+export default app;

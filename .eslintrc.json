@@ -9,7 +9,7 @@
     "parserOptions": {
         "ecmaVersion": 2018,
         "ecmaFeatures": {
-
+            
         },
         "sourceType": "module"
     },
