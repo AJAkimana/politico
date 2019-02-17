@@ -9,6 +9,7 @@ const officeController = {
 			.then(office => {
 				res.status(201).json({
 					status: 201,
+					message: 'Successfully created',
 					data: office
 				});
 			})
@@ -18,9 +19,10 @@ const officeController = {
 			}));
 	},
 	getAllOfficesList(req, res){
-		DataModel.findAll(offices)
+		DataModel.findAll(offices, 'office')
 			.then(offices => res.status(200).json({
 				status: 200,
+				message: 'Success',
 				data: offices
 			}))
 			.catch(err => {
@@ -35,9 +37,10 @@ const officeController = {
 	getSpecificOffice(req, res){
 		const officeId = Number(req.params.officeId);
 
-		DataModel.findOneById(offices, officeId)
+		DataModel.findOneById(offices, 'office', officeId)
 			.then(office => res.status(200).json({
 				status: 200,
+				message: 'Success',
 				data: office
 			}))
 			.catch(err => {
@@ -52,9 +55,10 @@ const officeController = {
 	modifyOffice(req, res){
 		const id = Number(req.params.officeId);
 		req.body.type = req.body.type.toLowerCase().trim();
-		DataModel.findOneAndUpdate(officeFileJson, offices, id, req.body)
+		DataModel.findOneAndUpdate(officeFileJson, offices, 'office', id, req.body)
 			.then(office => res.status(201).json({
 				status: 201,
+				message: 'Successfully modified',
 				data: office
 			}))
 			.catch(err => {
@@ -69,7 +73,7 @@ const officeController = {
 	deleteOffice(req, res){
 		const officeId = Number(req.params.officeId);
 
-		DataModel.removeOne(officeFileJson, offices, officeId)
+		DataModel.removeOne(officeFileJson, offices, 'office', officeId)
 			.then(() => res.status(200).json({
 				status: 200,
 				message: 'The office has been deleted'

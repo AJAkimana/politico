@@ -8,6 +8,7 @@ const partyController = {
 			.then(party => {
 				res.status(201).json({
 					status: 201,
+					message: 'Successfully created',
 					data: party
 				});
 			})
@@ -20,9 +21,10 @@ const partyController = {
 			});
 	},
 	getAllPartiesList(req, res){
-		DataModel.findAll(parties)
+		DataModel.findAll(parties, 'party')
 			.then(parties => res.status(200).json({
 				status: 200,
+				message: 'Success',
 				data: parties
 			}))
 			.catch(err => {
@@ -39,9 +41,10 @@ const partyController = {
 		if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 		const partyId = Number(req.params.partyId);
 
-		DataModel.findOneById(parties, partyId)
+		DataModel.findOneById(parties, 'party', partyId)
 			.then(party => res.status(200).json({
 				status: 200,
+				message: 'Success',
 				data: party
 			}))
 			.catch(err => {
@@ -55,9 +58,10 @@ const partyController = {
 	},
 	modifyParty(req, res){
 		const id = Number(req.params.partyId);
-		DataModel.findOneAndUpdate(partyFileJson, parties, id, req.body)
+		DataModel.findOneAndUpdate(partyFileJson, parties, 'party', id, req.body)
 			.then(party => res.status(201).json({
 				status: 201,
+				message: 'Successfully modified',
 				data: party
 			}))
 			.catch(err => {
@@ -72,7 +76,7 @@ const partyController = {
 	deleteParty(req, res){
 		const partyId = Number(req.params.partyId);
 
-		DataModel.removeOne(partyFileJson, parties, partyId)
+		DataModel.removeOne(partyFileJson, parties, 'party', partyId)
 			.then(() => res.status(200).json({
 				status: 200,
 				message: 'The party has been deleted'
