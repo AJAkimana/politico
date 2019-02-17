@@ -59,8 +59,8 @@ const partyController = {
 	modifyParty(req, res){
 		const id = Number(req.params.partyId);
 		DataModel.findOneAndUpdate(partyFileJson, parties, 'party', id, req.body)
-			.then(party => res.status(201).json({
-				status: 201,
+			.then(party => res.status(200).json({
+				status: 200,
 				message: 'Successfully modified',
 				data: party
 			}))

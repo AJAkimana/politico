@@ -142,11 +142,11 @@ describe('Politico', () => {
 					done();
 				});
 			});
-			it('If everything is fine. Status code should be 201 and should be an object', (done) => {				chai.request(server)
+			it('If everything is fine. Status code should be 200 and should be an object', (done) => {				chai.request(server)
 				.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
 				.send(partyBody)
 				.end((err, res) => {
-					res.should.have.status(201);
+					res.should.have.status(200);
 					res.body.should.be.a('object');
 					done();
 				});
@@ -287,12 +287,12 @@ describe('Politico', () => {
 						done();
 					});
 			});
-			it('Everything fine. Status code should be 201 and must be an object', (done) => {
+			it('Everything fine. Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
 					.patch('/api/v1/offices/'+firstOffice.id)
 					.send(officeBody)
 					.end((err, res) => {
-						res.should.have.status(201);
+						res.should.have.status(200);
 						res.body.should.be.a('object');
 						done();
 					});

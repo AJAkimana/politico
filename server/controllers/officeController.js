@@ -56,8 +56,8 @@ const officeController = {
 		const id = Number(req.params.officeId);
 		req.body.type = req.body.type.toLowerCase().trim();
 		DataModel.findOneAndUpdate(officeFileJson, offices, 'office', id, req.body)
-			.then(office => res.status(201).json({
-				status: 201,
+			.then(office => res.status(200).json({
+				status: 200,
 				message: 'Successfully modified',
 				data: office
 			}))
