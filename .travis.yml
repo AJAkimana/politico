@@ -1,18 +1,7 @@
 language: node_js
-node_js:
-- stable
+node_js: 
+  - "stable"
 cache:
   directories:
-  - node_modules
-addons:
-  code_climate:
-    repo_token: "<supersecrettoken>"
-script: istanbul cover npm run test -- -R spec
-before_script:
-- npm install codeclimate-test-reporter istanbul -g
-after_script:
-- codeclimate-test-reporter < ./coverage/lcov.info
+    - "node_modules"
 after_success: npm run coverage
-env:
-  global:
-    secure: iBX5YVn+TC/oLEZn6jobKLJ1ZnDApk+ztj+8L+ngPo5f7L9GL8oypK2ODoWfQm7wd2dv0aY4gUt7U3yqNKN/rCsAhWQ4Hj3bS+Jjhw2PVOtoYQ7tNaNVql2Bl+6rUQPnbGzFH1R/hRbBQFAyYqtWyg/ReE5UCMrz+4HokP0Hs8FvCU+GQBzcG3u1qHmhuhoCe48+d7qOTlav7FQXyv57E/oKQDUjEb+GMuHZD+sQm6pvPB5jQd2qFXpbK6imaqhMWMZ+4b7+C5xX0Ocy24K8Md9LRpoYgsgfVk9Ra0jYxfq0nWkulLxra0QhavtP23eGRrhTlGJ/ZdHWsAm8FNIt6Veex1wRk0K7YiA+zOmLsHe/+Uu7cbxW+uT6pDxXIDADsn/DK6XDUVd/dspC9rjNbes+5kFL/hgvupw9x6cbFvmV1jTJN1QH3/LjCwIPdgXqiu2xr6sO17E8ZyPGxMTcgDpzqTQCXr6ejQofRZneYiHQ38PXp4dPtEsiS7/65kd3QbnROuTvSn8MwZnr1gLd62TPGsf9mXJ6HPxs7xPOqcKIQAn+SItyqYeV4IHnRPvEbqBxlnZl1tBtkbs2DKlWzEiCiRxQjxwIFmCdlv98ncKOCqmUmxBea75HMCVLbZfFdDF//MOXmbdDZwHctQe/xcKw9IZI5h1Hs5YWJGnWpko=
