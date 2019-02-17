@@ -2,11 +2,11 @@ import helper from '../helper/helper.js';
 let oneDataInfo = [];
 
 const DataModel = {
-	findAll(dataArray){
+	findAll(dataArray, infoName){
 		return new Promise((resolve, reject) => {
 			if (dataArray.length === 0) {
 				reject({
-					message: 'No data available',
+					message: 'No '+infoName+' available',
 					status: 404
 				});
 			}
@@ -16,9 +16,9 @@ const DataModel = {
 	firstOne(dataArray){
 		return dataArray[0];
 	},
-	findOneById(dataArray, id){
+	findOneById(dataArray, infoName, id){
 		return new Promise((resolve, reject) => {
-			helper.mustBeInArray(dataArray, id)
+			helper.mustBeInArray(dataArray, infoName, id)
 				.then(theData => {
 					oneDataInfo[0] = theData;
 					resolve(oneDataInfo);
@@ -40,9 +40,9 @@ const DataModel = {
 			resolve(oneDataInfo); 
 		});
 	},
-	findOneAndUpdate(jsonFile, dataArray, id, reqBody){
+	findOneAndUpdate(jsonFile, dataArray, infoName, id, reqBody){
 		return new Promise((resolve, reject) => {
-			helper.mustBeInArray(dataArray, id)
+			helper.mustBeInArray(dataArray, infoName, id)
 				.then(theData => {
 					const index = dataArray.findIndex(p => p.id == theData.id);
 					id = { id: theData.id };
@@ -58,9 +58,9 @@ const DataModel = {
 				.catch(err => reject(err));
 		});
 	},
-	removeOne(jsonFile, dataArray, id){
+	removeOne(jsonFile, dataArray, infoName, id){
 		return new Promise((resolve, reject) => {
-			helper.mustBeInArray(dataArray, id)
+			helper.mustBeInArray(dataArray, infoName, id)
 				.then(() => {
 					dataArray = dataArray.filter(p => p.id != id);
 					helper.writeJSONFile(jsonFile, dataArray);
