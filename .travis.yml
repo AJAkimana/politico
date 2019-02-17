@@ -1,7 +1,10 @@
 language: node_js
-node_js: 
-  - "stable"
+node_js:
+- stable
 cache:
   directories:
-    - "node_modules"
+  - node_modules
 after_success: npm run coverage
+env:
+  global:
+    secure: jVRnWa6YSrkBOunu0Ps8aweb5FNsMH+UnANC0wE2YVh5Ac6A/Uu5ODYJfB1jDEetr3c2bndMLuOFOXveUyxF1OxTWUI2d3qSS1KJAxbX3goGzX0wQJ0jNuXuj8wlP7MmWupophqY0X8OoCJmSIqkLx4t/eS5wAB6qC7dMJaf8NDutP2pHZDUJY9yavGsLx6RITC7Pbzzg1vgfzM3CvlV8i9gld4OrcCRebJR9nXAkkHrDJNg0LMfNIwx8/lnpbjbYBhG7HLGnEB4Y1pWPgrYnC56MR4uqUTbIZLbHmwaZh937K0LLKPx86K/jyQemqr2C15Cu88Da5KY23yp/HVXw6SH/PbaAC3ZwGzKKlJWhDKMatAXnrvwcz4UPWuKuO1cXScl18pYRJ6j4ymnffUj4zaotVkXMyCXTK/uo36vdriH5229+9GpCP6doRyaub7zTPnB+DeCm0iPBLFf96A9lbwIID8nxDR8+bWgXPf6JZvo8OAky7VAHMaEmO31JOWsyZVbR5o6oakOcuzXo7HorZfUKjJ4xq7a8gMlb1bKK+1McfNIjvKp+/8xOxGdLVFnTwpRuAuFQ4HB3VJiGe5A7BxlcS6NAPlyxXlJ0Z1SVCuJljPcz9NZVh3wn1YwuZCVqvWDN1sZS7/ApsbyKfDoA8+UX3f2WMPfJWmU0fL2+rI=
