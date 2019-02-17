@@ -15,9 +15,14 @@ Embedded JavaScript templates
 
 Before installing, [download and install Node.js](https://nodejs.org/en/download/).
 
-## Features
+## Features / APIs
 
-  * View, create, modify and edit political parties and offices
+This app contains basic APIs regarding with View, create, modify and edit political parties and offices
+  * APIs to view a list of political parties and offices
+  * APIs to view a specific political office and party
+  * APIs that creates an office and party
+  * APIs that modify and edit the registered political party and office 
+  * APIs to delete a specific political party and office
 
 ## Quick Start
 
