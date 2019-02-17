@@ -4,6 +4,7 @@ const offices = require(officeFileJson);
 
 const officeController = {
 	createNewOffice(req, res){
+		req.body.type = req.body.type.toLowerCase().trim();
 		DataModel.saveNew(officeFileJson, offices, req.body)
 			.then(office => {
 				res.status(201).json({
@@ -50,6 +51,7 @@ const officeController = {
 	},
 	modifyOffice(req, res){
 		const id = Number(req.params.officeId);
+		req.body.type = req.body.type.toLowerCase().trim();
 		DataModel.findOneAndUpdate(officeFileJson, offices, id, req.body)
 			.then(office => res.status(201).json({
 				status: 201,
