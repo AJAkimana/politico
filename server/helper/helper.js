@@ -8,12 +8,12 @@ const helper = {
 	newDate (){
 		return new Date().toString();
 	},
-	mustBeInArray(array, id){
+	mustBeInArray(array, infoName, id){
 		return new Promise((resolve, reject) => {
 			const row = array.find(r => r.id == id);
 			if (!row) {
 				reject({
-					message: 'No data found',
+					message: 'No '+infoName+' found',
 					status: 404
 				});
 			}

@@ -2,21 +2,18 @@ const officeTypes = ['federal','legistrative','state','local'];
 
 const officeMiddleware = {
 	verifyOfficeBody(req, res, next){
-		req.assert('name', 'Type party name').notEmpty();
-		req.assert('type', 'Invalid office type').isIn(officeTypes);
+		req.assert('name', 'Type office name').notEmpty();
+		req.assert('name', 'Invalid office name').isString();
+		req.assert('type', 'Specifiy office type').notEmpty();
 
 		const errors = req.validationErrors();
-		if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
-
-		return next();
-	},
-	verifyOfficeBodyWithId(req, res, next){
-		req.assert('name', 'Type party name').notEmpty();
-		req.assert('type', 'Invalid office type').isIn(officeTypes);
-		req.assert('officeId','Invalid office spacification').isInt();
+		const numberOfKeys = Object.keys(req.body).length;
 		
-		const errors = req.validationErrors();
 		if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
+		if (numberOfKeys !== 2) return res.status(400).json({status: 400, error: 'Invalid information'});
+
+		const type = req.body.type.toLowerCase().trim();
+		if (officeTypes.indexOf(type) ===-1 ) return res.status(400).json({status: 400, error: 'Invalid office type'});
 
 		return next();
 	},

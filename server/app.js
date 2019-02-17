@@ -19,7 +19,13 @@ app.set('port', process.env.PORT || 8080);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(expressValidator());
+app.use(expressValidator({
+	customValidators: {
+		isString: (value)=>{
+			return isNaN(value);
+		}
+	}
+}));
 
 app.use('/api', apiVersion1);
 app.all('*', (req, res) => {
