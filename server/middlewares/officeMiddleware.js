@@ -8,10 +8,11 @@ const officeMiddleware = {
 
 		const errors = req.validationErrors();
 		const numberOfKeys = Object.keys(req.body).length;
-		const type = req.body.type.toLowerCase().trim();
-		console.log('Office:'+type+', Index :'+officeTypes.indexOf(type))
+		
 		if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
 		if (numberOfKeys !== 2) return res.status(400).json({status: 400, error: 'Invalid information'});
+
+		const type = req.body.type.toLowerCase().trim();
 		if (officeTypes.indexOf(type) ===-1 ) return res.status(400).json({status: 400, error: 'Invalid office type'});
 
 		return next();

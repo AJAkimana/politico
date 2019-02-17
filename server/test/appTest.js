@@ -259,7 +259,7 @@ describe('Politico', () => {
 		describe('/PATCH modify office',  () => {
 			it('If ID is string. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.patch('/api/v1/offices/string/name')
+					.patch('/api/v1/offices/string')
 					.send(officeBody)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -269,7 +269,7 @@ describe('Politico', () => {
 			});
 			it('If no Name. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.patch('/api/v1/offices/'+firstOffice.id+'/'+firstOffice.name)
+					.patch('/api/v1/offices/'+firstOffice.id)
 					.send(officeBodyWithNoName)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -279,7 +279,7 @@ describe('Politico', () => {
 			});
 			it('If no type. Status code should be 400 and must be an object', (done) => {
 				chai.request(server)
-					.patch('/api/v1/offices/'+firstOffice.id+'/'+firstOffice.name)
+					.patch('/api/v1/offices/'+firstOffice.id)
 					.send(officeBodyWithWrongType)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -289,7 +289,7 @@ describe('Politico', () => {
 			});
 			it('Everything fine. Status code should be 201 and must be an object', (done) => {
 				chai.request(server)
-					.patch('/api/v1/offices/'+firstOffice.id+'/'+firstOffice.name)
+					.patch('/api/v1/offices/'+firstOffice.id)
 					.send(officeBody)
 					.end((err, res) => {
 						res.should.have.status(201);
