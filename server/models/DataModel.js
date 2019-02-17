@@ -40,12 +40,14 @@ const DataModel = {
 			resolve(oneDataInfo); 
 		});
 	},
-	findOneAndUpdate(jsonFile, dataArray, infoName, id, reqBody){
+	findOneAndUpdate(jsonFile, dataArray, infoName, reqBody){
+		const dataId = Number(reqBody.dataId);
 		return new Promise((resolve, reject) => {
-			helper.mustBeInArray(dataArray, infoName, id)
+			helper.mustBeInArray(dataArray, infoName, dataId)
 				.then(theData => {
 					const index = dataArray.findIndex(p => p.id == theData.id);
-					id = { id: theData.id };
+					console.log('id:'+theData.name)
+					const id = { id: theData.id };
 					const date = {
 						createdAt: theData.createdAt,
 						updatedAt: helper.newDate()

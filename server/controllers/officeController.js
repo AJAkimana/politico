@@ -53,9 +53,9 @@ const officeController = {
 			});
 	},
 	modifyOffice(req, res){
-		const id = Number(req.params.officeId);
 		req.body.type = req.body.type.toLowerCase().trim();
-		DataModel.findOneAndUpdate(officeFileJson, offices, 'office', id, req.body)
+		req.body.dataId = req.params.officeId;
+		DataModel.findOneAndUpdate(officeFileJson, offices, 'office', req.body)
 			.then(office => res.status(200).json({
 				status: 200,
 				message: 'Successfully modified',
