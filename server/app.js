@@ -5,8 +5,27 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import errorHandler from 'errorhandler';
 import expressValidator from 'express-validator';
-
+import dotenv from 'dotenv';
+import { Pool } from 'pg';
 import apiVersion1 from './routes/apiVersion1';
+
+/**
+ * Load environment variables from .env file, where API keys and passwords are configured.
+ */
+dotenv.load({ path: '.app.env'});
+
+/**
+* Connect database and check connection
+*/
+const pool = new Pool({
+	connectionString: process.env.DATABASE_URL,
+});
+pool.query('SELECT NOW()', (err, res) => {
+	if(err){
+		console.error('Postgres Connection Error. Please make sure that Postgres is running.');
+  		process.exit(1);
+	}
+});
 /**
  * Create Express server.
  */
@@ -14,6 +33,7 @@ const app = express();
 /**
  * Express configuration.
  */
+
 app.set('port', process.env.PORT || 8080);
 
 app.use(bodyParser.json());
