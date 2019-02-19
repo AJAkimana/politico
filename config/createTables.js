@@ -7,9 +7,11 @@ const queries = {
 		lastname varchar(50) NOT NULL,
 		othername varchar(50) NOT NULL,
 		email varchar(100) NOT NULL,
+		password varchar(100) NOT NULL,
 		phoneNumber varchar(15) NOT NULL,
 		passportUrl varchar(200) NOT NULL,
 		isAdmin int NOT NULL DEFAULT '0',
+		resetToken varchar(50) NULL,
 		createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		updateAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 	)`,

@@ -1,4 +1,7 @@
 import fs from 'fs';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
 
 const helper = {
 	getNewId (array) {
@@ -27,6 +30,39 @@ const helper = {
 			console.log('Ok:'+JSON.stringify(ok));
 		});
 	},
+	
+	hashPassword(password) {
+		return bcrypt.hashSync(password, bcrypt.genSaltSync(8))
+	},
+
+	comparePassword(hashPassword, password){
+		return bcrypt.compareSync(password, hashPassword);
+	},
+
+	isValidEmail(email){
+		return /\S+@\S+\.\S+/.test(email);
+	},
+
+	generateToken(id) {
+		const token = jwt.sign({
+		  userId: id
+		},
+		  process.env.JWT_SECRET, { expiresIn: '7d' }
+		);
+		return token;
+	},
+	generateResetToken(tokenLenght){
+	    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	    const charlen = chars.length;
+	    let buf = [];
+    	for (let i = 0; i < tokenLenght; ++i) {
+        	buf.push(chars[getRandomInt(0, charlen - 1)]);
+        }
+		return buf.join('');
+	},
+	getRandomInt(min, max) {
+	  return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
 };
 
 export default helper;
