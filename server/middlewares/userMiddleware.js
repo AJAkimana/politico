@@ -1,6 +1,8 @@
 
 import helper from '../helper/helper';
+import Runner from '../../config/Runner';
 
+const sql = 'SELECT * FROM users WHERE email=$1';
 const userMiddleware = {
 	verifyUserBody(req, res, next){
 		req.assert('firstname', 'Type firstname').notEmpty().isString();
@@ -16,8 +18,18 @@ const userMiddleware = {
 		if(!helper.isValidEmail(req.body.email)){
 			return res.status(400).json({status: 400, error: 'Invalid email'});
 		}
-		
-		return next();
+		Runner.execute(sql, [req.body.email], (err, data)=>{
+			if(err){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not available'
+				});
+			} 
+			if(data.rows[0]){
+				return res.status(400).json({status: 400, error: 'Email exist'});
+			};
+			return next();
+		})
 	}
 };
 

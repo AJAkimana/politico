@@ -26,11 +26,10 @@ const userController = {
 			req.body.passportUrl,
 		] 
 		Runner.execute(insertQuery, values, (err, data)=>{
-			console.log(err, data)
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
-					error: 'Service not availavle'
+					error: 'Service not available'
 				});
 			} 
 			const token = helper.generateToken(data.rows[0].id);

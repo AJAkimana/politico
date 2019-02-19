@@ -1,6 +1,6 @@
 import { pool } from './database';
 
-const DataModel = {
+const Runner = {
 	execute(sqlQuery, values, callBack){
 		pool.connect((err, client, done) => {
 			client.query(sqlQuery, values, (err, result) => {
@@ -11,4 +11,4 @@ const DataModel = {
 	}
 }
 
-export default DataModel;
+export default Runner;
