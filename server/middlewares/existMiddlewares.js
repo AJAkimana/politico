@@ -29,7 +29,6 @@ const existMiddleware = {
 		];
 		console.log(values)
 		Runner.execute(candidateSql, values, (err, data)=>{
-			console.log(err, data)
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
@@ -38,6 +37,24 @@ const existMiddleware = {
 			} 
 			if(data.rows[0]){
 				return res.status(400).json({status: 400, error: 'Candidate is already registered'});
+			};
+			return next();
+		})
+	},
+	isCandidateExist(req, res, next){
+		const values = [
+			req.body.candidate,
+			req.body.officeId
+		];
+		Runner.execute(candidateSql, values, (err, data)=>{
+			if(err){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not available'
+				});
+			} 
+			if(!data.rows[0]){
+				return res.status(400).json({status: 400, error: 'Candidate is not on this office'});
 			};
 			return next();
 		})
@@ -74,10 +91,10 @@ const existMiddleware = {
 	},
 	hasVoted(req, res, next){
 		const values = [
-			req.body.office,
+			req.body.officeId,
 			req.user.id
 		]
-
+		console.log(values)
 		Runner.execute(voteSql, values, (err, data)=>{
 			if(err){
 				return res.status(500).json({ 
