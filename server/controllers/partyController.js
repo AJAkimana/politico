@@ -1,4 +1,4 @@
-import Runner from '../../config/models/Runner';
+import Runner from '../../config/Runner';
 
 const queryInsert = 'INSERT INTO parties(name, hqAddress, logoUrl) VALUES ($1, $2, $3) returning *';
 const queryEdit = 'UPDATE parties SET name=$1, hqAddress=$2, logoUrl=$3, updated_at=NOW() WHERE id=$4';

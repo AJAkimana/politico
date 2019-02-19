@@ -1,4 +1,4 @@
-import Runner from '../../config/models/Runner';
+import Runner from '../../config/Runner';
 
 const queryInsert = 'INSERT INTO offices(name, type) VALUES ($1, $2) returning *';
 const queryEdit = 'UPDATE offices SET name=$1, type=$2, updated_at=NOW() WHERE id=$3 returning *';
