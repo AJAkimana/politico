@@ -1,6 +1,6 @@
-import DataModel from '../models/DataModel';
+import Runner from '../../config/Runner';
 
-import TableDBs from '../../config/tablesDB';
+import UserDB from '../models/UserDB';
 import helper from '../helper/helper';
 
 /**
@@ -18,14 +18,15 @@ const userController = {
 		const hashPassword = helper.hashPassword(req.body.password);
 		const values = [
 			req.body.firstname,
-			req.body.lastname,
+			req.body.lastname || null,
 			req.body.othername,
 			req.body.email,
 			hashPassword,
 			req.body.phoneNumber,
 			req.body.passportUrl,
 		] 
-		DataModel.execute(insertQuery, values, (err, data)=>{
+		Runner.execute(insertQuery, values, (err, data)=>{
+			console.log(err, data)
 			if(err){
 				return res.status(500).json({ 
 					status: 500,

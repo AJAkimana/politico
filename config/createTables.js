@@ -5,7 +5,7 @@ const queries = {
 		id SERIAL PRIMARY KEY,
 		firstname varchar(50) NOT NULL,
 		lastname varchar(50) NOT NULL,
-		othername varchar(50) NOT NULL,
+		othername varchar(50) NULL,
 		email varchar(100) NOT NULL,
 		password varchar(100) NOT NULL,
 		phoneNumber varchar(15) NOT NULL,
