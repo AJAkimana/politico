@@ -1,4 +1,4 @@
-import { pool } from '../../config/tablesDB';
+import { pool } from './database';
 
 const DataModel = {
 	execute(sqlQuery, values, callBack){
