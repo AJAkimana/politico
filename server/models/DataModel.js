@@ -1,76 +1,20 @@
-import helper from '../helper/helper.js';
-let oneDataInfo = [];
+import { pool } from '../../config/tablesDB';
 
+/**
+* Queries
+*/
+const insertQuery = 'INSERT INTO users(firstname, lastname, othername, email, phoneNumber, passportUrl, isAdmin) VALUES ($1, $2, $3, $4, $5, $6,$7) returning *';
+const queryAll = 'SELECT * FROM users';
+const queryOne = 'SELECT * FROM users WHERE id = $1';
 const DataModel = {
-	findAll(dataArray, infoName){
-		return new Promise((resolve, reject) => {
-			if (dataArray.length === 0) {
-				reject({
-					message: 'No '+infoName+' available',
-					status: 404
-				});
-			}
-			resolve(dataArray);
-		});
-	},
-	firstOne(dataArray){
-		return dataArray[0];
-	},
-	findOneById(dataArray, infoName, id){
-		return new Promise((resolve, reject) => {
-			helper.mustBeInArray(dataArray, infoName, id)
-				.then(theData => {
-					oneDataInfo[0] = theData;
-					resolve(oneDataInfo);
-				})
-				.catch(err => reject(err));
-		});
-	},
-	saveNew(jsonFile, dataArray, reqBody){
-		return new Promise((resolve) => {
-			const id = { id: helper.getNewId(dataArray) };
-			const date = { 
-				createdAt: helper.newDate(),
-				updatedAt: helper.newDate()
-			}; 
-			reqBody = { ...id, ...reqBody, ...date };
-			dataArray.push(reqBody);
-			helper.writeJSONFile(jsonFile, dataArray);
-			oneDataInfo[0] = reqBody;
-			resolve(oneDataInfo); 
-		});
-	},
-	findOneAndUpdate(jsonFile, dataArray, infoName, reqBody){
-		const dataId = Number(reqBody.dataId);
-		return new Promise((resolve, reject) => {
-			helper.mustBeInArray(dataArray, infoName, dataId)
-				.then(theData => {
-					const index = dataArray.findIndex(p => p.id == theData.id);
-					console.log('id:'+theData.name)
-					const id = { id: theData.id };
-					const date = {
-						createdAt: theData.createdAt,
-						updatedAt: helper.newDate()
-					}; 
-					dataArray[index] = { ...id, ...reqBody, ...date };
-					helper.writeJSONFile(jsonFile, dataArray);
-					oneDataInfo[0] = dataArray[index];
-					resolve(oneDataInfo);
-				})
-				.catch(err => reject(err));
-		});
-	},
-	removeOne(jsonFile, dataArray, infoName, id){
-		return new Promise((resolve, reject) => {
-			helper.mustBeInArray(dataArray, infoName, id)
-				.then(() => {
-					dataArray = dataArray.filter(p => p.id != id);
-					helper.writeJSONFile(jsonFile, dataArray);
-					resolve();
-				})
-				.catch(err => reject(err));
-		});
-	},
-};
+	execute(sqlQuery, values, callBack){
+		pool.connect((err, client, done) => {
+			client.query(sqlQuery, values, (err, result) => {
+				done();
+				callBack(err, result)
+			})
+		})
+	}
+}
 
 export default DataModel;
