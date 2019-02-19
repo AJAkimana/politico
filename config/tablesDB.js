@@ -168,10 +168,6 @@ const dropAllTables = () =>{
 	dropOfficeTable()
 };
 
-pool.on('remove', () => {
-	console.log('client removed');
-	process.exit(0);
-});
 module.exports = {
 	createUserTable,
 	createPartyTable,
@@ -189,6 +185,7 @@ module.exports = {
 
 	createAllTables,
 	dropAllTables,
+	pool
 };
 
 require('make-runnable');
