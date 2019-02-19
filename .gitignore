@@ -9,3 +9,6 @@ build
 
 # Dependency directories
 node_modules/
+
+# Application environment
+.app.env
