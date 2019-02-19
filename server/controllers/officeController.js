@@ -13,6 +13,7 @@ const officeController = {
 			req.body.type.toLowerCase().trim(),
 		] 
 		DataModel.execute(queryInsert, values, (err, result)=>{
+			console.log(err, result)
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
