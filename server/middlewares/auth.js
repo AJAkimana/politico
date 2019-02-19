@@ -7,7 +7,7 @@ const auth = {
     const token = req.headers['x-access-token'];
     if(!token) {
       return res.status(400).json({ 
-      	status: 400
+      	status: 400,
       	message: 'Token is not provided' 
       });
     }
@@ -21,11 +21,11 @@ const auth = {
 		}
 		if(!result.rows[0]){
 			return res.status(400).json({ 
-		      	status: 400
+		      	status: 400,
 		      	message: 'No token provided' 
 		    });
 		}
-		req.user = { id: decoded.userId };
+		req.user = result.rows[0];
       	next();
 	})
   }
