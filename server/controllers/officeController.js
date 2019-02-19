@@ -1,4 +1,4 @@
-import DataModel from '../models/DataModel';
+import Runner from '../../config/models/Runner';
 
 const queryInsert = 'INSERT INTO offices(name, type) VALUES ($1, $2) returning *';
 const queryEdit = 'UPDATE offices SET name=$1, type=$2, updated_at=NOW() WHERE id=$3 returning *';
@@ -12,7 +12,7 @@ const officeController = {
 			req.body.name,
 			req.body.type.toLowerCase().trim(),
 		] 
-		DataModel.execute(queryInsert, values, (err, result)=>{
+		Runner.execute(queryInsert, values, (err, result)=>{
 			console.log(err, result)
 			if(err){
 				return res.status(500).json({ 
@@ -28,7 +28,7 @@ const officeController = {
 		})
 	},
 	getAllOfficesList(req, res){
-		DataModel.execute(queryAll, [], (err, result)=>{
+		Runner.execute(queryAll, [], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
@@ -51,7 +51,7 @@ const officeController = {
 	getSpecificOffice(req, res){
 		const officeId = Number(req.params.officeId);
 
-		DataModel.execute(queryOne, [officeId], (err, result)=>{
+		Runner.execute(queryOne, [officeId], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
@@ -78,7 +78,7 @@ const officeController = {
 			req.body.type.toLowerCase().trim(),
 			req.params.officeId
 		] 
-		DataModel.execute(queryOne, [req.params.officeId], (err, result)=>{
+		Runner.execute(queryOne, [req.params.officeId], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
@@ -91,7 +91,7 @@ const officeController = {
 					error: 'No office found'
 				});
 			}
-			DataModel.execute(queryEdit, values, (error, response)=>{
+			Runner.execute(queryEdit, values, (error, response)=>{
 				console.log(response)
 				if(error){
 					return res.status(500).json({ 
@@ -110,7 +110,7 @@ const officeController = {
 	deleteOffice(req, res){
 		const officeId = Number(req.params.officeId);
 
-		DataModel.execute(queryOne, [officeId], (err, result)=>{
+		Runner.execute(queryOne, [officeId], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
@@ -123,7 +123,7 @@ const officeController = {
 					error: 'No office found'
 				});
 			}
-			DataModel.execute(queryDelete, [officeId], (error, response)=>{
+			Runner.execute(queryDelete, [officeId], (error, response)=>{
 				console.log(response)
 				if(error){
 					return res.status(500).json({ 

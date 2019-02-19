@@ -1,4 +1,4 @@
-import DataModel from '../models/DataModel';
+import Runner from '../../config/models/Runner';
 
 const queryInsert = 'INSERT INTO parties(name, hqAddress, logoUrl) VALUES ($1, $2, $3) returning *';
 const queryEdit = 'UPDATE parties SET name=$1, hqAddress=$2, logoUrl=$3, updated_at=NOW() WHERE id=$4';
@@ -13,7 +13,7 @@ const partyController = {
 			req.body.hqAddress,
 			req.body.logoUrl,
 		] 
-		DataModel.execute(queryInsert, values, (err, result)=>{
+		Runner.execute(queryInsert, values, (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
@@ -28,7 +28,7 @@ const partyController = {
 		})
 	},
 	getAllPartiesList(req, res){
-		DataModel.execute(queryAll, [], (err, result)=>{
+		Runner.execute(queryAll, [], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
@@ -51,7 +51,7 @@ const partyController = {
 	getSpecificParty(req, res){
 		const partyId = Number(req.params.partyId);
 
-		DataModel.execute(queryOne, [partyId], (err, result)=>{
+		Runner.execute(queryOne, [partyId], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
@@ -78,7 +78,7 @@ const partyController = {
 			req.body.logoUrl,
 			req.params.partyId
 		] 
-		DataModel.execute(queryOne, [req.params.partyId], (err, result)=>{
+		Runner.execute(queryOne, [req.params.partyId], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
@@ -91,7 +91,7 @@ const partyController = {
 					error: 'No party found'
 				});
 			}
-			DataModel.execute(queryEdit, values, (error, response)=>{
+			Runner.execute(queryEdit, values, (error, response)=>{
 				console.log(response)
 				if(error){
 					return res.status(500).json({ 
@@ -110,7 +110,7 @@ const partyController = {
 	deleteParty(req, res){
 		const partyId = Number(req.params.partyId);
 
-		DataModel.execute(queryOne, [partyId], (err, result)=>{
+		Runner.execute(queryOne, [partyId], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
@@ -123,7 +123,7 @@ const partyController = {
 					error: 'No office found'
 				});
 			}
-			DataModel.execute(queryDelete, [partyId], (error, response)=>{
+			Runner.execute(queryDelete, [partyId], (error, response)=>{
 				console.log(response)
 				if(error){
 					return res.status(500).json({ 
