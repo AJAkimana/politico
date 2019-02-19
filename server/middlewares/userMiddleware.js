@@ -18,6 +18,19 @@ const userMiddleware = {
 		}
 		
 		return next();
+	},
+	verifyLoginBody(req, res, next){
+		req.assert('email', 'Type email').notEmpty();
+		req.assert('password', 'Type password').notEmpty();
+
+		const errors = req.validationErrors();
+		if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
+
+		if(!helper.isValidEmail(req.body.email)){
+			return res.status(400).json({status: 400, error: 'Invalid email'});
+		}
+		
+		return next();
 	}
 };
 
