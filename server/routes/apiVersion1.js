@@ -1,4 +1,5 @@
 import express from 'express';
+import Auth from '../middlewares/auth';
 const apiVersion1 = express.Router();
 
 /**
@@ -15,6 +16,7 @@ import userController from '../controllers/userController';
 import partyMiddleware from '../middlewares/partyMiddleware';
 import officeMiddleware from '../middlewares/officeMiddleware';
 import userMiddleware from '../middlewares/userMiddleware';
+import exit from '../middlewares/existMiddlewares';
 
 /**
 * Routes related with political parties
@@ -45,5 +47,11 @@ apiVersion1.delete('/v1/offices/:officeId', officeMiddleware.verifyOfficeId, off
 
 apiVersion1.post('/auth/signup', userMiddleware.verifyUserBody, userController.registerUser);
 apiVersion1.post('/auth/login', userMiddleware.verifyLoginBody, userController.userLogin);
+apiVersion1.post('/office/:officeId/register',
+	Auth.verifyToken,
+	exit.isOfficeExists,
+	exit.hasRegistered,
+	exit.isPartyExists,
+	userController.setUserAsCandidate);
 
 export default apiVersion1;
