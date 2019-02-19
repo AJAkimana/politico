@@ -1,4 +1,5 @@
 import Runner from '../../config/Runner';
+import OfficeDB from '../models/OfficeDB';
 
 const queryInsert = 'INSERT INTO offices(name, type) VALUES ($1, $2) returning *';
 const queryEdit = 'UPDATE offices SET name=$1, type=$2, updated_at=NOW() WHERE id=$3 returning *';
@@ -6,8 +7,13 @@ const queryAll = 'SELECT * FROM offices';
 const queryOne = 'SELECT * FROM offices WHERE id = $1';
 const queryDelete = 'DELETE FROM offices WHERE id = $1';
 
+
+const initialise = () => {
+	OfficeDB.createOfficeTable();
+}
 const officeController = {
 	createNewOffice(req, res){
+		initialise()
 		const values = [
 			req.body.name,
 			req.body.type.toLowerCase().trim(),
@@ -28,6 +34,7 @@ const officeController = {
 		})
 	},
 	getAllOfficesList(req, res){
+		initialise()
 		Runner.execute(queryAll, [], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -49,6 +56,7 @@ const officeController = {
 		})
 	},
 	getSpecificOffice(req, res){
+		initialise()
 		const officeId = Number(req.params.officeId);
 
 		Runner.execute(queryOne, [officeId], (err, result)=>{
@@ -72,6 +80,7 @@ const officeController = {
 		})
 	},
 	modifyOffice(req, res){
+		initialise()
 		req.body.type = req.body.type.toLowerCase().trim();
 		const values = [
 			req.body.name,
@@ -108,6 +117,7 @@ const officeController = {
 		})
 	},
 	deleteOffice(req, res){
+		initialise()
 		const officeId = Number(req.params.officeId);
 
 		Runner.execute(queryOne, [officeId], (err, result)=>{
