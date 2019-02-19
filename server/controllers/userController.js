@@ -56,7 +56,6 @@ const userController = {
 					error: 'Email not found'
 				});
 			}
-			// console.log(data.rows[0].password, req.body.password)
 			if(!helper.comparePassword(data.rows[0].password, req.body.password)){
 				return res.status(401).json({ 
 					status: 401,
