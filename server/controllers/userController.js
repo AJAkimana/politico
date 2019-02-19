@@ -9,6 +9,7 @@ import helper from '../helper/helper';
 const insertQuery = 'INSERT INTO users(firstname, lastname, othername, email, password, phoneNumber, passportUrl) VALUES ($1, $2, $3, $4, $5, $6,$7) returning *';
 const queryAll = 'SELECT * FROM users';
 const queryOne = 'SELECT * FROM users WHERE email = $1';
+const insertCandidate = 'INSERT INTO candidates(office,party,candidate) VALUES ($1,$2,$3) returning *';
 const initialise = () => {
 	UserDB.createUserTable();
 }
@@ -67,8 +68,29 @@ const userController = {
 			const response = [{token:token,user: data.rows[0]}]
 			res.status(201).json({
 				status: 201,
-				message: 'Successfully created',
+				message: 'Welcome',
 				data: response
+			});
+		})
+	},
+	setUserAsCandidate(req, res){
+		initialise();
+		const values = [
+			req.params.officeId,
+			req.body.party,
+			req.body.candidate
+		] 
+		Runner.execute(insertCandidate, values, (err, data)=>{
+			if(err){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not availavle'
+				});
+			} 
+			res.status(201).json({
+				status: 201,
+				message: 'Successfully created',
+				data: data.rows[0]
 			});
 		})
 	}
