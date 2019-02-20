@@ -2,13 +2,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../app';
-
-import DataModel from '../models/DataModel';
-const officeFileJson = '../helper/data/offices.json';
-const partyFileJson = '../helper/data/parties.json';
-const parties = require(partyFileJson);
-const offices = require(officeFileJson);
-
+import pgConfig from '../../config/pgConfig';
 // Configure chai
 chai.use(chaiHttp);
 chai.should();
@@ -26,11 +20,12 @@ const officeBody = {name:'Office Test',type:officeByRandom},
 	officeBodyWithNoType = {name:'Office Test'},
 	officeBodyWithWrongType = {name:'Office Test',type:'Wrong type'};
 
-const firstParty = DataModel.firstOne(parties);
-const firstOffice = DataModel.firstOne(offices);
 const wrongId = 2019;
 
 describe('Politico', () => {
+	before((done) => {
+		pgConfig.initialize(process.env.DATABASE_TEST_URL, done);
+	});
 	describe('Parties api', () => {
 		describe('/POST create party',  () => {
 			it('If no name. Status code should be 400 and must be an object', (done) => {
