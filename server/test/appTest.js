@@ -2,9 +2,9 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../app';
-// import pgConfig from '../../config/pgConfig';
+import pgConfig from '../../config/pgConfig';
 import { Pool } from 'pg';
-// import db from '../../config/database';
+import db from '../../config/database';
 // Configure chai
 chai.use(chaiHttp);
 chai.should();
@@ -26,8 +26,9 @@ const wrongId = 2019;
 
 describe('Politico', () => {
 	before((done) => {
-		// pgConfig.initialize(process.env.DATABASE_URL, done);
-		done()
+		db.dropAllTables;
+		db.createAllTables;
+		done();
 	});
 	describe('Parties api', () => {
 		describe('/POST create party',  () => {
