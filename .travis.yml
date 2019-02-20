@@ -9,6 +9,7 @@ services:
 
 before_script:
 - psql -c 'create database politico_db;' -U postgres
+- psql -c "CREATE USER test_user WITH PASSWORD 'pass_test';" -U postgres
 - node ./config/database.js createTables
 after_success: npm run coverage
 env:
