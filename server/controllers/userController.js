@@ -15,7 +15,6 @@ const initialise = () => {
 }
 const userController = {
 	registerUser(req, res){
-		initialise();
 		const hashPassword = helper.hashPassword(req.body.password);
 		const values = [
 			req.body.firstname,
@@ -43,7 +42,6 @@ const userController = {
 		})
 	},
 	userLogin(req, res){
-		initialise();
 		Runner.execute(queryOne, [req.body.email], (err, data)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -66,15 +64,14 @@ const userController = {
 			}
 			const token = helper.generateToken(data.rows[0].id);
 			const response = [{token:token,user: data.rows[0]}]
-			res.status(201).json({
-				status: 201,
+			res.status(200).json({
+				status: 200,
 				message: 'Welcome',
 				data: response
 			});
 		})
 	},
 	setUserAsCandidate(req, res){
-		initialise();
 		const values = [
 			req.params.officeId,
 			req.body.party,
