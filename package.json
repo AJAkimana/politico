@@ -5,7 +5,7 @@
   "main": "server/app.js",
   "scripts": {
     "start": "babel-watch server/app.js",
-    "create-tables": "node config/tablesDB.js createAllTables",
+    "create-tables": "node config/database.js createAllTables",
     "test": "nyc --reporter=html --reporter=text mocha server/test/*.js --compilers js:@babel/register --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
