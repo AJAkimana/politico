@@ -32,7 +32,6 @@ const officeController = {
 		})
 	},
 	getAllOfficesList(req, res){
-		initialise()
 		Runner.execute(queryAll, [], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -54,9 +53,7 @@ const officeController = {
 		})
 	},
 	getSpecificOffice(req, res){
-		initialise()
 		const officeId = Number(req.params.officeId);
-
 		Runner.execute(queryOne, [officeId], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -78,7 +75,6 @@ const officeController = {
 		})
 	},
 	modifyOffice(req, res){
-		initialise()
 		req.body.type = req.body.type.toLowerCase().trim();
 		const values = [
 			req.body.name,
@@ -100,9 +96,9 @@ const officeController = {
 		})
 	},
 	deleteOffice(req, res){
-		initialise()
 		const officeId = Number(req.params.officeId);
 		Runner.execute(queryDelete, [officeId], (error, response)=>{
+			console.log(error)
 			if(error){
 				return res.status(500).json({ 
 					status: 500,

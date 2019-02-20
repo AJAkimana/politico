@@ -79,7 +79,6 @@ const partyController = {
 			req.params.partyId
 		] 
 		Runner.execute(queryEdit, values, (error, response)=>{
-			console.log(response)
 			if(error){
 				return res.status(500).json({ 
 					status: 500,
@@ -97,7 +96,6 @@ const partyController = {
 		const partyId = Number(req.params.partyId);
 
 		Runner.execute(queryDelete, [partyId], (error, response)=>{
-			console.log(response)
 			if(error){
 				return res.status(500).json({ 
 					status: 500,
