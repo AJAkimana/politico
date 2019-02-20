@@ -127,21 +127,21 @@ const dropCandidateTable = () => {
 	    });
 };
 
-const createAllTables = async () =>{
-	await createUserTable(),
-	await createPartyTable(),
-	await createOfficeTable(),
-	await createCandidateTable(),
-	await createVoteTable(),
-	await createPetitionTable()
+const createAllTables = () =>{
+	createUserTable(),
+	createPartyTable(),
+	createOfficeTable(),
+	createCandidateTable(),
+	createVoteTable(),
+	createPetitionTable()
 };
-const dropAllTables = async () =>{
-	await dropCandidateTable(),
-	await dropVoteTable(),
-	await dropPetitionTable(),
-	await dropUserTable(),
-	await dropPartyTable(),
-	await dropOfficeTable()
+const dropAllTables = () =>{
+	dropCandidateTable(),
+	dropVoteTable(),
+	dropPetitionTable(),
+	dropUserTable(),
+	dropPartyTable(),
+	dropOfficeTable()
 };
 
 module.exports = {
