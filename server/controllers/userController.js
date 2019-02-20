@@ -43,7 +43,7 @@ const userController = {
 				});
 			}
 			catch(err){
-				console.log(error)
+				console.log(err)
 				return res.status(500).json({
 					status: 500,
 					error: 'Service not availavle'
