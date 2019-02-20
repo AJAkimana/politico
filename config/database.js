@@ -9,8 +9,8 @@ const pool = new Pool({
 	connectionString: process.env.DATABASE_URL,
 }) 
 
-pool.on('connect', () => {
-	console.log('connected to the db');
+pool.on('connect', (err) => {
+	// if(err) console.log('Error',err);
 });
 
 const createUserTable = () => {
@@ -19,8 +19,7 @@ const createUserTable = () => {
 	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+
 	    });
 };
 const createPartyTable = () => {
@@ -129,20 +128,20 @@ const dropCandidateTable = () => {
 };
 
 const createAllTables = () =>{
-	createUserTable(),
 	createPartyTable(),
 	createOfficeTable(),
+	createUserTable(),
 	createCandidateTable(),
 	createVoteTable(),
 	createPetitionTable()
 };
 const dropAllTables = () =>{
-	dropCandidateTable(),
-	dropVoteTable(),
 	dropPetitionTable(),
+	dropVoteTable(),
+	dropCandidateTable(),
 	dropUserTable(),
-	dropPartyTable(),
-	dropOfficeTable()
+	dropOfficeTable(),
+	dropPartyTable()
 };
 
 module.exports = {
