@@ -16,8 +16,7 @@ pool.on('connect', () => {
 const createUserTable = () => {
 	pool.query(createTables.User)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
 	      console.log(err);
@@ -27,56 +26,46 @@ const createUserTable = () => {
 const createPartyTable = () => {
 	pool.query(createTables.Party)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+	      
 	    });
 };
 const createOfficeTable = () => {
 	pool.query(createTables.Office)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+	      
 	    });
 };
 const createPetitionTable = () => {
 	pool.query(createTables.Petition)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+	      
 	    });
 };
 const createVoteTable = () => {
 	pool.query(createTables.Vote)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+	      
 	    });
 };
 const createCandidateTable = () => {
 	pool.query(createTables.Candidate)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+	      
 	    });
 };
 
@@ -87,67 +76,55 @@ const createCandidateTable = () => {
 const dropUserTable = () => {
 	pool.query(dropTables.User)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+	      
 	    });
 };
 const dropPartyTable = () => {
 	pool.query(dropTables.Party)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+	      
 	    });
 };
 const dropOfficeTable = () => {
 	pool.query(dropTables.Office)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+	      
 	    });
 };
 const dropPetitionTable = () => {
 	pool.query(dropTables.Petition)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+	      
 	    });
 };
 const dropVoteTable = () => {
 	pool.query(dropTables.Vote)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+	      
 	    });
 };
 const dropCandidateTable = () => {
 	pool.query(dropTables.Candidate)
 	    .then((res) => {
-	      console.log(res);
-	      pool.end();
+	      
 	    })
 	    .catch((err) => {
-	      console.log(err);
-	      pool.end();
+	      
 	    });
 };
 
