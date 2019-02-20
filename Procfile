@@ -1,1 +1,1 @@
-web: npm run create-tables
+web: npm run start
