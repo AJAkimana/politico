@@ -2,6 +2,7 @@ import Runner from '../../config/Runner';
 import VoteDB from '../models/VoteDB';
 
 const voteSql = 'INSERT INTO votes(createdby,office,candidate) VALUES ($1,$2,$3) returning *';
+const resultSql = 'SELECT * FROM votes WHERE office=$1';
 
 
 const initialise = () => {
@@ -25,6 +26,22 @@ const voteController = {
 			res.status(201).json({
 				status: 201,
 				message: 'Successfully created',
+				data: result.rows[0]
+			});
+		})
+	},
+	getResult(req, res){
+		initialise()
+		Runner.execute(resultSql, [req.params.officeId], (err, result)=>{
+			if(err){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not availavle'
+				});
+			} 
+			res.status(200).json({
+				status: 200,
+				message: 'Success',
 				data: result.rows[0]
 			});
 		})
