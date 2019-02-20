@@ -2,7 +2,7 @@ import Runner from '../../config/Runner';
 import VoteDB from '../models/VoteDB';
 
 const voteSql = 'INSERT INTO votes(createdby,office,candidate) VALUES ($1,$2,$3) returning *';
-const resultSql = 'SELECT * FROM votes WHERE office=$1';
+const resultSql = 'SELECT office, candidate, COUNT(*) AS result FROM votes WHERE office=$1 GROUP BY candidate,office';
 
 
 const initialise = () => {
