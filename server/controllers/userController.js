@@ -33,13 +33,22 @@ const userController = {
 					error: 'Service not availavle'
 				});
 			} 
-			const token = helper.generateToken(data.rows[0].id);
-			const response = [{token:token,user: data.rows[0]}]
-			res.status(201).json({
-				status: 201,
-				message: 'Successfully created',
-				data: response
-			});
+			try{
+				const token = helper.generateToken(data.rows[0].id);
+				const response = [{token:token,user: data.rows[0]}]
+				return res.status(201).json({
+					status: 201,
+					message: 'Successfully created',
+					data: response
+				});
+			}
+			catch(err){
+				console.log(error)
+				return res.status(500).json({
+					status: 500,
+					error: 'Service not availavle'
+				});
+			}
 		})
 	},
 	userLogin(req, res){
