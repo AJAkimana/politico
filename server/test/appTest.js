@@ -26,9 +26,7 @@ const wrongId = 2019;
 
 describe('Politico', () => {
 	before((done) => {
-		db.dropAllTables;
-		db.createAllTables;
-		done();
+		pgConfig.initialize(process.env.DATABASE_URL, done);
 	});
 	describe('Parties api', () => {
 		describe('/POST create party',  () => {
