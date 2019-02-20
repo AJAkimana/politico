@@ -13,7 +13,6 @@ const initialise = () => {
 }
 const officeController = {
 	createNewOffice(req, res){
-		initialise()
 		const values = [
 			req.body.name,
 			req.body.type.toLowerCase().trim(),
@@ -85,64 +84,35 @@ const officeController = {
 			req.body.name,
 			req.body.type.toLowerCase().trim(),
 			req.params.officeId
-		] 
-		Runner.execute(queryOne, [req.params.officeId], (err, result)=>{
-			if(err){
+		];
+		Runner.execute(queryEdit, values, (error, response)=>{
+			if(error){
 				return res.status(500).json({ 
 					status: 500,
 					error: 'Service not availavle'
 				});
-			} 
-			if (!result.rows[0]){
-				return res.status(404).json({ 
-					status: 404,
-					error: 'No office found'
-				});
 			}
-			Runner.execute(queryEdit, values, (error, response)=>{
-				if(error){
-					return res.status(500).json({ 
-						status: 500,
-						error: 'Service not availavle'
-					});
-				}
-				res.status(200).json({
-					status: 200,
-					message: 'Successfully modified',
-					data: response.rows[0]
-				});
-			})
+			res.status(200).json({
+				status: 200,
+				message: 'Successfully modified',
+				data: response.rows[0]
+			});
 		})
 	},
 	deleteOffice(req, res){
 		initialise()
 		const officeId = Number(req.params.officeId);
-
-		Runner.execute(queryOne, [officeId], (err, result)=>{
-			if(err){
+		Runner.execute(queryDelete, [officeId], (error, response)=>{
+			if(error){
 				return res.status(500).json({ 
 					status: 500,
 					error: 'Service not availavle'
 				});
-			} 
-			if (!result.rows[0]){
-				return res.status(404).json({ 
-					status: 404,
-					error: 'No office found'
-				});
 			}
-			Runner.execute(queryDelete, [officeId], (error, response)=>{
-				if(error){
-					return res.status(500).json({ 
-						status: 500,
-						error: 'Service not availavle'
-					});
-				}
-				res.status(200).json({
-					status: 200,
-					message: 'The office has been deleted'
-				});
-			})
+			res.status(200).json({
+				status: 200,
+				message: 'The office has been deleted'
+			});
 		})
 	}
 };

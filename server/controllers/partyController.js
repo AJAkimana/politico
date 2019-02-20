@@ -78,64 +78,36 @@ const partyController = {
 			req.body.logoUrl,
 			req.params.partyId
 		] 
-		Runner.execute(queryOne, [req.params.partyId], (err, result)=>{
-			if(err){
+		Runner.execute(queryEdit, values, (error, response)=>{
+			console.log(response)
+			if(error){
 				return res.status(500).json({ 
 					status: 500,
 					error: 'Service not availavle'
 				});
-			} 
-			if (!result.rows[0]){
-				return res.status(404).json({ 
-					status: 404,
-					error: 'No party found'
-				});
 			}
-			Runner.execute(queryEdit, values, (error, response)=>{
-				console.log(response)
-				if(error){
-					return res.status(500).json({ 
-						status: 500,
-						error: 'Service not availavle'
-					});
-				}
-				res.status(200).json({
-					status: 200,
-					message: 'Successfully modified',
-					data: response.rows[0]
-				});
-			})
+			res.status(200).json({
+				status: 200,
+				message: 'Successfully modified',
+				data: response.rows[0]
+			});
 		})
 	},
 	deleteParty(req, res){
 		const partyId = Number(req.params.partyId);
 
-		Runner.execute(queryOne, [partyId], (err, result)=>{
-			if(err){
+		Runner.execute(queryDelete, [partyId], (error, response)=>{
+			console.log(response)
+			if(error){
 				return res.status(500).json({ 
 					status: 500,
 					error: 'Service not availavle'
 				});
-			} 
-			if (!result.rows[0]){
-				return res.status(404).json({ 
-					status: 404,
-					error: 'No office found'
-				});
 			}
-			Runner.execute(queryDelete, [partyId], (error, response)=>{
-				console.log(response)
-				if(error){
-					return res.status(500).json({ 
-						status: 500,
-						error: 'Service not availavle'
-					});
-				}
-				res.status(200).json({
-					status: 200,
-					message: 'The office has been deleted'
-				});
-			})
+			res.status(200).json({
+				status: 200,
+				message: 'The office has been deleted'
+			});
 		})
 	}
 };
