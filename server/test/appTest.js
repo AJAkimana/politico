@@ -92,7 +92,7 @@ describe('Politico', () => {
 			});
 			it('Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
-					.get('/api/v1/parties/'+firstParty.id)
+					.get('/api/v1/parties/1')
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.be.a('object');
@@ -111,7 +111,7 @@ describe('Politico', () => {
 				});
 			});
 			it('If no Name. Status code should be 400 and must be an object', (done) => {				chai.request(server)
-				.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
+				.patch('/api/v1/parties/1'+'/name')
 				.send(partyBodyWithNoName)
 				.end((err, res) => {
 					res.should.have.status(400);
@@ -120,7 +120,7 @@ describe('Politico', () => {
 				});
 			});
 			it('If no Address. Status code should be 400 and must be an object', (done) => {				chai.request(server)
-				.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
+				.patch('/api/v1/parties/1'+'/name')
 				.send(partyBodyWithNoAddress)
 				.end((err, res) => {
 					res.should.have.status(400);
@@ -129,7 +129,7 @@ describe('Politico', () => {
 				});
 			});
 			it('If no Url. Status code should be 400 and must be an object', (done) => {				chai.request(server)
-				.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
+				.patch('/api/v1/parties/1'+'/name')
 				.send(partyBodyWithNoUrl)
 				.end((err, res) => {
 					res.should.have.status(400);
@@ -138,7 +138,7 @@ describe('Politico', () => {
 				});
 			});
 			it('If everything is fine. Status code should be 200 and should be an object', (done) => {				chai.request(server)
-				.patch('/api/v1/parties/'+firstParty.id+'/'+firstParty.name)
+				.patch('/api/v1/parties/1'+'/name')
 				.send(partyBody)
 				.end((err, res) => {
 					res.should.have.status(200);
@@ -168,7 +168,7 @@ describe('Politico', () => {
 			});
 			it('Status code should be 200 and should be an object', (done) => {
 				chai.request(server)
-					.delete('/api/v1/parties/'+firstParty.id)
+					.delete('/api/v1/parties/1')
 					.end((err, res) => {
 						res.should.have.status(200);
 						res.body.should.be.a('object');
