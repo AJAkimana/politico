@@ -61,5 +61,9 @@ apiVersion1.post('/vote',
 	exists.isCandidateExist,
 	exists.hasVoted,
 	voteController.vote);
+apiVersion1.get('/office/:officeId/result',
+	Auth.verifyToken,
+	exists.isOfficeExists,
+	voteController.getResult);
 
 export default apiVersion1;
