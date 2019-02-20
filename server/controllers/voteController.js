@@ -42,7 +42,7 @@ const voteController = {
 			res.status(200).json({
 				status: 200,
 				message: 'Success',
-				data: result.rows[0]
+				data: result.rows
 			});
 		})
 	},
