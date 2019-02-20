@@ -21,7 +21,9 @@ const officeBody = {name:'Office Test',type:officeByRandom},
 	officeBodyWithNoName = {type:officeByRandom},
 	officeBodyWithNoType = {name:'Office Test'},
 	officeBodyWithWrongType = {name:'Office Test',type:'Wrong type'};
-
+const testUser = {firstname:'User',lastname:'Test',password:'pass',email:'test@email.com',phoneNumber:'56766575',passportUrl:'urlTest'};
+const testUserNoEmail = {firstname:'User',lastname:'Test',password:'pass',email:'test@email',phoneNumber:'56766575',passportUrl:'urlTest'};
+const testCandidat = {party:1,candidate:2};
 const wrongId = 2019;
 
 describe('Politico', () => {
@@ -317,5 +319,53 @@ describe('Politico', () => {
 		// 			});
 		// 	});
 		// });
+	});
+	describe('Politico Auth apis', () => {
+		describe('/POST Sign up', () => {
+			it('If user send invalid email: code 400', (done) => {
+				chai.request(server)
+					.post('/api/auth/signup')
+					.send(testUserNoEmail)
+					.end((err, res) => {
+						res.should.have.status(400);
+						res.body.should.be.a('object');
+						done();
+					});
+			});
+			it('Everything fine. Status code should be 201 and must be an object', (done) => {
+				chai.request(server)
+					.post('/api/auth/signup')
+					.send(testUser)
+					.end((err, res) => {
+						res.should.have.status(201);
+						res.body.should.be.a('object');
+						done();
+					});
+			});
+		});
+		describe('/POST login', () => {
+			it('Everything fine. Status code should be 200 and must be an object', (done) => {
+				chai.request(server)
+					.post('/api/auth/login')
+					.send(testUser)
+					.end((err, res) => {
+						res.should.have.status(200);
+						res.body.should.be.a('object');
+						done();
+					});
+			});
+		});
+		describe('/POST Register new candidate', () => {
+			it('Everything fine. Status code should be 201 and must be an object', (done) => {
+				chai.request(server)
+					.post('/api/office/1/register')
+					.send(testCandidat)
+					.end((err, res) => {
+						res.should.have.status(201);
+						res.body.should.be.a('object');
+						done();
+					});
+			});
+		});
 	});
 });
