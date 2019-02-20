@@ -24,18 +24,18 @@ import exists from '../middlewares/existMiddlewares';
 */
 apiVersion1.post('/v1/parties', partyMiddleware.verifyPartyBody, partyController.createNewParty);
 apiVersion1.get('/v1/parties', partyController.getAllPartiesList);
-apiVersion1.get('/v1/parties/:partyId', 
-	exists.isPartyExists,
+apiVersion1.get('/v1/parties/:partyId',
 	partyMiddleware.verifyPartyId, 
-	partyController.getSpecificParty);
-apiVersion1.patch('/v1/parties/:partyId/:partyName', 
 	exists.isPartyExists,
+	partyController.getSpecificParty);
+apiVersion1.patch('/v1/parties/:partyId/:partyName',
 	partyMiddleware.verifyPartyBody, 
 	partyMiddleware.verifyPartyId,
-	partyController.modifyParty);
-apiVersion1.delete('/v1/parties/:partyId', 
 	exists.isPartyExists,
+	partyController.modifyParty);
+apiVersion1.delete('/v1/parties/:partyId',
 	partyMiddleware.verifyPartyId, 
+	exists.isPartyExists,
 	partyController.deleteParty);
 
 /**
@@ -46,16 +46,17 @@ apiVersion1.post('/v1/offices',
 	officeMiddleware.verifyOfficeBody, 
 	officeController.createNewOffice);
 apiVersion1.get('/v1/offices/:officeId',
+	officeMiddleware.verifyOfficeId,
 	exists.isOfficeExists,
-	officeMiddleware.verifyOfficeId, officeController.getSpecificOffice);
+	officeController.getSpecificOffice);
 apiVersion1.patch('/v1/offices/:officeId',
-	exists.isOfficeExists, 
 	officeMiddleware.verifyOfficeBody,
 	officeMiddleware.verifyOfficeId,
-	officeController.modifyOffice);
-apiVersion1.delete('/v1/offices/:officeId', 
 	exists.isOfficeExists,
-	officeMiddleware.verifyOfficeId, 
+	officeController.modifyOffice);
+apiVersion1.delete('/v1/offices/:officeId',
+	officeMiddleware.verifyOfficeId,
+	exists.isOfficeExists, 
 	officeController.deleteOffice);
 
 apiVersion1.post('/auth/signup', userMiddleware.verifyUserBody, userController.registerUser);

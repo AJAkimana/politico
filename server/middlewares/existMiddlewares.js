@@ -17,7 +17,7 @@ const existMiddleware = {
 				});
 			} 
 			if(!data.rows[0]){
-				return res.status(400).json({status: 400, error: 'User does not exist'});
+				return res.status(404).json({status: 404, error: 'User does not exist'});
 			};
 			return next();
 		})
@@ -36,7 +36,7 @@ const existMiddleware = {
 				});
 			} 
 			if(data.rows[0]){
-				return res.status(400).json({status: 400, error: 'Candidate is already registered'});
+				return res.status(404).json({status: 404, error: 'Candidate is already registered'});
 			};
 			return next();
 		})
@@ -54,13 +54,13 @@ const existMiddleware = {
 				});
 			} 
 			if(!data.rows[0]){
-				return res.status(400).json({status: 400, error: 'Candidate is not on this office'});
+				return res.status(404).json({status: 404, error: 'Candidate is not on this office'});
 			};
 			return next();
 		})
 	},
 	isPartyExists(req, res, next){
-		const partyId = req.body.party?req.body.party:req.params.party
+		const partyId = req.body.party?req.body.party:req.params.partyId
 		Runner.execute(partySql, [partyId], (err, data)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -69,7 +69,7 @@ const existMiddleware = {
 				});
 			} 
 			if(!data.rows[0]){
-				return res.status(400).json({status: 400, error: 'Party does not exist'});
+				return res.status(404).json({status: 404, error: 'Party does not exist'});
 			};
 			return next();
 		})
@@ -84,7 +84,7 @@ const existMiddleware = {
 				});
 			} 
 			if(!data.rows[0]){
-				return res.status(400).json({status: 400, error: 'Office does not exist'});
+				return res.status(404).json({status: 404, error: 'Office does not exist'});
 			};
 			return next();
 		})
@@ -103,7 +103,7 @@ const existMiddleware = {
 				});
 			} 
 			if(data.rows[0]){
-				return res.status(400).json({status: 400, error: 'You have already voted'});
+				return res.status(404).json({status: 404, error: 'You have already voted'});
 			};
 			return next();
 		})
