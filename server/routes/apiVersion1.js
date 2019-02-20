@@ -25,13 +25,16 @@ import exists from '../middlewares/existMiddlewares';
 apiVersion1.post('/v1/parties', partyMiddleware.verifyPartyBody, partyController.createNewParty);
 apiVersion1.get('/v1/parties', partyController.getAllPartiesList);
 apiVersion1.get('/v1/parties/:partyId', 
+	exists.isPartyExists,
 	partyMiddleware.verifyPartyId, 
 	partyController.getSpecificParty);
 apiVersion1.patch('/v1/parties/:partyId/:partyName', 
+	exists.isPartyExists,
 	partyMiddleware.verifyPartyBody, 
 	partyMiddleware.verifyPartyId,
 	partyController.modifyParty);
 apiVersion1.delete('/v1/parties/:partyId', 
+	exists.isPartyExists,
 	partyMiddleware.verifyPartyId, 
 	partyController.deleteParty);
 
@@ -39,12 +42,21 @@ apiVersion1.delete('/v1/parties/:partyId',
 * Routes related with political offices
 */
 apiVersion1.get('/v1/offices', officeController.getAllOfficesList);
-apiVersion1.post('/v1/offices', officeMiddleware.verifyOfficeBody, officeController.createNewOffice);
-apiVersion1.get('/v1/offices/:officeId', officeMiddleware.verifyOfficeId, officeController.getSpecificOffice);
-apiVersion1.patch('/v1/offices/:officeId', officeMiddleware.verifyOfficeBody,
+apiVersion1.post('/v1/offices',
+	officeMiddleware.verifyOfficeBody, 
+	officeController.createNewOffice);
+apiVersion1.get('/v1/offices/:officeId',
+	exists.isOfficeExists,
+	officeMiddleware.verifyOfficeId, officeController.getSpecificOffice);
+apiVersion1.patch('/v1/offices/:officeId',
+	exists.isOfficeExists, 
+	officeMiddleware.verifyOfficeBody,
 	officeMiddleware.verifyOfficeId,
 	officeController.modifyOffice);
-apiVersion1.delete('/v1/offices/:officeId', officeMiddleware.verifyOfficeId, officeController.deleteOffice);
+apiVersion1.delete('/v1/offices/:officeId', 
+	exists.isOfficeExists,
+	officeMiddleware.verifyOfficeId, 
+	officeController.deleteOffice);
 
 apiVersion1.post('/auth/signup', userMiddleware.verifyUserBody, userController.registerUser);
 apiVersion1.post('/auth/login', userMiddleware.verifyLoginBody, userController.userLogin);
