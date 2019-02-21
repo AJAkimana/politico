@@ -10,18 +10,19 @@ pool.on('connect', () => {
 	console.log('client connected');
 });
 
-const UserDB = {
-	createUserTable(){
-		pool.query(createTables.User)
+const VoteDB = {
+	createVoteTable(){
+		pool.query(createTables.Vote)
 		    .then((res) => {
-		      console.log(res);
 		      pool.end();
 		    })
 		    .catch((err) => {
-		      console.log(err);
 		      pool.end();
 		    });
 	},
 	pool,
 };
-export default UserDB;
+pool.on('remove', () => {
+	console.log('client removed');
+});
+export default VoteDB;

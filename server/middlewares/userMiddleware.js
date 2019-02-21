@@ -1,6 +1,7 @@
-
 import helper from '../helper/helper';
+import Runner from '../../config/Runner';
 
+const sql = 'SELECT * FROM users WHERE email=$1';
 const userMiddleware = {
 	verifyUserBody(req, res, next){
 		req.assert('firstname', 'Type firstname').notEmpty().isString();
@@ -16,7 +17,6 @@ const userMiddleware = {
 		if(!helper.isValidEmail(req.body.email)){
 			return res.status(400).json({status: 400, error: 'Invalid email'});
 		}
-		
 		return next();
 	},
 	verifyLoginBody(req, res, next){

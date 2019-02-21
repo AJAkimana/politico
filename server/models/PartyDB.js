@@ -10,9 +10,9 @@ pool.on('connect', () => {
 	console.log('client connected');
 });
 
-const UserDB = {
-	createUserTable(){
-		pool.query(createTables.User)
+const PartyDB = {
+	createPartyTable(){
+		pool.query(createTables.Party)
 		    .then((res) => {
 		      console.log(res);
 		      pool.end();
@@ -24,4 +24,7 @@ const UserDB = {
 	},
 	pool,
 };
-export default UserDB;
+pool.on('remove', () => {
+	console.log('client removed');
+});
+export default PartyDB;

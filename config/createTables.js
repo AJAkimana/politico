@@ -66,11 +66,13 @@ const queries = {
 				createdOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				createdBy int NOT NULL,
 				office int NOT NULL,
+				candidate int NOT NULL,
 				created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				PRIMARY KEY (id),
 				CONSTRAINT vote_office_fk FOREIGN KEY (office) REFERENCES offices (id),
-				CONSTRAINT vote_user_fk FOREIGN KEY (createdBy) REFERENCES users (id)
+				CONSTRAINT vote_user_fk FOREIGN KEY (createdBy) REFERENCES users (id),
+				CONSTRAINT vote_candidate_fk FOREIGN KEY (candidate) REFERENCES users (id)
 			)`,
 }
 module.exports = queries;

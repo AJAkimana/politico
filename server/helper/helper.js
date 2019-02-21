@@ -32,7 +32,7 @@ const helper = {
 	},
 	
 	hashPassword(password) {
-		return bcrypt.hashSync(password, bcrypt.genSaltSync(8))
+		return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 	},
 
 	comparePassword(hashPassword, password){
@@ -57,7 +57,7 @@ const helper = {
 	    let buf = [];
     	for (let i = 0; i < tokenLenght; ++i) {
         	buf.push(chars[getRandomInt(0, charlen - 1)]);
-        }
+		}
 		return buf.join('');
 	},
 	getRandomInt(min, max) {
