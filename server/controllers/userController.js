@@ -32,7 +32,6 @@ const userController = {
 					error: 'Service not available'
 				});
 			} 
-<<<<<<< HEAD
 			try{
 				const token = helper.generateToken(data.rows[0].id);
 				const response = [{token:token,user: data.rows[0]}]
@@ -49,16 +48,6 @@ const userController = {
 				});
 			}
 		})
-=======
-			const token = helper.generateToken(data.rows[0].id);
-			const response = [{token:token,user: data.rows[0]}];
-			res.status(201).json({
-				status: 201,
-				message: 'Successfully created',
-				data: response
-			});
-		});
->>>>>>> ch-fix-Heroku-db-164102329
 	},
 	userLogin(req, res){
 		Runner.execute(queryOne, [req.body.email], (err, data)=>{
