@@ -85,6 +85,7 @@ const userController = {
 			req.body.candidate
 		]; 
 		Runner.execute(insertCandidate, values, (err, data)=>{
+			console.log(err)
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
