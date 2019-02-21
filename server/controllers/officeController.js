@@ -10,16 +10,14 @@ const queryDelete = 'DELETE FROM offices WHERE id = $1';
 
 const initialise = () => {
 	OfficeDB.createOfficeTable();
-}
+};
 const officeController = {
 	createNewOffice(req, res){
-		initialise()
 		const values = [
 			req.body.name,
 			req.body.type.toLowerCase().trim(),
-		] 
+		]; 
 		Runner.execute(queryInsert, values, (err, result)=>{
-			console.log(err, result)
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
@@ -31,10 +29,9 @@ const officeController = {
 				message: 'Successfully created',
 				data: result.rows[0]
 			});
-		})
+		});
 	},
 	getAllOfficesList(req, res){
-		initialise()
 		Runner.execute(queryAll, [], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -53,12 +50,10 @@ const officeController = {
 				message: 'Success',
 				data: result.rows
 			});
-		})
+		});
 	},
 	getSpecificOffice(req, res){
-		initialise()
 		const officeId = Number(req.params.officeId);
-
 		Runner.execute(queryOne, [officeId], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -77,76 +72,44 @@ const officeController = {
 				message: 'Success',
 				data: result.rows[0]
 			});
-		})
+		});
 	},
 	modifyOffice(req, res){
-		initialise()
 		req.body.type = req.body.type.toLowerCase().trim();
 		const values = [
 			req.body.name,
 			req.body.type.toLowerCase().trim(),
 			req.params.officeId
-		] 
-		Runner.execute(queryOne, [req.params.officeId], (err, result)=>{
-			if(err){
+		];
+		Runner.execute(queryEdit, values, (error, response)=>{
+			if(error){
 				return res.status(500).json({ 
 					status: 500,
 					error: 'Service not availavle'
 				});
-			} 
-			if (!result.rows[0]){
-				return res.status(404).json({ 
-					status: 404,
-					error: 'No office found'
-				});
 			}
-			Runner.execute(queryEdit, values, (error, response)=>{
-				console.log(response)
-				if(error){
-					return res.status(500).json({ 
-						status: 500,
-						error: 'Service not availavle'
-					});
-				}
-				res.status(200).json({
-					status: 200,
-					message: 'Successfully modified',
-					data: response.rows[0]
-				});
-			})
-		})
+			res.status(200).json({
+				status: 200,
+				message: 'Successfully modified',
+				data: response.rows[0]
+			});
+		});
 	},
 	deleteOffice(req, res){
-		initialise()
 		const officeId = Number(req.params.officeId);
-
-		Runner.execute(queryOne, [officeId], (err, result)=>{
-			if(err){
+		Runner.execute(queryDelete, [officeId], (error, response)=>{
+			console.log(error);
+			if(error){
 				return res.status(500).json({ 
 					status: 500,
 					error: 'Service not availavle'
 				});
-			} 
-			if (!result.rows[0]){
-				return res.status(404).json({ 
-					status: 404,
-					error: 'No office found'
-				});
 			}
-			Runner.execute(queryDelete, [officeId], (error, response)=>{
-				console.log(response)
-				if(error){
-					return res.status(500).json({ 
-						status: 500,
-						error: 'Service not availavle'
-					});
-				}
-				res.status(200).json({
-					status: 200,
-					message: 'The office has been deleted'
-				});
-			})
-		})
+			res.status(200).json({
+				status: 200,
+				message: 'The office has been deleted'
+			});
+		});
 	}
 };
 

@@ -7,15 +7,15 @@ const resultSql = 'SELECT office, candidate, COUNT(*) AS result FROM votes WHERE
 
 const initialise = () => {
 	VoteDB.createVoteTable();
-}
+};
 const voteController = {
 	vote(req, res){
-		initialise()
+		initialise();
 		const values = [
 			req.user.id,
 			req.body.officeId,
 			req.body.candidate,
-		] 
+		]; 
 		Runner.execute(voteSql, values, (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -28,10 +28,10 @@ const voteController = {
 				message: 'Successfully created',
 				data: result.rows[0]
 			});
-		})
+		});
 	},
 	getResult(req, res){
-		initialise()
+		initialise();
 		Runner.execute(resultSql, [req.params.officeId], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -44,7 +44,7 @@ const voteController = {
 				message: 'Success',
 				data: result.rows[0]
 			});
-		})
+		});
 	},
 };
 
