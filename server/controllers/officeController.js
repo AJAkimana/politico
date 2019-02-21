@@ -1,82 +1,116 @@
-const DataModel = require('../models/DataModel');
-const officeFileJson = '../helper/data/offices.json';
-const offices = require(officeFileJson);
+import Runner from '../../config/Runner';
+import OfficeDB from '../models/OfficeDB';
 
-exports.createNewOffice = (req, res) => {
-	DataModel.saveNew(officeFileJson, offices, req.body)
-		.then(office => {
+const queryInsert = 'INSERT INTO offices(name, type) VALUES ($1, $2) returning *';
+const queryEdit = 'UPDATE offices SET name=$1, type=$2, updated_at=NOW() WHERE id=$3 returning *';
+const queryAll = 'SELECT * FROM offices';
+const queryOne = 'SELECT * FROM offices WHERE id = $1';
+const queryDelete = 'DELETE FROM offices WHERE id = $1';
+
+
+const initialise = () => {
+	OfficeDB.createOfficeTable();
+};
+const officeController = {
+	createNewOffice(req, res){
+		const values = [
+			req.body.name,
+			req.body.type.toLowerCase().trim(),
+		]; 
+		Runner.execute(queryInsert, values, (err, result)=>{
+			if(err){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not availavle'
+				});
+			} 
 			res.status(201).json({
 				status: 201,
-				data: office
+				message: 'Successfully created',
+				data: result.rows[0]
 			});
-		})
-		.catch(err => res.status(500).json({ 
-			status: 500,
-			error: err.message 
-		}));
-};
-exports.getAllOfficesList = (req, res) => {
-	DataModel.findAll(offices)
-		.then(offices => res.status(200).json({
-			status: 200,
-			data: offices
-		}))
-		.catch(err => {
-			const codeStatus = err.status?err.status:500;
-			const response = {
-				status:codeStatus,
-				error:err.message
-			};
-			return res.status(codeStatus).json(response);
 		});
+	},
+	getAllOfficesList(req, res){
+		Runner.execute(queryAll, [], (err, result)=>{
+			if(err){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not availavle'
+				});
+			} 
+			if (result.rowCount < 1){
+				return res.status(404).json({ 
+					status: 404,
+					error: 'No office found'
+				});
+			}
+			res.status(200).json({
+				status: 200,
+				message: 'Success',
+				data: result.rows
+			});
+		});
+	},
+	getSpecificOffice(req, res){
+		const officeId = Number(req.params.officeId);
+		Runner.execute(queryOne, [officeId], (err, result)=>{
+			if(err){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not availavle'
+				});
+			} 
+			if (!result.rows[0]){
+				return res.status(404).json({ 
+					status: 404,
+					error: 'No office found'
+				});
+			}
+			res.status(200).json({
+				status: 200,
+				message: 'Success',
+				data: result.rows[0]
+			});
+		});
+	},
+	modifyOffice(req, res){
+		req.body.type = req.body.type.toLowerCase().trim();
+		const values = [
+			req.body.name,
+			req.body.type.toLowerCase().trim(),
+			req.params.officeId
+		];
+		Runner.execute(queryEdit, values, (error, response)=>{
+			if(error){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not availavle'
+				});
+			}
+			res.status(200).json({
+				status: 200,
+				message: 'Successfully modified',
+				data: response.rows[0]
+			});
+		});
+	},
+	deleteOffice(req, res){
+		const officeId = Number(req.params.officeId);
+		Runner.execute(queryDelete, [officeId], (error, response)=>{
+			console.log(error);
+			if(error){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not availavle'
+				});
+			}
+			res.status(200).json({
+				status: 200,
+				message: 'The office has been deleted'
+			});
+		});
+	}
 };
-exports.getSpecificOffice = (req, res) => {
-	const officeId = Number(req.params.officeId);
 
-	DataModel.findOneById(offices, officeId)
-		.then(office => res.status(200).json({
-			status: 200,
-			data: office
-		}))
-		.catch(err => {
-			const codeStatus = err.status?err.status:500;
-			const response = {
-				status:codeStatus,
-				error:err.message
-			};
-			return res.status(codeStatus).json(response);
-		});
-};
-exports.modifyOffice = (req, res) => {
-	const id = Number(req.params.officeId);
-	DataModel.findOneAndUpdate(officeFileJson, offices, id, req.body)
-		.then(office => res.status(201).json({
-			status: 201,
-			data: office
-		}))
-		.catch(err => {
-			const codeStatus = err.status?err.status:500;
-			const response = {
-				status:codeStatus,
-				error:err.message
-			};
-			res.status(codeStatus).json(response);
-		});
-};
-exports.deleteOffice = (req, res) => {
-	const officeId = Number(req.params.officeId);
-
-	DataModel.removeOne(officeFileJson, offices, officeId)
-		.then(() => res.status(200).json({
-			status: 200,
-			message: 'The office has been deleted'
-		}))
-		.catch(err => {
-			const codeStatus = err.status?err.status:500;
-			const response = {
-				status:codeStatus,
-				error:err.message
-			};
-			res.status(codeStatus).json(response);
-		});
-};
+export default officeController;
