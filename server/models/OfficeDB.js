@@ -4,7 +4,7 @@ import dropTables from '../../config/dropTables';
 
 const pool = new Pool({
 	connectionString: process.env.DATABASE_URL,
-}) 
+}); 
 
 pool.on('connect', () => {
 	console.log('client connected');
@@ -21,8 +21,8 @@ const OfficeDB = {
 		    });
 	},
 	pool,
-}
+};
 pool.on('remove', () => {
 	console.log('client removed');
 });
-export default OfficeDB
+export default OfficeDB;
