@@ -1,13 +1,9 @@
 import Runner from '../../config/Runner';
-import VoteDB from '../models/VoteDB';
 
 const voteSql = 'INSERT INTO votes(createdby,office,candidate) VALUES ($1,$2,$3) returning *';
 const resultSql = 'SELECT office, candidate, COUNT(*) AS result FROM votes WHERE office=$1 GROUP BY candidate,office';
 
 
-const initialise = () => {
-	VoteDB.createVoteTable();
-};
 const voteController = {
 	vote(req, res){
 		initialise();
@@ -31,7 +27,6 @@ const voteController = {
 		});
 	},
 	getResult(req, res){
-		initialise();
 		Runner.execute(resultSql, [req.params.officeId], (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -39,6 +34,12 @@ const voteController = {
 					error: 'Service not availavle'
 				});
 			} 
+			if(!result.rows||!result.rows.length){
+				return res.status(404).json({ 
+					status: 404,
+					error: 'No result found'
+				});
+			}
 			res.status(200).json({
 				status: 200,
 				message: 'Success',

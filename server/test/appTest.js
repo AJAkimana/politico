@@ -3,11 +3,14 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../app';
 import { Pool } from 'pg';
+import dotenv from 'dotenv';
 import db from '../../config/database';
+
 // Configure chai
 chai.use(chaiHttp);
 chai.should();
 
+dotenv.load({ path: '.app.env'});
 const partyBody = {name:'Part Test',hqAddress:'Kigali',logoUrl:'testUrl'},
 	partyBodyWithNoName = {hqAddress:'Kigali',logoUrl:'testUrl'},
 	partyBodyWithNoAddress = {name:'Part Test', logoUrl:'testUrl'},
@@ -20,10 +23,10 @@ const officeBody = {name:'Office Test',type:officeByRandom},
 	officeBodyWithNoName = {type:officeByRandom},
 	officeBodyWithNoType = {name:'Office Test'},
 	officeBodyWithWrongType = {name:'Office Test',type:'Wrong type'};
-const testUser = {firstname:'User',lastname:'Test',password:'pass',email:'test@email.com',phoneNumber:'56766575',passportUrl:'urlTest'};
-const testLogUser = {password:'pass',email:'test@email.com'};
+const testUser = {firstname:'User',lastname:'Test',password:'password',email:'test@email.com',phoneNumber:'56766575',passportUrl:'urlTest'};
+const testLogUser = {password:'password',email:'test@email.com'};
 const testUserNoEmail = {firstname:'User',lastname:'Test',password:'pass',email:'test@email',phoneNumber:'56766575',passportUrl:'urlTest'};
-const testCandidat = {party:1,candidate:2};
+const testCandidat = {party:1,candidate:1};
 const testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTU1MDczOTg0MywiZXhwIjoxNTUxMzQ0NjQzfQ.TW5KC_yAWT4NgnLW-2sSKNDKfYaBbLL_UpD1Uf3S9jM';
 const wrongId = 2019;
 
@@ -325,7 +328,7 @@ describe('Politico', () => {
 		describe('/POST Sign up', () => {
 			it('If user send invalid email: code 400', (done) => {
 				chai.request(server)
-					.post('/api/auth/signup')
+					.post('/api/v1/auth/signup')
 					.send(testUserNoEmail)
 					.end((err, res) => {
 						res.should.have.status(400);
@@ -333,12 +336,12 @@ describe('Politico', () => {
 						done();
 					});
 			});
-			it('Everything fine. Status code should be 201 and must be an object', (done) => {
+			it('Test if registering user exist', (done) => {
 				chai.request(server)
-					.post('/api/auth/signup')
+					.post('/api/v1/auth/signup')
 					.send(testUser)
 					.end((err, res) => {
-						res.should.have.status(201);
+						res.should.have.status(400);
 						res.body.should.be.a('object');
 						done();
 					});
@@ -347,7 +350,7 @@ describe('Politico', () => {
 		describe('/POST login', () => {
 			it('Everything fine. Status code should be 200 and must be an object', (done) => {
 				chai.request(server)
-					.post('/api/auth/login')
+					.post('/api/v1/auth/login')
 					.send(testLogUser)
 					.end((err, res) => {
 						res.should.have.status(200);
@@ -356,18 +359,45 @@ describe('Politico', () => {
 					});
 			});
 		});
-		// describe('/POST Register new candidate', () => {
-		// 	it('Everything fine. Status code should be 201 and must be an object', (done) => {
-		// 		chai.request(server)
-		// 			.post('/api/office/1/register')
-		// 			.set('x-access-token', testToken)
-		// 			.send(testCandidat)
-		// 			.end((err, res) => {
-		// 				res.should.have.status(201);
-		// 				res.body.should.be.a('object');
-		// 				done();
-		// 			});
-		// 	});
-		// });
+		describe('/POST Register new candidate', () => {
+			it('Register must have an authentication token', (done) => {
+				chai.request(server)
+					.post('/api/v1/office/1/register')
+					.set('x-access-token', 'testToken')
+					.send(testCandidat)
+					.end((err, res) => {
+						res.should.have.status(401);
+						res.body.should.be.a('object');
+						done();
+					});
+			});
+		});
+		describe('/POST vote', () => {
+			it('Voter must have an authentication token', (done) => {
+				chai.request(server)
+					.post('/api/v1/vote')
+					.set('x-access-token', 'testToken')
+					.send({officeId:1,candidate:2})
+					.end((err, res) => {
+						res.should.have.status(401);
+						res.body.should.be.a('object');
+						done();
+					});
+			});
+		});
+		describe('/GET election result', () => {
+			it('Voter must have an authentication token', (done) => {
+				chai.request(server)
+					.get('/api/v1/office/1/result')
+					.set('x-access-token', 'testToken')
+					.send()
+					.end((err, res) => {
+						res.should.have.status(401);
+						res.body.should.be.a('object');
+						done();
+					});
+			});
+			
+		});
 	});
 });

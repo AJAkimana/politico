@@ -1,5 +1,4 @@
 import Runner from '../../config/Runner';
-import OfficeDB from '../models/OfficeDB';
 
 const queryInsert = 'INSERT INTO offices(name, type) VALUES ($1, $2) returning *';
 const queryEdit = 'UPDATE offices SET name=$1, type=$2, updated_at=NOW() WHERE id=$3 returning *';
@@ -8,9 +7,6 @@ const queryOne = 'SELECT * FROM offices WHERE id = $1';
 const queryDelete = 'DELETE FROM offices WHERE id = $1';
 
 
-const initialise = () => {
-	OfficeDB.createOfficeTable();
-};
 const officeController = {
 	createNewOffice(req, res){
 		const values = [

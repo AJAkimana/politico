@@ -55,7 +55,7 @@ const existMiddleware = {
 				});
 			} 
 			if(data.rows[0]&&data.rows[0].email){
-				return res.status(404).json({status: 404, error: 'Sorry, this email exists'});
+				return res.status(400).json({status: 400, error: 'Sorry, this email exists'});
 			}
 			return next();
 		});

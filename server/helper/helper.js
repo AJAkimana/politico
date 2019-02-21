@@ -45,24 +45,24 @@ const helper = {
 
 	generateToken(id) {
 		const token = jwt.sign({
-		  userId: id
+			userId: id
 		},
-		  process.env.JWT_SECRET, { expiresIn: '7d' }
+		process.env.JWT_SECRET, { expiresIn: '7d' }
 		);
 		return token;
 	},
 	generateResetToken(tokenLenght){
-	    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	    const charlen = chars.length;
-	    let buf = [];
-    	for (let i = 0; i < tokenLenght; ++i) {
-        	buf.push(chars[getRandomInt(0, charlen - 1)]);
+		const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		const charlen = chars.length;
+		let buf = [];
+		for (let i = 0; i < tokenLenght; ++i) {
+			buf.push(chars[getRandomInt(0, charlen - 1)]);
 		}
 		return buf.join('');
 	},
 	
 };
 function getRandomInt(min, max){
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 export default helper;

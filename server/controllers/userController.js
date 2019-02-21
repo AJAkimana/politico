@@ -1,6 +1,5 @@
 import Runner from '../../config/Runner';
 
-import UserDB from '../models/UserDB';
 import helper from '../helper/helper';
 import mailSender from './mailSender';
 
@@ -13,9 +12,7 @@ const queryOne = 'SELECT * FROM users WHERE email = $1';
 const insertCandidate = 'INSERT INTO candidates(office,party,candidate) VALUES ($1,$2,$3) returning *';
 const updateToken = 'UPDATE users SET resettoken=$1 where email=$2';
 const updatePass = 'UPDATE users SET password=$1 where email=$2';
-const initialise = () => {
-	UserDB.createUserTable();
-};
+
 const userController = {
 	registerUser(req, res){
 		const hashPassword = helper.hashPassword(req.body.password);
@@ -37,7 +34,7 @@ const userController = {
 			} 
 			try{
 				const token = helper.generateToken(data.rows[0].id);
-				const response = [{token:token,user: data.rows[0]}]
+				const response = [{token:token,user: data.rows[0]}];
 				return res.status(201).json({
 					status: 201,
 					message: 'You are successfully registered',
@@ -50,7 +47,7 @@ const userController = {
 					error: 'Service not availavle'
 				});
 			}
-		})
+		});
 	},
 	userLogin(req, res){
 		Runner.execute(queryOne, [req.body.email], (err, data)=>{
@@ -116,9 +113,9 @@ const userController = {
 				});
 			} 
 			const infos ={
-		        email: req.body.email, 
-		        token: req.body.token
-		    };
+				email: req.body.email, 
+				token: req.body.token
+			};
 			mailSender.send(infos).then((result)=>{
 				res.status(200).json({
 					status: 200,
@@ -130,7 +127,7 @@ const userController = {
 					status: 500,
 					error: 'Service not availavle'
 				});
-			})
+			});
 		});
 	},
 	resetPassword(req, res){

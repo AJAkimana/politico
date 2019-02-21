@@ -50,11 +50,13 @@ apiVersion1.get('/v1/offices/:officeId',
 	officeMiddleware.verifyOfficeId,
 	officeController.getSpecificOffice);
 apiVersion1.patch('/v1/offices/:officeId',
+	officeMiddleware.verifyOfficeId,
 	exists.isOfficeExists,
 	officeMiddleware.verifyOfficeBody,
 	officeMiddleware.verifyOfficeId,
 	officeController.modifyOffice);
 apiVersion1.delete('/v1/offices/:officeId',
+	officeMiddleware.verifyOfficeId,
 	exists.isOfficeExists, 
 	officeMiddleware.verifyOfficeId,
 	officeController.deleteOffice);
