@@ -12,7 +12,7 @@ const partyController = {
 			req.body.name,
 			req.body.hqAddress,
 			req.body.logoUrl,
-		] 
+		]; 
 		Runner.execute(queryInsert, values, (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -25,7 +25,7 @@ const partyController = {
 				message: 'Successfully created',
 				data: result.rows[0]
 			});
-		})
+		});
 	},
 	getAllPartiesList(req, res){
 		Runner.execute(queryAll, [], (err, result)=>{
@@ -46,7 +46,7 @@ const partyController = {
 				message: 'Success',
 				data: result.rows
 			});
-		})
+		});
 	},
 	getSpecificParty(req, res){
 		const partyId = Number(req.params.partyId);
@@ -69,7 +69,7 @@ const partyController = {
 				message: 'Success',
 				data: result.rows[0]
 			});
-		})
+		});
 	},
 	modifyParty(req, res){
 		const values = [
@@ -77,7 +77,7 @@ const partyController = {
 			req.body.hqAddress,
 			req.body.logoUrl,
 			req.params.partyId
-		] 
+		]; 
 		Runner.execute(queryEdit, values, (error, response)=>{
 			if(error){
 				return res.status(500).json({ 
@@ -90,7 +90,7 @@ const partyController = {
 				message: 'Successfully modified',
 				data: response.rows[0]
 			});
-		})
+		});
 	},
 	deleteParty(req, res){
 		const partyId = Number(req.params.partyId);
@@ -106,7 +106,7 @@ const partyController = {
 				status: 200,
 				message: 'The office has been deleted'
 			});
-		})
+		});
 	}
 };
 

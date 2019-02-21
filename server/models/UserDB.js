@@ -4,7 +4,7 @@ import dropTables from '../../config/dropTables';
 
 const pool = new Pool({
 	connectionString: process.env.DATABASE_URL,
-}) 
+}); 
 
 pool.on('connect', () => {
 	console.log('client connected');
@@ -23,5 +23,5 @@ const UserDB = {
 		    });
 	},
 	pool,
-}
-export default UserDB
+};
+export default UserDB;

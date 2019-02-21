@@ -10,13 +10,13 @@ const queryDelete = 'DELETE FROM offices WHERE id = $1';
 
 const initialise = () => {
 	OfficeDB.createOfficeTable();
-}
+};
 const officeController = {
 	createNewOffice(req, res){
 		const values = [
 			req.body.name,
 			req.body.type.toLowerCase().trim(),
-		] 
+		]; 
 		Runner.execute(queryInsert, values, (err, result)=>{
 			if(err){
 				return res.status(500).json({ 
@@ -29,7 +29,7 @@ const officeController = {
 				message: 'Successfully created',
 				data: result.rows[0]
 			});
-		})
+		});
 	},
 	getAllOfficesList(req, res){
 		Runner.execute(queryAll, [], (err, result)=>{
@@ -50,7 +50,7 @@ const officeController = {
 				message: 'Success',
 				data: result.rows
 			});
-		})
+		});
 	},
 	getSpecificOffice(req, res){
 		const officeId = Number(req.params.officeId);
@@ -72,7 +72,7 @@ const officeController = {
 				message: 'Success',
 				data: result.rows[0]
 			});
-		})
+		});
 	},
 	modifyOffice(req, res){
 		req.body.type = req.body.type.toLowerCase().trim();
@@ -93,12 +93,12 @@ const officeController = {
 				message: 'Successfully modified',
 				data: response.rows[0]
 			});
-		})
+		});
 	},
 	deleteOffice(req, res){
 		const officeId = Number(req.params.officeId);
 		Runner.execute(queryDelete, [officeId], (error, response)=>{
-			console.log(error)
+			console.log(error);
 			if(error){
 				return res.status(500).json({ 
 					status: 500,
@@ -109,7 +109,7 @@ const officeController = {
 				status: 200,
 				message: 'The office has been deleted'
 			});
-		})
+		});
 	}
 };
 
