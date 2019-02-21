@@ -46,37 +46,44 @@ apiVersion1.post('/v1/offices',
 	officeMiddleware.verifyOfficeBody, 
 	officeController.createNewOffice);
 apiVersion1.get('/v1/offices/:officeId',
-	officeMiddleware.verifyOfficeId,
 	exists.isOfficeExists,
+	officeMiddleware.verifyOfficeId,
 	officeController.getSpecificOffice);
 apiVersion1.patch('/v1/offices/:officeId',
+	exists.isOfficeExists,
 	officeMiddleware.verifyOfficeBody,
 	officeMiddleware.verifyOfficeId,
-	exists.isOfficeExists,
 	officeController.modifyOffice);
 apiVersion1.delete('/v1/offices/:officeId',
-	officeMiddleware.verifyOfficeId,
 	exists.isOfficeExists, 
+	officeMiddleware.verifyOfficeId,
 	officeController.deleteOffice);
 
-apiVersion1.post('/auth/signup', userMiddleware.verifyUserBody, userController.registerUser);
-apiVersion1.post('/auth/login', userMiddleware.verifyLoginBody, userController.userLogin);
-apiVersion1.post('/office/:officeId/register',
+apiVersion1.post('/v1/auth/signup', userMiddleware.verifyUserBody,
+	exists.notEmailTaken,
+	userController.registerUser);
+apiVersion1.post('/v1/auth/login', userMiddleware.verifyLoginBody, userController.userLogin);
+apiVersion1.post('/v1/auth/reset', exists.isEmailExists, userController.reqResetPassword);
+apiVersion1.post('/v1/auth/reset/password', exists.isTokenExists, userController.resetPassword);
+
+apiVersion1.post('/v1/office/:officeId/register',
 	Auth.isAdmin,
 	exists.isOfficeExists,
+	exists.isUserExists,
 	exists.hasRegistered,
 	exists.isPartyExists,
 	userController.setUserAsCandidate);
 
-apiVersion1.post('/vote',
+apiVersion1.post('/v1/vote',
 	Auth.verifyToken,
 	exists.isOfficeExists,
 	exists.isCandidateExist,
-	exists.hasVoted,
+	exists.hasVoted, 
 	voteController.vote);
-apiVersion1.get('/office/:officeId/result',
+apiVersion1.get('/v1/office/:officeId/result',
 	Auth.verifyToken,
 	exists.isOfficeExists,
 	voteController.getResult);
 
 export default apiVersion1;
+  

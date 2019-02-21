@@ -25,7 +25,7 @@ const voteController = {
 			} 
 			res.status(201).json({
 				status: 201,
-				message: 'Successfully created',
+				message: 'Thanks for your vote',
 				data: result.rows[0]
 			});
 		});

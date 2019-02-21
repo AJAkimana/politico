@@ -26,7 +26,7 @@ const auth = {
 		    });
 			}
 			req.user = result.rows[0];
-      	next();
+      		next();
 		});
 	},
 	isAdmin(req, res, next){
@@ -47,18 +47,18 @@ const auth = {
 			}
 			if(!result.rows[0]){
 				return res.status(401).json({ 
-		      	status: 401,
-		      	message: 'No token provided' 
-		    });
+			      	status: 401,
+			      	message: 'No token provided' 
+			    });
 			}
 			if(!result.rows[0].isadmin){
 				return res.status(401).json({ 
-		      	status: 401,
-		      	message: 'Operation is reserved for admin' 
-		    });
+			      	status: 401,
+			      	message: 'Operation is reserved for admin' 
+			    });
 			}
 			req.user = result.rows[0];
-      	next();
+      		next();
 		});
 	}
 };

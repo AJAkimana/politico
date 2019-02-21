@@ -1,7 +1,10 @@
 import Runner from '../../config/Runner';
+import helper from '../helper/helper';
 
 
 const userSql = 'SELECT * FROM users WHERE id=$1';
+const emailSql = 'SELECT * FROM users WHERE email=$1';
+const nullTokenSql = 'UPDATE users SET resettoken=null where email=$1';
 const candidateSql = 'SELECT * FROM candidates WHERE candidate=$1 AND office=$2';
 const partySql = 'SELECT * FROM parties WHERE id=$1';
 const officeSql = 'SELECT * FROM offices WHERE id=$1';
@@ -22,9 +25,69 @@ const existMiddleware = {
 			return next();
 		});
 	},
+	isEmailExists(req, res, next){
+		if(!helper.isValidEmail(req.body.email)){
+			return res.status(400).json({status: 400, error: 'Invalid email'});
+		}
+		Runner.execute(emailSql, [req.body.email], (err, data)=>{
+			if(err){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not available'
+				});
+			} 
+			if(!data.rows[0]||!data.rows[0].email){
+				return res.status(404).json({status: 404, error: 'Email does not registered'});
+			}
+			req.body.token = helper.generateResetToken(15);
+			return next();
+		});
+	},
+	notEmailTaken(req, res, next){
+		if(!helper.isValidEmail(req.body.email)){
+			return res.status(400).json({status: 400, error: 'Invalid email'});
+		}
+		Runner.execute(emailSql, [req.body.email], (err, data)=>{
+			if(err){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not available'
+				});
+			} 
+			if(data.rows[0]&&data.rows[0].email){
+				return res.status(404).json({status: 404, error: 'Sorry, this email exists'});
+			}
+			return next();
+		});
+	},
+	isTokenExists(req, res, next){
+		req.assert('m', 'Invalid link').len(1,100); // mail
+		req.assert('t', 'Invalid link').notEmpty(); // token
+		req.assert('password', 'Enter new password at least 7 character').len(7,100); 
+		const errors = req.validationErrors();
+		if (errors) {
+			return res.status(400).json({ 
+				status: 400,
+				error: errors[0].msg
+			});
+		}
+
+		if(!helper.isValidEmail(req.query.m)){
+			return res.status(400).json({status: 400, error: 'Invalid link .'});
+		}
+		Runner.execute(nullTokenSql, [req.query.m], (err, data)=>{
+			if(err){
+				return res.status(500).json({ 
+					status: 500,
+					error: 'Service not available'
+				});
+			}
+			return next();
+		});
+	},
 	hasRegistered(req, res, next){
 		const values = [
-			req.body.candidate,
+			req.body.userId,
 			req.params.officeId
 		];
 		console.log(values);
@@ -36,7 +99,7 @@ const existMiddleware = {
 				});
 			} 
 			if(data.rows[0]){
-				return res.status(404).json({status: 404, error: 'Candidate is already registered'});
+				return res.status(400).json({status: 400, error: 'Candidate is already registered'});
 			}
 			return next();
 		});

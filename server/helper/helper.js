@@ -60,9 +60,9 @@ const helper = {
 		}
 		return buf.join('');
 	},
-	getRandomInt(min, max) {
-	  return Math.floor(Math.random() * (max - min + 1)) + min;
-	}
+	
 };
-
+function getRandomInt(min, max){
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 export default helper;

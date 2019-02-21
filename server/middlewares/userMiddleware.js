@@ -4,12 +4,13 @@ import Runner from '../../config/Runner';
 const sql = 'SELECT * FROM users WHERE email=$1';
 const userMiddleware = {
 	verifyUserBody(req, res, next){
-		req.assert('firstname', 'Type firstname').notEmpty().isString();
-		req.assert('lastname', 'Type lastname').notEmpty();
-		req.assert('phoneNumber', 'Type phoneNumber').notEmpty();
-		req.assert('email', 'Type email').notEmpty();
+		req.assert('firstname', 'Enter your first name').notEmpty().isString();
+		req.assert('lastname', 'Enter your last name').notEmpty();
+		req.assert('phoneNumber', 'Enter your phone number').notEmpty();
+		req.assert('email', 'Enter your email').notEmpty();
 		req.assert('passportUrl', 'Upload passport').notEmpty();
-		req.assert('password', 'Type password').notEmpty();
+		req.assert('password', 'Enter password').notEmpty();
+		req.assert('password', 'Password must at least have 7 character').len(7,100);
 
 		const errors = req.validationErrors();
 		if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
@@ -20,8 +21,8 @@ const userMiddleware = {
 		return next();
 	},
 	verifyLoginBody(req, res, next){
-		req.assert('email', 'Type email').notEmpty();
-		req.assert('password', 'Type password').notEmpty();
+		req.assert('email', 'Provide your email').notEmpty();
+		req.assert('password', 'Enter password').notEmpty();
 
 		const errors = req.validationErrors();
 		if (errors) return res.status(400).json({status: 400, error: errors[0].msg});
