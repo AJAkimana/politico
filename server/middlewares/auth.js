@@ -31,7 +31,6 @@ const auth = {
   },
   isAdmin(req, res, next){
   	const token = req.headers['x-access-token'];
-  	console.log('=========================================>',token)
     if(!token) {
       return res.status(401).json({ 
       	status: 401,
