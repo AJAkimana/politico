@@ -3,7 +3,7 @@ Politico enables citizens give their mandate to politicians running for differen
 
 Embedded JavaScript templates
 
-[![Build Status](https://travis-ci.org/AJAkimana/politico.svg?branch=develop)](https://travis-ci.org/AJAkimana/politico) [![Coverage Status](https://coveralls.io/repos/github/AJAkimana/politico/badge.svg?branch=develop)](https://coveralls.io/github/AJAkimana/politico?branch=develop)  [![Maintainability](https://api.codeclimate.com/v1/badges/03a8b99c0e216d5f4ed9/maintainability)](https://codeclimate.com/github/AJAkimana/politico/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/03a8b99c0e216d5f4ed9/test_coverage)](https://codeclimate.com/github/AJAkimana/politico/test_coverage)
+[![Build Status](https://travis-ci.org/AJAkimana/politico.svg?branch=develop)](https://travis-ci.org/AJAkimana/politico) [![Coverage Status](https://coveralls.io/repos/github/AJAkimana/politico/badge.svg?branch=develop)](https://coveralls.io/github/AJAkimana/politico?branch=develop)  [![Maintainability](https://api.codeclimate.com/v1/badges/03a8b99c0e216d5f4ed9/maintainability)](https://codeclimate.com/github/AJAkimana/politico/maintainability)
 
 ## Technologies
 
@@ -17,12 +17,27 @@ Before installing, [download and install Node.js](https://nodejs.org/en/download
 
 ## Features / APIs
 
-This app contains basic APIs regarding with View, create, modify and edit political parties and offices
-  * APIs to view a list of political parties and offices
-  * APIs to view a specific political office and party
-  * APIs that creates an office and party
-  * APIs that modify and edit the registered political party and office 
-  * APIs to delete a specific political party and office
+
+| API | Verb | Description |
+| ------ | ------ | ------ |
+| /offices | GET |  To view a list of political offices |
+| /parties | GET |  To view a list of political parties |
+| /offices/id | GET | To view a specific political office |
+| /parties/id | GET | To view a specific political party |
+| /offices | POST | To create an office |
+| /parties | POST | To create political party |
+| /parties/id/name | PATCH | To modify political party |
+| /offices/id | PATCH | To modify political office |
+| /parties/id | DELETE | Deleting specific party |
+| /offices/id | DELETE | Deleting specific office |
+| /auth/signup | POST | Creating account |
+| /auth/login | POST | User login |
+| /auth/reset | POST | Request link for reset |
+| /auth/reset/password | POST | Reset pwd using the link sent |
+| /office/id/register | POST | Set candidate |
+| /vote | POST | Voting a candidate |
+| /office/id/result | GET | View election result |
+
 
 ## Quick Start
 
