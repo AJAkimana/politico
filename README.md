@@ -9,7 +9,7 @@ Embedded JavaScript templates
 
   * Runtime environment: [Node](https://nodejs.org/)
   * Backend framework: [Express.js](https://expressjs.com/)
-  * Database: None. All data are saved to and retrieved from created JSON files
+  * Database: [Postgres](https://www.postgresql.org/)
 
 ## Installation
 
