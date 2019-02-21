@@ -1,7 +1,7 @@
 const partyMiddleware = {
 	verifyPartyBody(req, res, next){
-		req.assert('name', 'Type office name').notEmpty();
-		req.assert('name', 'Invalid office name').isString();
+		req.assert('name', 'Type party name').notEmpty();
+		req.assert('name', 'Invalid party name').isString();
 		req.assert('hqAddress', 'Provide party address').notEmpty().isString();
 		req.assert('logoUrl', 'Provide party logo url').notEmpty().isString();
 
