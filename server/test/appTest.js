@@ -25,7 +25,7 @@ const officeBody = {name:'Office Test',type:officeByRandom},
 	officeBodyWithWrongType = {name:'Office Test',type:'Wrong type'};
 const testUser = {firstname:'User',lastname:'Test',password:'password',email:'test@email.com',phoneNumber:'56766575',passportUrl:'urlTest'};
 const testLogUser = {password:'password',email:'test@email.com'};
-const testUserNoEmail = {firstname:'User',lastname:'Test',password:'pass',email:'test@email',phoneNumber:'56766575',passportUrl:'urlTest'};
+const testUserNoEmail = {firstname:'User',lastname:'Test',password:'password',email:'testemail.com',phoneNumber:'56766575',passportUrl:'urlTest'};
 const testCandidat = {party:1,candidate:1};
 const testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTU1MDczOTg0MywiZXhwIjoxNTUxMzQ0NjQzfQ.TW5KC_yAWT4NgnLW-2sSKNDKfYaBbLL_UpD1Uf3S9jM';
 const wrongId = 2019;
@@ -336,12 +336,12 @@ describe('Politico', () => {
 						done();
 					});
 			});
-			it('Test if registering user exist', (done) => {
+			it('User not registered, continue with success', (done) => {
 				chai.request(server)
 					.post('/api/v1/auth/signup')
 					.send(testUser)
 					.end((err, res) => {
-						res.should.have.status(400);
+						res.should.have.status(201);
 						res.body.should.be.a('object');
 						done();
 					});
