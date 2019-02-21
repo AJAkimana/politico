@@ -134,7 +134,8 @@ const userController = {
 		});
 	},
 	resetPassword(req, res){
-		Runner.execute(updatePass, [req.body.password, req.query.m], (err, data)=>{
+		const hashPassword = helper.hashPassword(req.body.password);
+		Runner.execute(updatePass, [hashPassword, req.query.m], (err, data)=>{
 			if(err){
 				return res.status(500).json({ 
 					status: 500,
