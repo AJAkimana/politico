@@ -2,7 +2,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../app';
-import pgConfig from '../../config/pgConfig';
 import { Pool } from 'pg';
 import db from '../../config/database';
 // Configure chai
@@ -24,6 +23,7 @@ const officeBody = {name:'Office Test',type:officeByRandom},
 const testUser = {firstname:'User',lastname:'Test',password:'pass',email:'test@email.com',phoneNumber:'56766575',passportUrl:'urlTest'};
 const testUserNoEmail = {firstname:'User',lastname:'Test',password:'pass',email:'test@email',phoneNumber:'56766575',passportUrl:'urlTest'};
 const testCandidat = {party:1,candidate:2};
+const testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJpYXQiOjE1NTA1OTE1MjksImV4cCI6MTU1MTE5NjMyOX0.MdatjKr-6cDFQUFgPxs6ox3VnWE6QtWnzhN3JgoxoP8';
 const wrongId = 2019;
 
 describe('Politico', () => {
@@ -359,6 +359,7 @@ describe('Politico', () => {
 			it('Everything fine. Status code should be 201 and must be an object', (done) => {
 				chai.request(server)
 					.post('/api/office/1/register')
+					.set('x-access-token', testToken)
 					.send(testCandidat)
 					.end((err, res) => {
 						res.should.have.status(201);

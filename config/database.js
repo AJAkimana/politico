@@ -10,7 +10,7 @@ const pool = new Pool({
 }) 
 
 pool.on('connect', (err) => {
-	if(err) console.log('Error',err);
+	// if(err) console.log('Error',err);
 });
 
 const createUserTable = () => {
