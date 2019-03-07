@@ -336,12 +336,12 @@ describe('Politico', () => {
 						done();
 					});
 			});
-			it('If user information are not complete', (done) => {
+			it('If user information are complete', (done) => {
 				chai.request(server)
 					.post('/api/v1/auth/signup')
 					.send(testUser)
 					.end((err, res) => {
-						res.should.have.status(400);
+						res.should.have.status(201);
 						res.body.should.be.a('object');
 						done();
 					});
