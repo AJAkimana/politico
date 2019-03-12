@@ -1,0 +1,14 @@
+# Coverage directory used by tools like istanbul
+coverage
+
+# nyc test coverage
+.nyc_output
+
+# Compiled build
+build
+
+# Dependency directories
+node_modules/
+
+# Application environment
+.app.env
