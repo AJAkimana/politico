@@ -2,6 +2,7 @@ const { Pool } = require('pg');
 const createTables = require('./createTables');
 const dropTables = require('./dropTables');
 const dotenv = require('dotenv');
+const async = require('async');
 
 dotenv.load({ path: '.app.env'});
 
@@ -13,14 +14,24 @@ pool.on('connect', (err) => {
 	// if(err) console.log('Error',err);
 });
 
-const createUserTable = () => {
+async.series([(createUserTb)=>{
 	pool.query(createTables.User)
 	    .then((res) => {
-
-	    })
-	    .catch((err) => {
-
+			return createUserTb(null);
+	    }).catch((err) => {
+			return createUserTb(err);
 	    });
+},(createPartyTb)=>{
+	pool.query(createTables.Party)
+	    .then((res) => {
+			return createPartyTb(null);
+	    }).catch((err) => {
+			return createPartyTb(err);
+	    });
+}])
+
+const createUserTable = () => {
+	
 };
 const createPartyTable = () => {
 	pool.query(createTables.Party)
