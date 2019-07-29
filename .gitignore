@@ -12,3 +12,6 @@ node_modules/
 
 # Application environment
 .app.env
+
+# package-lock
+package-lock.json
